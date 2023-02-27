@@ -11,7 +11,7 @@ import {
   IconButton,
 
 } from "../components";
-import { HeaderBar , TextIconButton, Rating, TextButton, MapComponent} from "../components";
+import { HeaderBar , TextIconButton, Rating, TextButton, MapComponent, SavedLocation} from "../components";
 
 import * as Animatable from 'react-native-animatable';
 
@@ -174,68 +174,18 @@ function BodyPanel() {
            
                 backgroundColor: COLORS.gray10,
                 width: "100%"
-                // alignItems: 'center',
-                // justifyContent: 'center',
               }}
           >
 
-            <View style={{
-              flexDirection: 'row',
-              alignItems: 'center'
-            }}>
-            <Image
-                    source={require('../assets/icons/Seats.png')}
-                    resizeMode="contain"
-                    style={{
-                        width: 40,
-                        height: 40,
-                        marginLeft: 20,
-                        // marginTop: 10
-                        // tintColor: COLORS.red1Font,
-                        
-                    }}
-                />
-                    <Text
-                    style={{
-                        ...FONTS.h3,
-                        marginLeft: 40,
-                        fontWeight: 'bold',
-                        // marginTop:-25
-                       
-                    }}
-                    >
-                  20 Seats Available
-                    </Text>
-            </View>
-            
-            <View style={{
-              flexDirection: 'row',
-              alignItems: 'center'
-            }}>
-            <Image
-                    source={require('../assets/icons/Seats.png')}
-                    resizeMode="contain"
-                    style={{
-                        width: 40,
-                        height: 40,
-                        marginLeft: 20,
-                        // marginTop: 10
-                        // tintColor: COLORS.red1Font,
-                        
-                    }}
-                />
-                    <Text
-                    style={{
-                        ...FONTS.h3,
-                        marginLeft: 40,
-                        fontWeight: 'bold',
-                        // marginTop:-25
-                       
-                    }}
-                    >
-                  20 Seats Available
-                    </Text>
-            </View>
+                <TouchableOpacity onPress={() => {navigation.navigate('DriverDetails')}}>
+                <SavedLocation ImageUri={require('../assets/images/Profile2.jpg')} >
+                    
+                </SavedLocation></TouchableOpacity>
+                <TouchableOpacity onPress={() => {navigation.navigate('DriverDetails')}}>
+                <SavedLocation ImageUri={require('../assets/images/Profile2.jpg')} >
+                    
+                </SavedLocation></TouchableOpacity>
+         
        
     
       

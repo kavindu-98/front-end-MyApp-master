@@ -39,3 +39,19 @@ export const DdummyData = [
         id: 3
     }
 ]
+
+export const SavedLocation1 = [
+
+    {
+        title: 'Home', Image: require('../assets/images/HomeIcon.png'),
+        // description : 'fdffdfd fdfdf',
+        id: 1,
+    
+    },
+    {
+        title: 'Work' , Image: require('../assets/images/Officez.png'),
+        // description : 'fdffdfd fdfdf',
+        id: 2
+    },
+  
+]

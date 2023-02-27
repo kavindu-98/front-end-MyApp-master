@@ -6,12 +6,9 @@ import { COLORS, SIZES, FONTS, icons } from '../constants';
 import BottomSheet, {BottomSheetView} from "@gorhom/bottom-sheet";
 
 
-import { HeaderBar ,IconButton, TextIconButton, Rating, TextButton, MapComponent, DriverCard} from "../components";
+import { HeaderBar , MapComponent, DriverCard} from "../components";
 
-import * as Animatable from 'react-native-animatable';
 
-import { ImageBackground } from 'react-native';
-import HomeScreen from './HomeScreen';
 
 
 

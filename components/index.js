@@ -11,6 +11,7 @@ import DPhotoCard  from "./DPhotoCard";
 import HeaderBar from "./HeaderBar";
 import MapComponent from "./MapComponent";
 import EmployeeCard from "./EmployeeCard";
+import SavedLocation from "./SavedLocation";
 
 
 export {
@@ -27,6 +28,7 @@ export {
     DriverCard,
     EmployeeCard,
     HeaderBar,
-    MapComponent
+    MapComponent,
+    SavedLocation
     
 }
