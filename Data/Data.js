@@ -57,30 +57,39 @@ export const SavedLocation1 = [
 ]
 export const Drivercards = [
 
-    {
-        name: 'Lalith Perera', Image: require('../assets/images/Profile2.jpg'),
+    {   
+        id: 1,
+        name: 'Lalith Perera', 
+        Image: require('../assets/images/Profile2.jpg'),
         vehicleType : 'Mini Bus',
         condition : 'AC',
         sheetcount : 20,
         ratings: 4.5,
-        id: 1,
+        vehicleNo: 'NB3742',
+        
     
     },
     {
-        name: 'Nalaka Sampath' , Image: require('../assets/images/Profile3.jpg'),
+        id: 2,
+        name: 'Nalaka Sampath' , 
+        Image: require('../assets/images/Profile3.jpg'),
         vehicleType : 'Mini Van',
         condition : 'Non - AC',
         sheetcount : 25,
         ratings: 4.2,
-        id: 2
+        vehicleNo: 'NB3742',
+       
     },
-    {
-        name: 'Saman Kumara' , Image: require('../assets/images/Profile4.jpg'),
+    {   
+        id: 3,
+        name: 'Saman Kumara' , 
+        Image: require('../assets/images/Profile4.jpg'),
         vehicleType : 'Mini Bus',
         condition : 'AC',
         sheetcount : 35,
         ratings: 4.0,
-        id: 3
+        vehicleNo: 'NB3742',
+        
     },
   
 ]

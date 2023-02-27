@@ -30,6 +30,7 @@ import {
    AcceptEmpReq,
    PendingDriver,
    DFinishRide,
+   MyDailyRides,
    DStartRide} from './screens';
 import Tabs from "./navigation/tabs";
 import DTabs from "./navigation/Dtabs";
@@ -65,6 +66,7 @@ const App = () => {
       
            <Stack.Screen name="RatingScreen" component={RatingScreen} />   
           <Stack.Screen name="MyActivity" component={MyActivity} /> 
+          <Stack.Screen name="MyDailyRides" component={MyDailyRides} />
         
           <Stack.Screen name="DriverDetails" component={DriverDetails} />
           <Stack.Screen name="DRSignUpScreen" component={DRSignUpScreen} />

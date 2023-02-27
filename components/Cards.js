@@ -21,10 +21,15 @@ import{
 
 } from "../constants";
 
-const Cards = ({imageUri}) => {
+const Cards = ({imageUri, customContainerStyle}) => {
 
         return (
-            <View style={{ height: 165, width: 240, marginLeft: 30 }}>
+            <View style={{ 
+                height: 165, 
+                width: 240, 
+                marginLeft: 30, 
+                ...customContainerStyle 
+                }}>
             <View style={{ flex: 2 }}>
                 <Image source={imageUri} 
                 

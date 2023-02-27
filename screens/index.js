@@ -32,6 +32,7 @@ import DStartRide from "./DStartRide";
 import AcceptEmpReq from "./AcceptEmpReq";
 import DFinishRide from "./DFinishRide";
 import DMyActivity from "./DMyActivity";
+import MyDailyRides from "./MyDailyRides";
 
 
 
@@ -70,6 +71,7 @@ export {
     AcceptEmpReq,
     DFinishRide,
     DMyActivity,
+    MyDailyRides,
 
     
 

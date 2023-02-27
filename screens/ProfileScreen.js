@@ -265,7 +265,9 @@ function LogSlideUp() {
                         marginLeft: 30
 
                       }}
-                      // onPress={signup}
+                     
+                      onPress={() => {navigation.navigate('MyDailyRides')}}
+                   
                    />
 
                     <TextIconButton

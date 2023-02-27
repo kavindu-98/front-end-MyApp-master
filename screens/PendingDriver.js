@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,  StatusBar, TouchableOpacity, ScrollView, SafeAreaView, Image, Animated, BackHandler, TextInput} from 'react-native';
+import { StyleSheet, Text, Modal, View,  StatusBar, TouchableOpacity, ScrollView, SafeAreaView, Image, Animated, BackHandler, TextInput} from 'react-native';
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Header, Icon, ListItem, SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
@@ -22,6 +22,7 @@ const PendingDriver = ({ route}) => {
 
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const snapPoints = ["100%"];   
 
@@ -49,6 +50,8 @@ const PendingDriver = ({ route}) => {
 //       }
 //   }, [])
   const navigation = useNavigation();
+
+
 
 
 
@@ -92,12 +95,237 @@ function renderMap() {
     )
 }
 
-function SlidingUpPanel() {
+function NoteToDriver() {
+  return (
+ <View>
+
+<Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <Text
+                style={{
+                  color: COLORS.black,
+                  // fontWeight: 1,
+                  ...FONTS.h1,
+                  fontSize: 23,
+                  
+                }}
+                >Note to driver</Text>
+                 <Text
+                style={{
+                  color: COLORS.gray40,
+                  // fontWeight: 1,
+                  ...FONTS.h3,
+                  fontSize: 15,
+                  
+                }}
+                >Let the driver know if you are coming or not</Text>
+               
+            
+                
+
+                
+
+       
+    
+
+                 <View  style={styles.Buttoncontainer}>
+                    
+                        <Text style={styles.inputTitle}>Morning</Text>
+                        <View style={styles.namecontainer}>
+                                    <TextIconButton
+                                label="Coming"
+                                customContainerStyle={{
+                                width: "43%",
+                                height: 55,
+                                backgroundColor: COLORS.gray20,
+                                borderColor: COLORS.gray20,
+                                borderWidth: 1,
+                                borderRadius: SIZES.radius_btn4,
+                                marginTop: SIZES.padding3,
+                                margin: 5
+
+                                }}
+                                customLabelStyle={{
+                                color: COLORS.gray30,
+                                alignItems: 'center',
+                                marginLeft: -15,
+                                ...FONTS.h3,
+                                
+                                }}
+                                // onPress={signup}
+                            />
+                         <TextIconButton
+                                label="Not Coming"
+                                customContainerStyle={{
+                                width: "43%",
+                                height: 55,
+                                backgroundColor: COLORS.gray20,
+                                borderColor: COLORS.gray20,
+                                borderWidth: 1,
+                                borderRadius: SIZES.radius_btn4,
+                                marginTop: SIZES.padding3,
+                                margin: 5
+                                }}
+                                customLabelStyle={{
+                                color: COLORS.gray30,
+                                alignItems: 'center',
+                                marginLeft: -15,
+                                ...FONTS.h3,
+                                
+                                }}
+                                // onPress={signup}
+                            />
+
+                           
+                            
+                    </View>
+                 
+                     
+                   </View>
+                   <View  style={styles.Buttoncontainer}>
+                    
+                    <Text style={styles.inputTitle}>Evening</Text>
+                            <View style={styles.namecontainer}>
+                                        <TextIconButton
+                                    label="Coming"
+                                    customContainerStyle={{
+                                    width: "43%",
+                                    height: 55,
+                                    backgroundColor: COLORS.gray20,
+                                    borderColor: COLORS.gray20,
+                                    borderWidth: 1,
+                                    borderRadius: SIZES.radius_btn4,
+                                    marginTop: SIZES.padding3,
+                                    margin: 5
+
+                                    }}
+                                    customLabelStyle={{
+                                    color: COLORS.gray30,
+                                    alignItems: 'center',
+                                    marginLeft: -15,
+                                    ...FONTS.h3,
+                                    
+                                    }}
+                                    // onPress={signup}
+                                />
+                            <TextIconButton
+                                    label="Not Coming"
+                                    customContainerStyle={{
+                                    width: "43%",
+                                    height: 55,
+                                    backgroundColor: COLORS.gray20,
+                                    borderColor: COLORS.gray20,
+                                    borderWidth: 1,
+                                    borderRadius: SIZES.radius_btn4,
+                                    marginTop: SIZES.padding3,
+                                    margin: 5
+                                    }}
+                                    customLabelStyle={{
+                                    color: COLORS.gray30,
+                                    alignItems: 'center',
+                                    marginLeft: -15,
+                                    ...FONTS.h3,
+                                    
+                                    }}
+                                    // onPress={signup}
+                                />
+
+                            
+                                
+                        </View>
+             
+                 
+               </View>
+
+               <View style={styles.Buttoncontainer}>
+                <View 
+                 style={{
+                    flexDirection: 'row',
+                
+                
+                     // alignItems: 'center',
+                     // justifyContent: 'center',
+                   }}>
+                <Text style={styles.inputTitle}>Note</Text>
+                        <Text style={styles.inputTitle1}>(Optional)</Text>
+                </View>
+                        
+                          <TextInput
+                            style={styles.input}
+                            placeholder="Enter your note"
+                            // autoFocus
+                            // value={email}
+                            // onChangeText={text => setEmail(text)}
+                          />
+                    </View>
+      
+
+                
+                <TextIconButton
+                      label="SEND"
+                      customContainerStyle={{
+                      width: "90%",
+                      height: 55,
+                     
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding1
+                      }}
+                      customLabelStyle={{
+                      color: COLORS.white,
+                      alignItems: 'center',
+                      marginLeft: -15,
+                      ...FONTS.h2,
+                      
+                      }}
+                      onPress={() => {navigation.navigate('SL')}}
+                   />
+                   
+                   <TextIconButton
+                      label="CANCEL"
+                      customContainerStyle={{
+                      width: "90%",
+                      height: 55,
+                      backgroundColor: COLORS.white,
+                      borderColor: COLORS.gray30,
+                      borderWidth: 1,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding3
+                      }}
+                      customLabelStyle={{
+                      color: COLORS.red1Font,
+                      alignItems: 'center',
+                      marginLeft: -15,
+                      ...FONTS.h2,
+                      
+                      }}
+                      onPress={() => setModalVisible(!modalVisible)}
+                   />
+         
+          
+          </View>
+        </View>
+      </Modal>
+        
+</View>    
+      
+
+  )
+}
+
+function PendingDriver() {
   return (
     
           <View
               style={{
-               flex: 1,
+               flex: 1.2,
            
                 backgroundColor: COLORS.gray10,
                 // alignItems: 'center',
@@ -154,7 +382,7 @@ function SlidingUpPanel() {
               />
           </View>
         </View>
-        {/* <TouchableOpacity onPress={() => {navigation.navigate('NoteToDriver')}}> */}
+        <TouchableOpacity  onPress={() => setModalVisible(true)}>
         <Image
                     source={require('../assets/icons/mesg.png')}
                     resizeMode="contain"
@@ -168,6 +396,7 @@ function SlidingUpPanel() {
                         
                     }}
                 />
+                </TouchableOpacity>
 
         </View>
 
@@ -252,17 +481,306 @@ function SlidingUpPanel() {
 
   )
 }
+function AcceptDriver() {
+  return (
+    
+          <View
+              style={{
+               flex: 1,
+           
+                backgroundColor: COLORS.gray10,
+                // alignItems: 'center',
+                // justifyContent: 'center',
+              }}
+          >
+            <BottomSheet
+            // ref={sheetRef}
+            snapPoints={snapPoints}
+            // enablePanDownToClose={true}
+            onClose={() => setIsOpen(false)}
+            backgroundStyle={{ borderRadius: 50}}
+          
+            >
+              <BottomSheetView
+                style={{
+                  // borderRadius: 5,
+                  // backgroundColor: COLORS.gray10
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                  
+                }}>
+                <Text
+                style={{
+                  color: COLORS.black,
+                  // fontWeight: 1,
+                  ...FONTS.h1,
+                  fontSize: 23
+                }}
+                >Lalith Perera</Text>
+                <View 
+                style={{
+                    flexDirection: 'row'
+                }}
+                >
+                       <Image
+                    source={require('../assets/icons/call.png')}
+                    resizeMode="contain"
+                    style={{
+                        width: 50,
+                        height: 50,
+                        margin: 35,
+                        marginTop: 50
+                        // tintColor: COLORS.red1Font,
+                        
+                    }}
+                />
+
+                
+
+        <View style={{ alignSelf: "center", marginTop: 20}}>
+          <View style={styles.Circle}>
+              <Image source={require('../assets/images/Profile2.jpg')} style={styles.profileimage} resizeMode="center"
+              />
+          </View>
+        </View>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('NoteToDriver')}}>
+        <Image
+                    source={require('../assets/icons/mesg.png')}
+                    resizeMode="contain"
+                    
+                    style={{
+                        width: 50,
+                        height: 50,
+                        margin: 35,
+                        marginTop: 50
+                        // tintColor: COLORS.red1Font,
+                        
+                    }}
+                /></TouchableOpacity>
+
+        </View>
+
+        <View   style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 10
+                }}> 
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+
+        </View>
+        <Text
+                style={{
+                  color: COLORS.black,
+                  // fontWeight: 1,
+                  ...FONTS.h2,
+                  fontSize: 15
+                }}
+                >NB3742 - Dehiwala</Text>
+
+                
+                <TextIconButton
+                      label="ACCEPTED"
+                      customContainerStyle={{
+                      width: "60%",
+                      height: 55,
+                      backgroundColor: COLORS.white,
+                      borderWidth:1,
+                      borderColor: COLORS.red1Font,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding1
+                      }}
+                      customLabelStyle={{
+                      color: COLORS.green,
+                      alignItems: 'center',
+                      marginLeft: -15,
+                      ...FONTS.h2,
+                      
+                      }}
+                      onPress={() => {navigation.navigate('Finish')}}
+                   />
+               
+              </BottomSheetView>
+            </BottomSheet>
+           
+        
+          </View>
+
+
+  )
+}
+function Finish() {
+  return (
+    
+          <View
+              style={{
+               flex: 1,
+           
+                backgroundColor: COLORS.gray10,
+                // alignItems: 'center',
+                // justifyContent: 'center',
+              }}
+          >
+            <BottomSheet
+            // ref={sheetRef}
+            snapPoints={snapPoints}
+            // enablePanDownToClose={true}
+            onClose={() => setIsOpen(false)}
+            backgroundStyle={{ borderRadius: 50}}
+          
+            >
+              <BottomSheetView
+                style={{
+                  // borderRadius: 5,
+                  // backgroundColor: COLORS.gray10
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                  
+                }}>
+                <Text
+                style={{
+                  color: COLORS.black,
+                  // fontWeight: 1,
+                  ...FONTS.h1,
+                  fontSize: 23
+                }}
+                >Lalith Perera</Text>
+                <View 
+                style={{
+                    flexDirection: 'row'
+                }}
+                >
+                       <Image
+                    source={require('../assets/icons/call.png')}
+                    resizeMode="contain"
+                    style={{
+                        width: 50,
+                        height: 50,
+                        margin: 35,
+                        marginTop: 50
+                        // tintColor: COLORS.red1Font,
+                        
+                    }}
+                />
+
+                
+
+        <View style={{ alignSelf: "center", marginTop: 20}}>
+          <View style={styles.Circle}>
+              <Image source={require('../assets/images/Profile2.jpg')} style={styles.profileimage} resizeMode="center"
+              />
+          </View>
+        </View>
+        
+        <Image
+                    source={require('../assets/icons/mesg.png')}
+                    resizeMode="contain"
+                    
+                    style={{
+                        width: 50,
+                        height: 50,
+                        margin: 35,
+                        marginTop: 50
+                        // tintColor: COLORS.red1Font,
+                        
+                    }}
+                />
+
+        </View>
+
+        <View   style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 10
+                }}> 
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
+                                />
+
+        </View>
+        <Text
+                style={{
+                  color: COLORS.black,
+                  // fontWeight: 1,
+                  ...FONTS.h2,
+                  fontSize: 15
+                }}
+                >NB3742 - Dehiwala</Text>
+
+                
+                <TextIconButton
+                      label="FINISHED"
+                      customContainerStyle={{
+                      width: "60%",
+                      height: 55,
+                      backgroundColor: COLORS.white,
+                      borderWidth:1,
+                      borderColor: COLORS.red1Font,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding1
+                      }}
+                      customLabelStyle={{
+                      color: COLORS.green,
+                      alignItems: 'center',
+                      marginLeft: -15,
+                      ...FONTS.h2,
+                      
+                      }}
+                      onPress={() => {navigation.navigate('RatingScreen')}}
+                   />
+                   
+            
+
+
+                
+                 
+               
+              </BottomSheetView>
+            </BottomSheet>
+           
+        
+          </View>
+
+
+  )
+}
+
 
 
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{  flex: 1,
+      opacity: modalVisible ? 0.2 : 1
+       }}>
        <StatusBar
                         style="auto"
                         />
     
     {renderMap()}
-    {SlidingUpPanel()}
+    {PendingDriver()}
+    {NoteToDriver()}
+    {/* {AcceptDriver()} */}
+    {/* {Finish()} */}
+    
+   
   </View>
   )
 }
@@ -307,52 +825,68 @@ marginTop:2
 
     margin: 5,
     
-  }
-
-//   header: {
-//     flex: 1,
-//     // justifyContent: 'center',
-//     // alignItems: 'center',
-
-// },
-
-
-// container: {
-//   backgroundColor: COLORS.background,
-//   height: "100%",
-//   flex: 1
-// },
-// titlebar: {
-//   flexDirection: 'row',
-
-// },
-
-
-// nameTitle : {
-//    color: COLORS.black,
-//    marginTop: 15,
-//    fontSize: SIZES.h3,
-
+  },
+  modelBackground: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+  
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  
    
-// },
-// proname : {
-//   alignItems: 'center'
-// },
-// nametag : {
-//   color: COLORS.dark_grey,
-//   marginTop: 3,
-//   fontSize: SIZES.h3,
+  },
+  modalView: {
+    width: "90%",
+    height: "90%",
+    margin: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 10,
+    alignItems: 'center',
+    shadowColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  namecontainer: {
+    flexDirection: 'row',
+    width: "100%",
+    justifyContent: 'center',
+    
+},
+inputTitle: {
+    
+    ...FONTS.h3,
+    
+    color: COLORS.black,
+    marginTop: SIZES.padding3,
+    marginLeft: 20
+  },
 
-  
-// },
-// prodes : {
-//   color: COLORS.grey,
-//   marginTop: -5,
-//   padding: 35,
-//   fontSize: SIZES.body5,
+  Buttoncontainer: {
+    
+    width: "100%",
+    justifyContent: 'center'
+},
 
-  
-// },
+inputTitle1:{
+    marginTop: 12,
+    marginLeft: 10
+}
+
+
 
 
 
