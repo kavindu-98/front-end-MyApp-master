@@ -93,3 +93,30 @@ export const Drivercards = [
     },
   
 ]
+
+export const Employee = [
+
+    {   
+        id: 1,
+        name: 'Nishadi Adhikari', 
+        Image: require('../assets/images/EProfile.jpg'),
+        EmployeeId: 'EMP001',
+        
+    
+    },
+    // {
+    //     id: 2,
+    //     name: 'Nishadi Adhikari', 
+    //     Image: require('../assets/images/EProfile1.jpg'),
+    //     EmployeeId: 'EMP002',
+       
+    // },
+    // {   
+    //     id: 3,
+    //     name: 'Nishadi Adhikari', 
+    //     Image: require('../assets/images/EProfile2.jpg'),
+    //     EmployeeId: 'EMP003',
+        
+    // },
+  
+]

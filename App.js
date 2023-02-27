@@ -31,7 +31,9 @@ import {
    PendingDriver,
    DFinishRide,
    MyDailyRides,
-   DStartRide} from './screens';
+   DStartRide,
+   DailyRides
+  } from './screens';
 import Tabs from "./navigation/tabs";
 import DTabs from "./navigation/Dtabs";
 
@@ -53,7 +55,7 @@ const App = () => {
         <Stack.Screen name="OTP" component={OTPScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="GetStartScreen" component={GetStartScreen} /> */}
-          <Stack.Screen name="Home" component={Tabs} />
+          {/* <Stack.Screen name="Home" component={Tabs} />
           <Stack.Screen name="Destination" component={Destination} />
            <Stack.Screen name="SetDesM" component={SetDestiOnMap} />
           <Stack.Screen name="SeleDriver" component={SelectDriver} /> 
@@ -66,7 +68,8 @@ const App = () => {
       
            <Stack.Screen name="RatingScreen" component={RatingScreen} />   
           <Stack.Screen name="MyActivity" component={MyActivity} /> 
-          <Stack.Screen name="MyDailyRides" component={MyDailyRides} />
+          <Stack.Screen name="MyDailyRides" component={MyDailyRides} /> */}
+          <Stack.Screen name="DailyRides" component={DailyRides} />
         
           <Stack.Screen name="DriverDetails" component={DriverDetails} />
           <Stack.Screen name="DRSignUpScreen" component={DRSignUpScreen} />

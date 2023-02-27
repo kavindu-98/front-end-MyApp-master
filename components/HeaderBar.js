@@ -27,7 +27,7 @@ const HeaderBar = ({ icon, title, leftOnPressed, right, containerStyle, containe
             onPress={leftOnPressed}
           >
               <Image
-                      source={icons.left_arrow}
+                      source={icon}
                 resizeMode="contain"
                 style={{
                     width: 20,
