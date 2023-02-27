@@ -1,10 +1,9 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, SafeAreaView, Image} from 'react-native';
+import { StyleSheet, Modal, Text, View, TouchableOpacity, ScrollView, SafeAreaView, Image} from 'react-native';
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Header, Icon, ListItem, SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from '../constants';
 import BottomSheet, {BottomSheetView} from "@gorhom/bottom-sheet";
-
 import {
   IconButton,
   TextIconButton
@@ -16,11 +15,11 @@ import { TextInput } from 'react-native-gesture-handler';
 import { ImageBackground } from 'react-native';
 
 
-
 const ProfileScreen = () => {
 
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const snapPoints = ["50%"]; 
 
@@ -67,79 +66,101 @@ const ProfileScreen = () => {
 }
 function LogSlideUp() {
   return (
-    <BottomSheet
-    // ref={sheetRef}
-    snapPoints={snapPoints}
-    // enablePanDownToClose={true}
-    onClose={() => setIsOpen(false)}
-    backgroundStyle={{ borderRadius: 50}}
-  
-    >
-      <BottomSheetView
-        style={{
-          // borderRadius: 5,
-          // backgroundColor: COLORS.gray10
-          justifyContent: 'center',
-          alignItems: 'center'
-          
+ <View>
+
+<Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
         }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
 
-<Text
-        style={{
-          color: COLORS.black,
-          fontWeight: 'bold',
-          ...FONTS.h3,
-          fontSize: 23
-        }}
-        >Logout</Text>
-
-        
-        <TextIconButton
-              label="PENDING..."
-              customContainerStyle={{
-              width: "90%",
-              height: 55,
-              backgroundColor: COLORS.redOpacity,
-              borderRadius: SIZES.radius_btn4,
-              marginTop: SIZES.padding1
-              }}
-              customLabelStyle={{
-              color: COLORS.white,
-              alignItems: 'center',
-              marginLeft: -15,
-              ...FONTS.h2,
-              
-              }}
-              // onPress={signup}
-           />
+          <View style={{
+              flexDirection: 'row',
+              // justifyContent: 'center',
+              width: "100%",
+              justifyContent: 'space-between',
+              marginTop: 20
            
-           <TextIconButton
-              label="CANCEL"
-              customContainerStyle={{
-              width: "90%",
-              height: 55,
-              backgroundColor: COLORS.white,
-              borderColor: COLORS.gray30,
-              borderWidth: 1,
-              borderRadius: SIZES.radius_btn4,
-              marginTop: SIZES.padding3
-              }}
-              customLabelStyle={{
-              color: COLORS.red1Font,
-              alignItems: 'center',
-              marginLeft: -15,
-              ...FONTS.h2,
-              
-              }}
-              // onPress={signup}
-           />
-
-
+            }}>
+            <IconButton
+                    icon={icons.Logout}
+                    iconStyle={{
+                      marginLeft:5,
+                      width: 40,
+                      height: 40,
+                      marginTop: 10,
+                      borderRadius: 50,
+                        // tintColor: COLORS.transparentWhite
+                    }}
+                ></IconButton>
+         <View>
+         <Text style={{...FONTS.h2}}>Logout</Text>
+            <Text style={{...FONTS.h3,
+            marginTop: 10}}>Are you sure want to logout?</Text>
+         </View>
+      
+            </View>
+            <View style={{
+              flexDirection: 'row',
+              // justifyContent: 'center',
+              width: "100%",
+              justifyContent: 'space-between',
+              marginTop: 50
+           
+            }}>
+            <TextIconButton
+                      label="No"
+                      customContainerStyle={{
+                      width: "48%",
+                      height: 55,
+                      backgroundColor: COLORS.gray40,
+                      borderWidth:1,
+                      borderColor: COLORS.gray40,
+                      borderRadius: SIZES.radius_btn3,
+                      marginTop: SIZES.padding1,
+                      }}
+                      customLabelStyle={{
+                      color: COLORS.white,
+                      alignItems: 'center',
+                      marginLeft: -15,
+                      ...FONTS.h3,
+                      
+                      }}
+                      onPress={() => setModalVisible(!modalVisible)}
+                   />
+                        <TextIconButton
+                      label="Yes"
+                      customContainerStyle={{
+                      width: "48%",
+                      height: 55,
+                      backgroundColor: COLORS.red1Font,
+                      borderWidth:1,
+                      borderColor: COLORS.red1Font,
+                      borderRadius: SIZES.radius_btn3,
+                      marginTop: SIZES.padding1
+                      }}
+                      customLabelStyle={{
+                      color: COLORS.white,
+                      alignItems: 'center',
+                      marginLeft: -15,
+                      ...FONTS.h3,
+                      
+                      }}
+                      onPress={() => {navigation.navigate('Finish')}}
+                   />
+            </View>
+          
+          </View>
+        </View>
+      </Modal>
         
-         
-       
-      </BottomSheetView>
-    </BottomSheet>
+</View>    
+      
 
   )
 }
@@ -149,10 +170,15 @@ function LogSlideUp() {
 
    
     
-   <SafeAreaView style={styles.container}>
+   <SafeAreaView style={{  
+    backgroundColor: COLORS.background,
+    height: "100%",
+    flex: 1,
+    opacity: modalVisible ? 0.1 : 1}}>
 
  {/* header */}
  {renderHeader()}
+{ LogSlideUp()}
   
 
         <ScrollView showsVerticalScrollIndicator={false} >
@@ -335,7 +361,7 @@ function LogSlideUp() {
                         marginLeft: 30
 
                       }}
-                      // onPress={signup}
+                      onPress={() => setModalVisible(true)}
                    />
       
 
@@ -399,7 +425,8 @@ const styles = StyleSheet.create({
 container: {
   backgroundColor: COLORS.background,
   height: "100%",
-  flex: 1
+  flex: 1,
+ 
 },
 titlebar: {
   flexDirection: 'row',
@@ -450,7 +477,40 @@ VersionTitle : {
 Version1:{
   marginLeft:30,
   marginBottom:30
-}
+},
+modelBackground: {
+  flex: 1,
+  backgroundColor: COLORS.white,
+  justifyContent: 'center',
+  alignItems: 'center',
+
+},
+centeredView: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginTop: 22,
+
+ 
+},
+modalView: {
+  width: "80%",
+  height: "40%",
+  margin: 30,
+  backgroundColor: 'white',
+  borderRadius: 20,
+  padding: 15,
+  alignItems: 'center',
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5,
+},
+
 
 
 
