@@ -19,12 +19,17 @@ import{
     SIZES,
     icons,
     images,
-    dummyData
+
 
 } from "../constants";
 const {width, height} = Dimensions.get("window");
+import{
 
-const DriverCard = ({ImageUri}) => {
+    Drivercards
+ 
+ } from '../Data/Data';
+
+const DriverCard = ({}) => {
 
         return (
             <View style={{ 
@@ -40,47 +45,54 @@ const DriverCard = ({ImageUri}) => {
              
               
                      }}>
+                {Drivercards.map((item,index) => {    
+                       
+                       return(
+                        <View >  
             
-                    <View style={{ flexDirection: 'column'
+                    <View 
+                     key={index}
+                    style={{ flexDirection: 'column'
                         
-                    }}>
+                     }}>
                     <View style={styles.Circle}>
-                        <Image source={ImageUri} style={styles.profileimage} resizeMode="center"
+                        <Image source={item.Image} style={styles.profileimage} resizeMode="center"
                         />
                     </View>
 
                     <View style={styles.Rating}>
-                            <Image source={require('../assets/images/Star.png')} style={styles.profileimage1} resizeMode="center"
-                                />
-                                <Text style={{
+                       <Image source={require('../assets/images/Star.png')} style={styles.profileimage1} resizeMode="center"
+                           />
+                           <Text style={{
                                     marginTop: 22,
                                     marginLeft: 7,
                                     ...FONTS.h2,
                                     
 
-                                }}>4.5</Text>
-                    </View>
+                         }}>{item.ratings}</Text>
+                   </View>
 
-                    </View>
-        <View >
-                    <Text style={{
-                        ...FONTS.h2,
-                        marginLeft: 60,
-                        marginTop: 20,
-                        color:COLORS.black,
+                   </View>
+       <View >
+              <Text style={{
+                     ...FONTS.h2,
+                    marginLeft: 60,
+                    marginTop: 20,
+                    color:COLORS.black,
                        
-                    }}>
-                    Lalith Perera
+                 }}>
+                     
+                     {item.name}
                     </Text>
-                    <Text
-                    style={{
-                        ...FONTS.h3,
-                        marginLeft: 60,
+              <Text
+                        style={{
+                    ...FONTS.h3,
+                    marginLeft: 60,
                         marginTop:5
                        
                     }}
                     >
-                   Mini Bus  *  AC
+                   {item.vehicleType} *  {item.condition}
                     </Text>
                     <Image
                     source={require('../assets/icons/Seats.png')}
@@ -90,8 +102,7 @@ const DriverCard = ({ImageUri}) => {
                         height: 30,
                         marginLeft: 56,
                         marginTop: 10
-                        // tintColor: COLORS.red1Font,
-                        
+                        // tintColor: COLORS.red1Font  
                     }}
                 />
                     <Text
@@ -102,7 +113,7 @@ const DriverCard = ({ImageUri}) => {
                        
                     }}
                     >
-                  20 Seats Available
+                  {item.sheetcount} Seats Available
                     </Text>
 
 
@@ -122,6 +133,12 @@ const DriverCard = ({ImageUri}) => {
                     }}
                 />
         </View>
+        </View>
+
+                     )
+
+                    }
+                    )}
         </View>
         )
     }

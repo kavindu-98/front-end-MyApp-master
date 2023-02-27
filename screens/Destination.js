@@ -177,12 +177,12 @@ function BodyPanel() {
               }}
           >
 
-                <TouchableOpacity onPress={() => {navigation.navigate('DriverDetails')}}>
-                <SavedLocation ImageUri={require('../assets/images/Profile2.jpg')} >
+                <TouchableOpacity onPress={() => {navigation.navigate('')}}>
+                <SavedLocation >
                     
                 </SavedLocation></TouchableOpacity>
-                <TouchableOpacity onPress={() => {navigation.navigate('DriverDetails')}}>
-                <SavedLocation ImageUri={require('../assets/images/Profile2.jpg')} >
+                <TouchableOpacity onPress={() => {navigation.navigate('')}}>
+                <SavedLocation >
                     
                 </SavedLocation></TouchableOpacity>
          

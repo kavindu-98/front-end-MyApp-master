@@ -41,6 +41,10 @@ const SignUpScreen = ({ navigation }) => {
   const [password2, setPassword2] = useState();
    const [selectedItem, setSelectedItem] = useState({});
    const [selectedGender, setSelectedGender] = useState({});
+   const [success,setSuccess] = useState({successMsg:''})
+  const [error, setError] = useState({
+    errorMsg:''
+  });
 
   //  {FirstName, LastName, email, phone, employeeId, gender, password
 
@@ -72,29 +76,78 @@ const SignUpScreen = ({ navigation }) => {
     },
   ]
 
- 
+  
+  const validate = () => {
+    if (( FirstName === '')||(LastName === '')||(password === '')||(password2 === '')||(employeeId === '')||(NIC === '')) {
+      setError({...error, errorMsg:'All Fields are required!'});
+      setSuccess({...success,successMsg:''})
+      return false;
+    }
+    if (password.length < 8) {
+      setError({...error, errorMsg:'Password must be at least 8 characters long!'});
+      setSuccess({...success,successMsg:''})
+      return false;
+    }
+    if (phone.length < 10) {
+      setError({...error, errorMsg:'Password must be at least 8 characters long!'});
+      setSuccess({...success,successMsg:''})
+      return false;
+    }
+    if (password !== password2) {
+      setError({...error, errorMsg:'Passwords do not match!'});
+      setSuccess({...success,successMsg:''})
+      return false;
+    }
+    else{
+      setError({...error, errorMsg:''});
+      setSuccess({...success,successMsg:'Successfully Account Created.'})
+      return true;
+   }
+  
+  };
 
-  const register = async () => {
-    const payload = {
-      email,
-      password,
-    };
-
-    try {
-      fetch(`${API_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      navigation.navigate("Home");
-      setEmail("");
-      setPassword("");
-    } catch (error) {
-      console.log(error);
+  const handleSignup = () => {
+    if (validate()) {
+      console.log('Signup success');
+      setFirstName('');
+      setLastName('');
+      setEid('');
+      setEmail('');
+      setNIC('');
+      setPhone('');
+      setPassword1('');
+      setPassword2('');
+      setTimeout(()=> {
+        navigation.navigate('SignIn');
+       }, 1500);
+      // navigation.navigate('SignIn')
     }
   };
+
+
+ 
+
+  // const register = async () => {
+  //   const payload = {
+  //     email,
+  //     password,
+  //   };
+
+  //   try {
+  //     fetch(`${API_URL}/login`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(payload),
+  //     });
+  //     navigation.navigate("Home");
+  //     setEmail("");
+  //     setPassword("");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   let AnimatedHeaderValue = new Animated.Value(0);
   const Header_Max_Height = 150;
@@ -326,6 +379,8 @@ const SignUpScreen = ({ navigation }) => {
                   
                   
                 </View>
+                {error.errorMsg !== '' && <Text style={styles.error}>{error.errorMsg}</Text>}
+      {success.successMsg !== '' && <Text style={styles.success}>{success.successMsg}</Text>}
 
                     <TextIconButton
                       label="SIGN UP"

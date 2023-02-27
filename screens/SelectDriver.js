@@ -19,6 +19,7 @@ const SelectDriver = ({ route}) => {
 
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
+  const [Drivercards, setDrivercards] = useState([]);
 
   const snapPoints = ["100%"];   
 
@@ -132,15 +133,15 @@ function SlidingUpPanel() {
                 }}
                 >SELECT A DRIVER</Text>
                 <TouchableOpacity onPress={() => {navigation.navigate('DriverDetails')}}>
-                <DriverCard ImageUri={require('../assets/images/Profile2.jpg')} >
+                <DriverCard  Drivercards={Drivercards}>
                     
                 </DriverCard></TouchableOpacity>
-                <DriverCard ImageUri={require('../assets/images/Profile3.jpg')}>
+                {/* <DriverCard ImageUri={require('../assets/images/Profile3.jpg')}>
                     
                 </DriverCard>
                 <DriverCard ImageUri={require('../assets/images/Profile4.jpg')}>
                     
-                </DriverCard>
+                </DriverCard> */}
                  
                    {/* <TextInput
                             style={styles.input}

@@ -15,39 +15,38 @@ const API_URL = 'http://192.168.1.107:8080/api/users/';
 
 const LoginScreen  = ({navigation}) => {
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [pic, setPic] = useState('');
-    const [field, setField] = useState([]);
-  
 
-    const signup = () => {
-        const payload = {
-          name,
-          email,
-          password,
-        };
-    
-        try {
-          fetch(`${API_URL}/`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-          });
-          navigation.navigate('Home');
-          setName('');
-          setPassword('');
-          setConfirmPassword('');
-          setEmail('');
-          setPic('');
-        } catch (error) {
-          console.log(error);
-        }
-      };
+  const dispatch = useDispatch();
+
+  const [employeeId, setEmployeeId] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const LoginBtnClick = () => {
+    // dispatch(getProductData());
+    navigation.navigate('OTP');
+  };
+
+  async function login() {
+    try {
+      const response = await fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          employeeId: employeeId,
+          password: password,
+        }),
+      });
+      const data = await response.json();
+      console.log('success');
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 
       let AnimatedHeaderValue = new Animated.Value(0);
       const Header_Max_Height = 150;
@@ -172,7 +171,7 @@ const LoginScreen  = ({navigation}) => {
                       ...FONTS.h2,
                       
                       }}
-                      onPress={() => {navigation.navigate('OTP')}}
+                      onPress={LoginBtnClick}
                    />
   
 
