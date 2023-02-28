@@ -39,7 +39,7 @@ const DriverCard = ({}) => {
                 shadowColor: COLORS.black,
                 flexDirection: "row",
               }}
-              key={index}
+              key={item.id}
             >
               <View style={{ flexDirection: "column" }}>
                 <View style={styles.Circle}>

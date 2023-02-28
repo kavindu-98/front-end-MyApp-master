@@ -140,7 +140,7 @@ const DriverDetails = ({ route }) => {
                     marginTop: 5,
                   }}
                 >
-                  {Driver.vehicleType}
+                  {Driver.vehicleType} * {Driver.condition}
                 </Text>
                 <Image
                   source={require("../assets/icons/Seats.png")}
@@ -160,7 +160,7 @@ const DriverDetails = ({ route }) => {
                     marginTop: -25,
                   }}
                 >
-                  20 Seats Available
+                 {Driver.sheetcount} Seats Available
                 </Text>
 
                 <Image
@@ -175,7 +175,7 @@ const DriverDetails = ({ route }) => {
                     ...FONTS.h2,
                   }}
                 >
-                  4.5
+                  {Driver.ratings}
                 </Text>
               </View>
             </View>

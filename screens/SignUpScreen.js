@@ -125,29 +125,7 @@ const SignUpScreen = ({ navigation }) => {
   };
 
 
- 
 
-  // const register = async () => {
-  //   const payload = {
-  //     email,
-  //     password,
-  //   };
-
-  //   try {
-  //     fetch(`${API_URL}/login`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(payload),
-  //     });
-  //     navigation.navigate("Home");
-  //     setEmail("");
-  //     setPassword("");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   let AnimatedHeaderValue = new Animated.Value(0);
   const Header_Max_Height = 150;
