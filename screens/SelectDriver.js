@@ -73,6 +73,7 @@ function renderMap() {
                                  <MapComponent></MapComponent>
                                  <HeaderBar
                               // title={selectedPlace?.name}
+                              icon={icons.left_arrow}
                               leftOnPressed={() => {navigation.navigate('SetDesM')}}
                               right={false}
                               containerStyle={{
@@ -132,24 +133,12 @@ function SlidingUpPanel() {
                   fontSize: 20
                 }}
                 >SELECT A DRIVER</Text>
-                <TouchableOpacity onPress={() => {navigation.navigate('DriverDetails')}}>
-                <DriverCard  Drivercards={Drivercards}>
-                    
-                </DriverCard></TouchableOpacity>
-                {/* <DriverCard ImageUri={require('../assets/images/Profile3.jpg')}>
-                    
-                </DriverCard>
-                <DriverCard ImageUri={require('../assets/images/Profile4.jpg')}>
-                    
-                </DriverCard> */}
-                 
-                   {/* <TextInput
-                            style={styles.input}
-                            placeholder="Enter Destionation"
-                            // autoFocus
-                            // value={email}
-                            // onChangeText={text => setEmail(text)}
-                          /> */}
+                {/* <TouchableOpacity onPress={() => {navigation.navigate('DriverDetails')}}> */}
+                     
+                <DriverCard/>
+                
+            
+ 
               </BottomSheetView>
               </ScrollView>
             </BottomSheet>
