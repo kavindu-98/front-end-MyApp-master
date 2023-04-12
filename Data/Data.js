@@ -109,3 +109,20 @@ export const Employee = [
 
   // },
 ];
+
+
+export const EmployeeShortCuts = [
+  {
+    id: 1,
+    type: "Pick-Up",
+    Image: require("../assets/images/Pickup.png"),
+    title: "Home",
+  },
+  {
+    id: 2,
+    type: "Drop",
+    Image: require("../assets/images/Drop.png"),
+    title: "Office",
+  },
+ 
+];

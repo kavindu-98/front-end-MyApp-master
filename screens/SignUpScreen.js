@@ -94,7 +94,7 @@ const SignUpScreen = ({ navigation }) => {
       return false;
     }
     if (password !== password2) {
-      setError({...error, errorMsg:'Passwords do not match!'});
+      setError({...error, errorMsg:'Passwords does not match!'});
       setSuccess({...success,successMsg:''})
       return false;
     }

@@ -1,789 +1,761 @@
-import { StyleSheet, Text, Modal, View,  StatusBar, TouchableOpacity, ScrollView, SafeAreaView, Image, Animated, BackHandler, TextInput} from 'react-native';
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import {
+  StyleSheet,
+  Text,
+  Modal,
+  View,
+  StatusBar,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+  Image,
+  Animated,
+  BackHandler,
+  TextInput,
+} from "react-native";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Header, Icon, ListItem, SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { COLORS, SIZES, FONTS, icons } from '../constants';
-import BottomSheet, {BottomSheetView} from "@gorhom/bottom-sheet";
+import { COLORS, SIZES, FONTS, icons } from "../constants";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
+import {
+  HeaderBar,
+  IconButton,
+  TextIconButton,
+  Rating,
+  TextButton,
+  MapComponent,
+  DriverCard,
+} from "../components";
 
-import { HeaderBar ,IconButton, TextIconButton, Rating, TextButton, MapComponent, DriverCard} from "../components";
+import * as Animatable from "react-native-animatable";
 
-import * as Animatable from 'react-native-animatable';
+import { ImageBackground } from "react-native";
+import HomeScreen from "./HomeScreen";
 
-import { ImageBackground } from 'react-native';
-import HomeScreen from './HomeScreen';
-
-
-
-
-
-const PendingDriver = ({ route}) => {
-
+const PendingDriver = ({ route }) => {
+  const Driver = route.params;
 
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const snapPoints = ["100%"];   
+  const snapPoints = ["100%"];
 
-//   const [selectedPlace, setSelectedPlace] = React.useState(null)
-//   const [selectedHotel, setSelectedHotel] = React.useState(null)
-//   const [allowDragging, setAllowDragging] = React.useState(true)
-
-
-//   const _draggedValue = React.useRef(new Animated.Value(0)).current;
-
-
-// //   let _panel = React.useRef(null);
-
-//   React.useEffect(() => {
-//       let { selectedPlace } = route.params;
-//       setSelectedPlace(selectedPlace) 
-//       // Listener that will diasble panel dragging whenever the mapview is shown
-//       _draggedValue.addListener((valueObj) => {
-//           if (valueObj.value > SIZES.height) {
-//               setAllowDragging(false)
-//           }
-//       })
-//       return () => {
-//           _draggedValue.removeAllListeners()
-//       }
-//   }, [])
   const navigation = useNavigation();
 
-
-
-
-
-
-
-function renderMap() {
+  function renderMap() {
     return (
- 
-            <View
-                style={{
-                 flex: 0.7,
-                  height : "100%",
-                  backgroundColor: COLORS.gray10,
-                  // alignItems: 'center',
-                  // justifyContent: 'center',
-                }}
-            >
-            
-                     <MapComponent></MapComponent>
-                              {/* header */}
-                                 <HeaderBar
-                              // title={selectedPlace?.name}
-                              leftOnPressed={() => {navigation.navigate('DriverDetails')}}
-                              right={false}
-                              containerStyle={{
-                                  position: 'absolute',
-                                  top: SIZES.padding * 2,
-                                  // height: "20%",
-                                  // width: SIZES.width,
-                                  backgroundColor: COLORS.transparentWhite
-                                 
-                              }}
-                            />
-                
-          
-                           
-            </View>
+      <View
+        style={{
+          flex: 0.7,
+          height: "100%",
+          backgroundColor: COLORS.gray10,
+          // alignItems: 'center',
+          // justifyContent: 'center',
+        }}
+      >
+        <MapComponent></MapComponent>
+        {/* header */}
+        <HeaderBar
+          // title={selectedPlace?.name}
+          icon={icons.left_arrow}
+          leftOnPressed={() => {
+            navigation.navigate("DriverDetails");
+          }}
+          right={false}
+          containerStyle={{
+            position: "absolute",
+            top: SIZES.padding * 2,
+            // height: "20%",
+            // width: SIZES.width,
+            backgroundColor: COLORS.transparentWhite,
+          }}
+        />
+      </View>
+    );
+  }
 
-
-   
-    )
-}
-
-function NoteToDriver() {
-  return (
- <View>
-
-<Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-          <Text
+  function NoteToDriver() {
+    return (
+      <View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text
                 style={{
                   color: COLORS.black,
                   // fontWeight: 1,
                   ...FONTS.h1,
                   fontSize: 23,
-                  
                 }}
-                >Note to driver</Text>
-                 <Text
+              >
+                Note to driver
+              </Text>
+              <Text
                 style={{
                   color: COLORS.gray40,
                   // fontWeight: 1,
                   ...FONTS.h3,
                   fontSize: 15,
-                  
                 }}
-                >Let the driver know if you are coming or not</Text>
-               
-            
-                
+              >
+                Let the driver know if you are coming or not
+              </Text>
 
-                
-
-       
-    
-
-                 <View  style={styles.Buttoncontainer}>
-                    
-                        <Text style={styles.inputTitle}>Morning</Text>
-                        <View style={styles.namecontainer}>
-                                    <TextIconButton
-                                label="Coming"
-                                customContainerStyle={{
-                                width: "43%",
-                                height: 55,
-                                backgroundColor: COLORS.gray20,
-                                borderColor: COLORS.gray20,
-                                borderWidth: 1,
-                                borderRadius: SIZES.radius_btn4,
-                                marginTop: SIZES.padding3,
-                                margin: 5
-
-                                }}
-                                customLabelStyle={{
-                                color: COLORS.gray30,
-                                alignItems: 'center',
-                                marginLeft: -15,
-                                ...FONTS.h3,
-                                
-                                }}
-                                // onPress={signup}
-                            />
-                         <TextIconButton
-                                label="Not Coming"
-                                customContainerStyle={{
-                                width: "43%",
-                                height: 55,
-                                backgroundColor: COLORS.gray20,
-                                borderColor: COLORS.gray20,
-                                borderWidth: 1,
-                                borderRadius: SIZES.radius_btn4,
-                                marginTop: SIZES.padding3,
-                                margin: 5
-                                }}
-                                customLabelStyle={{
-                                color: COLORS.gray30,
-                                alignItems: 'center',
-                                marginLeft: -15,
-                                ...FONTS.h3,
-                                
-                                }}
-                                // onPress={signup}
-                            />
-
-                           
-                            
-                    </View>
-                 
-                     
-                   </View>
-                   <View  style={styles.Buttoncontainer}>
-                    
-                    <Text style={styles.inputTitle}>Evening</Text>
-                            <View style={styles.namecontainer}>
-                                        <TextIconButton
-                                    label="Coming"
-                                    customContainerStyle={{
-                                    width: "43%",
-                                    height: 55,
-                                    backgroundColor: COLORS.gray20,
-                                    borderColor: COLORS.gray20,
-                                    borderWidth: 1,
-                                    borderRadius: SIZES.radius_btn4,
-                                    marginTop: SIZES.padding3,
-                                    margin: 5
-
-                                    }}
-                                    customLabelStyle={{
-                                    color: COLORS.gray30,
-                                    alignItems: 'center',
-                                    marginLeft: -15,
-                                    ...FONTS.h3,
-                                    
-                                    }}
-                                    // onPress={signup}
-                                />
-                            <TextIconButton
-                                    label="Not Coming"
-                                    customContainerStyle={{
-                                    width: "43%",
-                                    height: 55,
-                                    backgroundColor: COLORS.gray20,
-                                    borderColor: COLORS.gray20,
-                                    borderWidth: 1,
-                                    borderRadius: SIZES.radius_btn4,
-                                    marginTop: SIZES.padding3,
-                                    margin: 5
-                                    }}
-                                    customLabelStyle={{
-                                    color: COLORS.gray30,
-                                    alignItems: 'center',
-                                    marginLeft: -15,
-                                    ...FONTS.h3,
-                                    
-                                    }}
-                                    // onPress={signup}
-                                />
-
-                            
-                                
-                        </View>
-             
-                 
-               </View>
-
-               <View style={styles.Buttoncontainer}>
-                <View 
-                 style={{
-                    flexDirection: 'row',
-                
-                
-                     // alignItems: 'center',
-                     // justifyContent: 'center',
-                   }}>
-                <Text style={styles.inputTitle}>Note</Text>
-                        <Text style={styles.inputTitle1}>(Optional)</Text>
+              <View style={styles.Buttoncontainer}>
+                <Text style={styles.inputTitle}>Morning</Text>
+                <View style={styles.namecontainer}>
+                  <TextIconButton
+                    label="Coming"
+                    customContainerStyle={{
+                      width: "43%",
+                      height: 55,
+                      backgroundColor: COLORS.gray20,
+                      borderColor: COLORS.gray20,
+                      borderWidth: 1,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding3,
+                      margin: 5,
+                    }}
+                    customLabelStyle={{
+                      color: COLORS.gray30,
+                      alignItems: "center",
+                      marginLeft: -15,
+                      ...FONTS.h3,
+                    }}
+                    // onPress={signup}
+                  />
+                  <TextIconButton
+                    label="Not Coming"
+                    customContainerStyle={{
+                      width: "43%",
+                      height: 55,
+                      backgroundColor: COLORS.gray20,
+                      borderColor: COLORS.gray20,
+                      borderWidth: 1,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding3,
+                      margin: 5,
+                    }}
+                    customLabelStyle={{
+                      color: COLORS.gray30,
+                      alignItems: "center",
+                      marginLeft: -15,
+                      ...FONTS.h3,
+                    }}
+                    // onPress={signup}
+                  />
                 </View>
-                        
-                          <TextInput
-                            style={styles.input}
-                            placeholder="Enter your note"
-                            // autoFocus
-                            // value={email}
-                            // onChangeText={text => setEmail(text)}
-                          />
-                    </View>
-      
-
-                
-                <TextIconButton
-                      label="SEND"
-                      customContainerStyle={{
-                      width: "90%",
+              </View>
+              <View style={styles.Buttoncontainer}>
+                <Text style={styles.inputTitle}>Evening</Text>
+                <View style={styles.namecontainer}>
+                  <TextIconButton
+                    label="Coming"
+                    customContainerStyle={{
+                      width: "43%",
                       height: 55,
-                     
-                      borderRadius: SIZES.radius_btn4,
-                      marginTop: SIZES.padding1
-                      }}
-                      customLabelStyle={{
-                      color: COLORS.white,
-                      alignItems: 'center',
-                      marginLeft: -15,
-                      ...FONTS.h2,
-                      
-                      }}
-                      onPress={() => {navigation.navigate('SL')}}
-                   />
-                   
-                   <TextIconButton
-                      label="CANCEL"
-                      customContainerStyle={{
-                      width: "90%",
-                      height: 55,
-                      backgroundColor: COLORS.white,
-                      borderColor: COLORS.gray30,
+                      backgroundColor: COLORS.gray20,
+                      borderColor: COLORS.gray20,
                       borderWidth: 1,
                       borderRadius: SIZES.radius_btn4,
-                      marginTop: SIZES.padding3
-                      }}
-                      customLabelStyle={{
-                      color: COLORS.red1Font,
-                      alignItems: 'center',
-                      marginLeft: -15,
-                      ...FONTS.h2,
-                      
-                      }}
-                      onPress={() => setModalVisible(!modalVisible)}
-                   />
-         
-          
-          </View>
-        </View>
-      </Modal>
-        
-</View>    
-      
-
-  )
-}
-
-function PendingDriver() {
-  return (
-    
-          <View
-              style={{
-               flex: 1.2,
-           
-                backgroundColor: COLORS.gray10,
-                // alignItems: 'center',
-                // justifyContent: 'center',
-              }}
-          >
-            <BottomSheet
-            // ref={sheetRef}
-            snapPoints={snapPoints}
-            // enablePanDownToClose={true}
-            onClose={() => setIsOpen(false)}
-            backgroundStyle={{ borderRadius: 50}}
-          
-            >
-              <BottomSheetView
-                style={{
-                  // borderRadius: 5,
-                  // backgroundColor: COLORS.gray10
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                  
-                }}>
-                <Text
-                style={{
-                  color: COLORS.black,
-                  // fontWeight: 1,
-                  ...FONTS.h1,
-                  fontSize: 23
-                }}
-                >Lalith Perera</Text>
-                <View 
-                style={{
-                    flexDirection: 'row'
-                }}
-                >
-                       <Image
-                    source={require('../assets/icons/call.png')}
-                    resizeMode="contain"
-                    style={{
-                        width: 50,
-                        height: 50,
-                        margin: 35,
-                        marginTop: 50
-                        // tintColor: COLORS.red1Font,
-                        
+                      marginTop: SIZES.padding3,
+                      margin: 5,
                     }}
-                />
-
-                
-
-        <View style={{ alignSelf: "center", marginTop: 20}}>
-          <View style={styles.Circle}>
-              <Image source={require('../assets/images/Profile2.jpg')} style={styles.profileimage} resizeMode="center"
-              />
-          </View>
-        </View>
-        <TouchableOpacity  onPress={() => setModalVisible(true)}>
-        <Image
-                    source={require('../assets/icons/mesg.png')}
-                    resizeMode="contain"
-                    
-                    style={{
-                        width: 50,
-                        height: 50,
-                        margin: 35,
-                        marginTop: 50
-                        // tintColor: COLORS.red1Font,
-                        
-                    }}
-                />
-                </TouchableOpacity>
-
-        </View>
-
-        <View   style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: 10
-                }}> 
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-
-        </View>
-        <Text
-                style={{
-                  color: COLORS.black,
-                  // fontWeight: 1,
-                  ...FONTS.h2,
-                  fontSize: 15
-                }}
-                >NB3742 - Dehiwala</Text>
-
-                
-                <TextIconButton
-                      label="PENDING..."
-                      customContainerStyle={{
-                      width: "90%",
-                      height: 55,
-                      backgroundColor: COLORS.redOpacity,
-                      borderRadius: SIZES.radius_btn4,
-                      marginTop: SIZES.padding1
-                      }}
-                      customLabelStyle={{
-                      color: COLORS.white,
-                      alignItems: 'center',
+                    customLabelStyle={{
+                      color: COLORS.gray30,
+                      alignItems: "center",
                       marginLeft: -15,
-                      ...FONTS.h2,
-                      
-                      }}
-                      onPress={() => {navigation.navigate('AcceptDriver')}}
-                   />
-                   
-                   <TextIconButton
-                      label="CANCEL"
-                      customContainerStyle={{
-                      width: "90%",
+                      ...FONTS.h3,
+                    }}
+                    // onPress={signup}
+                  />
+                  <TextIconButton
+                    label="Not Coming"
+                    customContainerStyle={{
+                      width: "43%",
                       height: 55,
-                      backgroundColor: COLORS.white,
-                      borderColor: COLORS.gray30,
+                      backgroundColor: COLORS.gray20,
+                      borderColor: COLORS.gray20,
                       borderWidth: 1,
                       borderRadius: SIZES.radius_btn4,
-                      marginTop: SIZES.padding3
-                      }}
-                      customLabelStyle={{
-                      color: COLORS.red1Font,
-                      alignItems: 'center',
+                      marginTop: SIZES.padding3,
+                      margin: 5,
+                    }}
+                    customLabelStyle={{
+                      color: COLORS.gray30,
+                      alignItems: "center",
                       marginLeft: -15,
-                      ...FONTS.h2,
-                      
-                      }}
-                      onPress={() => {navigation.navigate('DriverDetails')}}
-                   />
+                      ...FONTS.h3,
+                    }}
+                    // onPress={signup}
+                  />
+                </View>
+              </View>
 
+              <View style={styles.Buttoncontainer}>
+                <View
+                  style={{
+                    flexDirection: "row",
 
-                
-                 
-               
-              </BottomSheetView>
-            </BottomSheet>
-           
-        
-          </View>
-
-
-  )
-}
-function AcceptDriver() {
-  return (
-    
-          <View
-              style={{
-               flex: 1,
-           
-                backgroundColor: COLORS.gray10,
-                // alignItems: 'center',
-                // justifyContent: 'center',
-              }}
-          >
-            <BottomSheet
-            // ref={sheetRef}
-            snapPoints={snapPoints}
-            // enablePanDownToClose={true}
-            onClose={() => setIsOpen(false)}
-            backgroundStyle={{ borderRadius: 50}}
-          
-            >
-              <BottomSheetView
-                style={{
-                  // borderRadius: 5,
-                  // backgroundColor: COLORS.gray10
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                  
-                }}>
-                <Text
-                style={{
-                  color: COLORS.black,
-                  // fontWeight: 1,
-                  ...FONTS.h1,
-                  fontSize: 23
-                }}
-                >Lalith Perera</Text>
-                <View 
-                style={{
-                    flexDirection: 'row'
-                }}
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
+                  }}
                 >
-                       <Image
-                    source={require('../assets/icons/call.png')}
-                    resizeMode="contain"
-                    style={{
-                        width: 50,
-                        height: 50,
-                        margin: 35,
-                        marginTop: 50
-                        // tintColor: COLORS.red1Font,
-                        
-                    }}
+                  <Text style={styles.inputTitle}>Note</Text>
+                  <Text style={styles.inputTitle1}>(Optional)</Text>
+                </View>
+
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your note"
+                  // autoFocus
+                  // value={email}
+                  // onChangeText={text => setEmail(text)}
                 />
+              </View>
 
-                
+              <TextIconButton
+                label="SEND"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
 
-        <View style={{ alignSelf: "center", marginTop: 20}}>
-          <View style={styles.Circle}>
-              <Image source={require('../assets/images/Profile2.jpg')} style={styles.profileimage} resizeMode="center"
-              />
-          </View>
-        </View>
-        <TouchableOpacity onPress={() => {
-          navigation.navigate('NoteToDriver')}}>
-        <Image
-                    source={require('../assets/icons/mesg.png')}
-                    resizeMode="contain"
-                    
-                    style={{
-                        width: 50,
-                        height: 50,
-                        margin: 35,
-                        marginTop: 50
-                        // tintColor: COLORS.red1Font,
-                        
-                    }}
-                /></TouchableOpacity>
-
-        </View>
-
-        <View   style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: 10
-                }}> 
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-
-        </View>
-        <Text
-                style={{
-                  color: COLORS.black,
-                  // fontWeight: 1,
-                  ...FONTS.h2,
-                  fontSize: 15
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding1,
                 }}
-                >NB3742 - Dehiwala</Text>
+                customLabelStyle={{
+                  color: COLORS.white,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                onPress={() => {
+                  navigation.navigate("SL");
+                }}
+              />
 
-                
-                <TextIconButton
-                      label="ACCEPTED"
-                      customContainerStyle={{
-                      width: "60%",
-                      height: 55,
-                      backgroundColor: COLORS.white,
-                      borderWidth:1,
-                      borderColor: COLORS.red1Font,
-                      borderRadius: SIZES.radius_btn4,
-                      marginTop: SIZES.padding1
-                      }}
-                      customLabelStyle={{
-                      color: COLORS.green,
-                      alignItems: 'center',
-                      marginLeft: -15,
-                      ...FONTS.h2,
-                      
-                      }}
-                      onPress={() => {navigation.navigate('Finish')}}
-                   />
-               
-              </BottomSheetView>
-            </BottomSheet>
-           
-        
+              <TextIconButton
+                label="CANCEL"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
+                  backgroundColor: COLORS.white,
+                  borderColor: COLORS.gray30,
+                  borderWidth: 1,
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding3,
+                }}
+                customLabelStyle={{
+                  color: COLORS.red1Font,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                onPress={() => setModalVisible(!modalVisible)}
+              />
+            </View>
           </View>
+        </Modal>
+      </View>
+    );
+  }
 
+  function PendingDriver() {
+    return (
+      <View
+        style={{
+          flex: 1.2,
 
-  )
-}
-function Finish() {
-  return (
-    
-          <View
-              style={{
-               flex: 1,
-           
-                backgroundColor: COLORS.gray10,
-                // alignItems: 'center',
-                // justifyContent: 'center',
-              }}
+          backgroundColor: COLORS.gray10,
+          // alignItems: 'center',
+          // justifyContent: 'center',
+        }}
+      >
+        <BottomSheet
+          // ref={sheetRef}
+          snapPoints={snapPoints}
+          // enablePanDownToClose={true}
+          onClose={() => setIsOpen(false)}
+          backgroundStyle={{ borderRadius: 50 }}
+        >
+          <BottomSheetView
+            style={{
+              // borderRadius: 5,
+              // backgroundColor: COLORS.gray10
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            <BottomSheet
-            // ref={sheetRef}
-            snapPoints={snapPoints}
-            // enablePanDownToClose={true}
-            onClose={() => setIsOpen(false)}
-            backgroundStyle={{ borderRadius: 50}}
-          
+            <Text
+              style={{
+                color: COLORS.black,
+                // fontWeight: 1,
+                ...FONTS.h1,
+                fontSize: 23,
+              }}
             >
-              <BottomSheetView
+              {/* {Driver.name} */}
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+              }}
+            >
+              <Image
+                source={require("../assets/icons/call.png")}
+                resizeMode="contain"
                 style={{
-                  // borderRadius: 5,
-                  // backgroundColor: COLORS.gray10
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                  
-                }}>
-                <Text
-                style={{
-                  color: COLORS.black,
-                  // fontWeight: 1,
-                  ...FONTS.h1,
-                  fontSize: 23
+                  width: 50,
+                  height: 50,
+                  margin: 35,
+                  marginTop: 50,
+                  // tintColor: COLORS.red1Font,
                 }}
-                >Lalith Perera</Text>
-                <View 
-                style={{
-                    flexDirection: 'row'
-                }}
-                >
-                       <Image
-                    source={require('../assets/icons/call.png')}
-                    resizeMode="contain"
-                    style={{
-                        width: 50,
-                        height: 50,
-                        margin: 35,
-                        marginTop: 50
-                        // tintColor: COLORS.red1Font,
-                        
-                    }}
-                />
-
-                
-
-        <View style={{ alignSelf: "center", marginTop: 20}}>
-          <View style={styles.Circle}>
-              <Image source={require('../assets/images/Profile2.jpg')} style={styles.profileimage} resizeMode="center"
               />
-          </View>
-        </View>
-        
-        <Image
-                    source={require('../assets/icons/mesg.png')}
-                    resizeMode="contain"
-                    
-                    style={{
-                        width: 50,
-                        height: 50,
-                        margin: 35,
-                        marginTop: 50
-                        // tintColor: COLORS.red1Font,
-                        
-                    }}
+
+              <View style={{ alignSelf: "center", marginTop: 20 }}>
+                <View style={styles.Circle}>
+                  <Image
+                    source={require("../assets/images/Profile2.jpg")}
+                    style={styles.profileimage}
+                    resizeMode="center"
+                  />
+                </View>
+              </View>
+              <TouchableOpacity   onPress={() => setModalVisible(true)}>
+                <Image
+                  source={require("../assets/icons/mesg.png")}
+                  resizeMode="contain"
+                  style={{
+                    width: 50,
+                    height: 50,
+                    margin: 35,
+                    marginTop: 50,
+                    // tintColor: COLORS.red1Font,
+                  }}
                 />
+              </TouchableOpacity>
+            </View>
 
-        </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 10,
+              }}
+            >
+              <Image
+                source={require("../assets/images/Star.png")}
+                style={styles.Star}
+                resizeMode="center"
+              />
+              <Image
+                source={require("../assets/images/Star.png")}
+                style={styles.Star}
+                resizeMode="center"
+              />
+              <Image
+                source={require("../assets/images/Star.png")}
+                style={styles.Star}
+                resizeMode="center"
+              />
+              <Image
+                source={require("../assets/images/Star.png")}
+                style={styles.Star}
+                resizeMode="center"
+              />
+              <Image
+                source={require("../assets/images/Star.png")}
+                style={styles.Star}
+                resizeMode="center"
+              />
+            </View>
+            <Text
+              style={{
+                color: COLORS.black,
+                // fontWeight: 1,
+                ...FONTS.h2,
+                fontSize: 15,
+              }}
+            >
+              NB3742 - Dehiwala
+            </Text>
 
-        <View   style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: 10
-                }}> 
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
-                                <Image source={require('../assets/images/Star.png')} style={styles.Star} resizeMode="center"
-                                />
+            <TextIconButton
+              label="PENDING..."
+              customContainerStyle={{
+                width: "90%",
+                height: 55,
+                backgroundColor: COLORS.redOpacity,
+                borderRadius: SIZES.radius_btn4,
+                marginTop: SIZES.padding1,
+              }}
+              customLabelStyle={{
+                color: COLORS.white,
+                alignItems: "center",
+                marginLeft: -15,
+                ...FONTS.h2,
+              }}
+              onPress={() => {
+                navigation.navigate("AcceptDriver");
+              }}
+            />
 
-        </View>
-        <Text
-                style={{
-                  color: COLORS.black,
-                  // fontWeight: 1,
-                  ...FONTS.h2,
-                  fontSize: 15
-                }}
-                >NB3742 - Dehiwala</Text>
+            <TextIconButton
+              label="CANCEL"
+              customContainerStyle={{
+                width: "90%",
+                height: 55,
+                backgroundColor: COLORS.white,
+                borderColor: COLORS.gray30,
+                borderWidth: 1,
+                borderRadius: SIZES.radius_btn4,
+                marginTop: SIZES.padding3,
+              }}
+              customLabelStyle={{
+                color: COLORS.red1Font,
+                alignItems: "center",
+                marginLeft: -15,
+                ...FONTS.h2,
+              }}
+              onPress={() => {
+                navigation.navigate("DriverDetails");
+              }}
+            />
+          </BottomSheetView>
+        </BottomSheet>
+      </View>
+    );
+  }
+  // function AcceptDriver() {
+  //   return (
+  //     <View
+  //       style={{
+  //         flex: 1,
 
-                
-                <TextIconButton
-                      label="FINISHED"
-                      customContainerStyle={{
-                      width: "60%",
-                      height: 55,
-                      backgroundColor: COLORS.white,
-                      borderWidth:1,
-                      borderColor: COLORS.red1Font,
-                      borderRadius: SIZES.radius_btn4,
-                      marginTop: SIZES.padding1
-                      }}
-                      customLabelStyle={{
-                      color: COLORS.green,
-                      alignItems: 'center',
-                      marginLeft: -15,
-                      ...FONTS.h2,
-                      
-                      }}
-                      onPress={() => {navigation.navigate('RatingScreen')}}
-                   />
-                   
-            
+  //         backgroundColor: COLORS.gray10,
+  //         // alignItems: 'center',
+  //         // justifyContent: 'center',
+  //       }}
+  //     >
+  //       <BottomSheet
+  //         // ref={sheetRef}
+  //         snapPoints={snapPoints}
+  //         // enablePanDownToClose={true}
+  //         onClose={() => setIsOpen(false)}
+  //         backgroundStyle={{ borderRadius: 50 }}
+  //       >
+  //         <BottomSheetView
+  //           style={{
+  //             // borderRadius: 5,
+  //             // backgroundColor: COLORS.gray10
+  //             justifyContent: "center",
+  //             alignItems: "center",
+  //           }}
+  //         >
+  //           <Text
+  //             style={{
+  //               color: COLORS.black,
+  //               // fontWeight: 1,
+  //               ...FONTS.h1,
+  //               fontSize: 23,
+  //             }}
+  //           >
+  //             Lalith Perera
+  //           </Text>
+  //           <View
+  //             style={{
+  //               flexDirection: "row",
+  //             }}
+  //           >
+  //             <Image
+  //               source={require("../assets/icons/call.png")}
+  //               resizeMode="contain"
+  //               style={{
+  //                 width: 50,
+  //                 height: 50,
+  //                 margin: 35,
+  //                 marginTop: 50,
+  //                 // tintColor: COLORS.red1Font,
+  //               }}
+  //             />
+
+  //             <View style={{ alignSelf: "center", marginTop: 20 }}>
+  //               <View style={styles.Circle}>
+  //                 <Image
+  //                   source={require("../assets/images/Profile2.jpg")}
+  //                   style={styles.profileimage}
+  //                   resizeMode="center"
+  //                 />
+  //               </View>
+  //             </View>
+  //             <TouchableOpacity
+  //               onPress={() => {
+  //                 navigation.navigate("NoteToDriver");
+  //               }}
+  //             >
+  //               <Image
+  //                 source={require("../assets/icons/mesg.png")}
+  //                 resizeMode="contain"
+  //                 style={{
+  //                   width: 50,
+  //                   height: 50,
+  //                   margin: 35,
+  //                   marginTop: 50,
+  //                   // tintColor: COLORS.red1Font,
+  //                 }}
+  //               />
+  //             </TouchableOpacity>
+  //           </View>
+
+  //           <View
+  //             style={{
+  //               flexDirection: "row",
+  //               justifyContent: "center",
+  //               alignItems: "center",
+  //               marginTop: 10,
+  //             }}
+  //           >
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //           </View>
+  //           <Text
+  //             style={{
+  //               color: COLORS.black,
+  //               // fontWeight: 1,
+  //               ...FONTS.h2,
+  //               fontSize: 15,
+  //             }}
+  //           >
+  //             NB3742 - Dehiwala
+  //           </Text>
+
+  //           <TextIconButton
+  //             label="ACCEPTED"
+  //             customContainerStyle={{
+  //               width: "60%",
+  //               height: 55,
+  //               backgroundColor: COLORS.white,
+  //               borderWidth: 1,
+  //               borderColor: COLORS.red1Font,
+  //               borderRadius: SIZES.radius_btn4,
+  //               marginTop: SIZES.padding1,
+  //             }}
+  //             customLabelStyle={{
+  //               color: COLORS.green,
+  //               alignItems: "center",
+  //               marginLeft: -15,
+  //               ...FONTS.h2,
+  //             }}
+  //             onPress={() => {
+  //               navigation.navigate("Finish");
+  //             }}
+  //           />
+  //         </BottomSheetView>
+  //       </BottomSheet>
+  //     </View>
+  //   );
+  // }
+  // function Finish() {
+  //   return (
+  //     <View
+  //       style={{
+  //         flex: 1,
+
+  //         backgroundColor: COLORS.gray10,
+  //         // alignItems: 'center',
+  //         // justifyContent: 'center',
+  //       }}
+  //     >
+  //       <BottomSheet
+  //         // ref={sheetRef}
+  //         snapPoints={snapPoints}
+  //         // enablePanDownToClose={true}
+  //         onClose={() => setIsOpen(false)}
+  //         backgroundStyle={{ borderRadius: 50 }}
+  //       >
+  //         <BottomSheetView
+  //           style={{
+  //             // borderRadius: 5,
+  //             // backgroundColor: COLORS.gray10
+  //             justifyContent: "center",
+  //             alignItems: "center",
+  //           }}
+  //         >
+  //           <Text
+  //             style={{
+  //               color: COLORS.black,
+  //               // fontWeight: 1,
+  //               ...FONTS.h1,
+  //               fontSize: 23,
+  //             }}
+  //           >
+  //             Lalith Perera
+  //           </Text>
+  //           <View
+  //             style={{
+  //               flexDirection: "row",
+  //             }}
+  //           >
+  //             <Image
+  //               source={require("../assets/icons/call.png")}
+  //               resizeMode="contain"
+  //               style={{
+  //                 width: 50,
+  //                 height: 50,
+  //                 margin: 35,
+  //                 marginTop: 50,
+  //                 // tintColor: COLORS.red1Font,
+  //               }}
+  //             />
+
+  //             <View style={{ alignSelf: "center", marginTop: 20 }}>
+  //               <View style={styles.Circle}>
+  //                 <Image
+  //                   source={require("../assets/images/Profile2.jpg")}
+  //                   style={styles.profileimage}
+  //                   resizeMode="center"
+  //                 />
+  //               </View>
+  //             </View>
+
+  //             <Image
+  //               source={require("../assets/icons/mesg.png")}
+  //               resizeMode="contain"
+  //               style={{
+  //                 width: 50,
+  //                 height: 50,
+  //                 margin: 35,
+  //                 marginTop: 50,
+  //                 // tintColor: COLORS.red1Font,
+  //               }}
+  //             />
+  //           </View>
+
+  //           <View
+  //             style={{
+  //               flexDirection: "row",
+  //               justifyContent: "center",
+  //               alignItems: "center",
+  //               marginTop: 10,
+  //             }}
+  //           >
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //             <Image
+  //               source={require("../assets/images/Star.png")}
+  //               style={styles.Star}
+  //               resizeMode="center"
+  //             />
+  //           </View>
+  //           <Text
+  //             style={{
+  //               color: COLORS.black,
+  //               // fontWeight: 1,
+  //               ...FONTS.h2,
+  //               fontSize: 15,
+  //             }}
+  //           >
+  //             NB3742 - Dehiwala
+  //           </Text>
+
+  //           <TextIconButton
+  //             label="FINISHED"
+  //             customContainerStyle={{
+  //               width: "60%",
+  //               height: 55,
+  //               backgroundColor: COLORS.white,
+  //               borderWidth: 1,
+  //               borderColor: COLORS.red1Font,
+  //               borderRadius: SIZES.radius_btn4,
+  //               marginTop: SIZES.padding1,
+  //             }}
+  //             customLabelStyle={{
+  //               color: COLORS.green,
+  //               alignItems: "center",
+  //               marginLeft: -15,
+  //               ...FONTS.h2,
+  //             }}
+  //             onPress={() => {
+  //               navigation.navigate("RatingScreen");
+  //             }}
+  //           />
+  //         </BottomSheetView>
+  //       </BottomSheet>
+  //     </View>
+  //   );
+  // }
 
 
-                
-                 
-               
-              </BottomSheetView>
-            </BottomSheet>
-           
-        
-          </View>
-
-
-  )
-}
-
-
-
+  // opacity: modalVisible ? 0.2 : 1
 
   return (
-    <View style={{  flex: 1,
-      opacity: modalVisible ? 0.2 : 1
+    <View style={{ 
+      flex: 1,
        }}>
-       <StatusBar
-                        style="auto"
-                        />
-    
-    {renderMap()}
-    {PendingDriver()}
-    {NoteToDriver()}
-    {/* {AcceptDriver()} */}
-    {/* {Finish()} */}
-    
-   
-  </View>
-  )
-}
+      <StatusBar style="auto" />
+
+      {renderMap()}
+      {NoteToDriver()}
+      {PendingDriver()}
+     
+      {/* {AcceptDriver()} */}
+      {/* {Finish()} */}
+    </View>
+  );
+};
 
 export default PendingDriver;
 
@@ -797,61 +769,51 @@ const styles = StyleSheet.create({
     height: 50,
     marginLeft: 17,
     marginTop: SIZES.padding3,
-    padding: SIZES.padding2
-
+    padding: SIZES.padding2,
   },
   profileimage: {
     width: 120,
     height: 120,
     borderRadius: 1900,
     // overflow: "hidden",
-    
-  
   },
-  Circle:{
+  Circle: {
     width: 120,
     height: 120,
     borderRadius: 100,
-marginTop:2
-   
-    
+    marginTop: 2,
 
     // overflow: "hidden",
-
   },
-  Star:{
+  Star: {
     width: 24,
     height: 24,
 
     margin: 5,
-    
   },
   modelBackground: {
     flex: 1,
     backgroundColor: COLORS.white,
-    justifyContent: 'center',
-    alignItems: 'center',
-  
+    justifyContent: "center",
+    alignItems: "center",
   },
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 22,
-  
-   
   },
   modalView: {
     width: "90%",
     height: "90%",
     margin: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 20,
     padding: 10,
-    alignItems: 'center',
-    shadowColor: '#000',
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: "center",
+    shadowColor: "#000",
+    justifyContent: "center",
+    alignItems: "center",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -861,34 +823,25 @@ marginTop:2
     elevation: 5,
   },
   namecontainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     width: "100%",
-    justifyContent: 'center',
-    
-},
-inputTitle: {
-    
+    justifyContent: "center",
+  },
+  inputTitle: {
     ...FONTS.h3,
-    
+
     color: COLORS.black,
     marginTop: SIZES.padding3,
-    marginLeft: 20
+    marginLeft: 20,
   },
 
   Buttoncontainer: {
-    
     width: "100%",
-    justifyContent: 'center'
-},
+    justifyContent: "center",
+  },
 
-inputTitle1:{
+  inputTitle1: {
     marginTop: 12,
-    marginLeft: 10
-}
-
-
-
-
-
-
-})
+    marginLeft: 10,
+  },
+});

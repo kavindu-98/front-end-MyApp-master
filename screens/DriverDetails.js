@@ -28,8 +28,8 @@ import {
 } from "../components";
 
 
-const DriverDetails = ({ route }) => {
-  const Driver = route.params;
+const DriverDetails = ({ route  }) => {
+
 
   const navigation = useNavigation();
 
@@ -99,7 +99,7 @@ const DriverDetails = ({ route }) => {
             >
               <View style={styles.Circle}>
                 <Image
-                  source={Driver.Image}
+                  // source={Driver.Image}
                   style={styles.profileimage}
                   resizeMode="center"
                 />
@@ -120,7 +120,8 @@ const DriverDetails = ({ route }) => {
                     marginLeft: 20,
                   }}
                 >
-                  {Driver.name}
+                  {/* {Driver.name} */}
+                  Lalith
                 </Text>
                 <Text
                   style={{
@@ -131,7 +132,7 @@ const DriverDetails = ({ route }) => {
                     marginLeft: 20,
                   }}
                 >
-                  {Driver.vehicleNo}
+                  {/* {Driver.vehicleNo} */}
                 </Text>
                 <Text
                   style={{
@@ -140,7 +141,7 @@ const DriverDetails = ({ route }) => {
                     marginTop: 5,
                   }}
                 >
-                  {Driver.vehicleType} * {Driver.condition}
+                  {/* {Driver.vehicleType} * {Driver.condition} */}
                 </Text>
                 <Image
                   source={require("../assets/icons/Seats.png")}
@@ -160,7 +161,7 @@ const DriverDetails = ({ route }) => {
                     marginTop: -25,
                   }}
                 >
-                 {Driver.sheetcount} Seats Available
+                 {/* {Driver.sheetcount} Seats Available */}
                 </Text>
 
                 <Image
@@ -175,7 +176,7 @@ const DriverDetails = ({ route }) => {
                     ...FONTS.h2,
                   }}
                 >
-                  {Driver.ratings}
+                  {/* {Driver.ratings} */}
                 </Text>
               </View>
             </View>
