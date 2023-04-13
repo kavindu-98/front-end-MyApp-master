@@ -2,6 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Modal,
   StatusBar,
   TouchableOpacity,
   ScrollView,
@@ -35,30 +36,12 @@ import HomeScreen from "./HomeScreen";
 const AcceptDriver = ({ route }) => {
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalCallVisible, setCallModalVisible] = useState(false);
 
   const snapPoints = ["6%", "40%", "100%"];
 
-  //   const [selectedPlace, setSelectedPlace] = React.useState(null)
-  //   const [selectedHotel, setSelectedHotel] = React.useState(null)
-  //   const [allowDragging, setAllowDragging] = React.useState(true)
 
-  //   const _draggedValue = React.useRef(new Animated.Value(0)).current;
-
-  // //   let _panel = React.useRef(null);
-
-  //   React.useEffect(() => {
-  //       let { selectedPlace } = route.params;
-  //       setSelectedPlace(selectedPlace)
-  //       // Listener that will diasble panel dragging whenever the mapview is shown
-  //       _draggedValue.addListener((valueObj) => {
-  //           if (valueObj.value > SIZES.height) {
-  //               setAllowDragging(false)
-  //           }
-  //       })
-  //       return () => {
-  //           _draggedValue.removeAllListeners()
-  //       }
-  //   }, [])
   const navigation = useNavigation();
 
   function renderMap() {
@@ -80,6 +63,7 @@ const AcceptDriver = ({ route }) => {
             navigation.navigate("DriverDetails");
           }}
           right={false}
+          icon={icons.left_arrow}
           containerStyle={{
             position: "absolute",
             top: SIZES.padding * 2,
@@ -133,6 +117,7 @@ const AcceptDriver = ({ route }) => {
                 flexDirection: "row",
               }}
             >
+               <TouchableOpacity   onPress={() => setCallModalVisible(true)}>
               <Image
                 source={require("../assets/icons/call.png")}
                 resizeMode="contain"
@@ -144,6 +129,7 @@ const AcceptDriver = ({ route }) => {
                   // tintColor: COLORS.red1Font,
                 }}
               />
+              </TouchableOpacity>
 
               <View style={{ alignSelf: "center", marginTop: 20 }}>
                 <View style={styles.Circle}>
@@ -155,9 +141,7 @@ const AcceptDriver = ({ route }) => {
                 </View>
               </View>
               <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("NoteToDriver");
-                }}
+               onPress={() => setModalVisible(true)}
               >
                 <Image
                   source={require("../assets/icons/mesg.png")}
@@ -244,12 +228,308 @@ const AcceptDriver = ({ route }) => {
       </View>
     );
   }
+  function NoteToDriver() {
+    return (
+      <View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text
+                style={{
+                  color: COLORS.black,
+                  // fontWeight: 1,
+                  ...FONTS.h1,
+                  fontSize: 23,
+                }}
+              >
+                Note to driver
+              </Text>
+              <Text
+                style={{
+                  color: COLORS.gray40,
+                  // fontWeight: 1,
+                  ...FONTS.h3,
+                  fontSize: 15,
+                }}
+              >
+                Let the driver know if you are coming or not
+              </Text>
+
+              <View style={styles.Buttoncontainer}>
+                <Text style={styles.inputTitle}>Morning</Text>
+                <View style={styles.namecontainer}>
+                  <TextIconButton
+                    label="Coming"
+                    customContainerStyle={{
+                      width: "43%",
+                      height: 55,
+                      backgroundColor: COLORS.gray20,
+                      borderColor: COLORS.gray20,
+                      borderWidth: 1,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding3,
+                      margin: 5,
+                    }}
+                    customLabelStyle={{
+                      color: COLORS.gray30,
+                      alignItems: "center",
+                      marginLeft: -15,
+                      ...FONTS.h3,
+                    }}
+                    // onPress={signup}
+                  />
+                  <TextIconButton
+                    label="Not Coming"
+                    customContainerStyle={{
+                      width: "43%",
+                      height: 55,
+                      backgroundColor: COLORS.gray20,
+                      borderColor: COLORS.gray20,
+                      borderWidth: 1,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding3,
+                      margin: 5,
+                    }}
+                    customLabelStyle={{
+                      color: COLORS.gray30,
+                      alignItems: "center",
+                      marginLeft: -15,
+                      ...FONTS.h3,
+                    }}
+                    // onPress={signup}
+                  />
+                </View>
+              </View>
+              <View style={styles.Buttoncontainer}>
+                <Text style={styles.inputTitle}>Evening</Text>
+                <View style={styles.namecontainer}>
+                  <TextIconButton
+                    label="Coming"
+                    customContainerStyle={{
+                      width: "43%",
+                      height: 55,
+                      backgroundColor: COLORS.gray20,
+                      borderColor: COLORS.gray20,
+                      borderWidth: 1,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding3,
+                      margin: 5,
+                    }}
+                    customLabelStyle={{
+                      color: COLORS.gray30,
+                      alignItems: "center",
+                      marginLeft: -15,
+                      ...FONTS.h3,
+                    }}
+                    // onPress={signup}
+                  />
+                  <TextIconButton
+                    label="Not Coming"
+                    customContainerStyle={{
+                      width: "43%",
+                      height: 55,
+                      backgroundColor: COLORS.gray20,
+                      borderColor: COLORS.gray20,
+                      borderWidth: 1,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding3,
+                      margin: 5,
+                    }}
+                    customLabelStyle={{
+                      color: COLORS.gray30,
+                      alignItems: "center",
+                      marginLeft: -15,
+                      ...FONTS.h3,
+                    }}
+                    // onPress={signup}
+                  />
+                </View>
+              </View>
+
+              <View style={styles.Buttoncontainer}>
+                <View
+                  style={{
+                    flexDirection: "row",
+
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
+                  }}
+                >
+                  <Text style={styles.inputTitle}>Note</Text>
+                  <Text style={styles.inputTitle1}>(Optional)</Text>
+                </View>
+
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your note"
+                  // autoFocus
+                  // value={email}
+                  // onChangeText={text => setEmail(text)}
+                />
+              </View>
+
+              <TextIconButton
+                label="SEND"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
+
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding1,
+                }}
+                customLabelStyle={{
+                  color: COLORS.white,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                onPress={() => {
+                  navigation.navigate("SL");
+                }}
+              />
+
+              <TextIconButton
+                label="CANCEL"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
+                  backgroundColor: COLORS.white,
+                  borderColor: COLORS.gray30,
+                  borderWidth: 1,
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding3,
+                }}
+                customLabelStyle={{
+                  color: COLORS.red1Font,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                onPress={() => setModalVisible(!modalVisible)}
+              />
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+  }
+
+  function CallToDriver() {
+    return (
+      <View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalCallVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setCallModalVisible(!modalCallVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalViewCall}>
+              <Text
+                style={{
+                  color: COLORS.black,
+                  // fontWeight: 1,
+                  ...FONTS.h1,
+                  fontSize: 23,
+                }}
+              >
+                Call to Driver
+              </Text>
+              <Text
+                style={{
+                  color: COLORS.gray40,
+                  // fontWeight: 1,
+                  ...FONTS.h3,
+                  fontSize: 15,
+                }}
+              >
+                Let make the call to driver
+              </Text>
+
+            
+
+              <View style={styles.Buttoncontainer}>
+                <View
+                  style={{
+                    flexDirection: "row",
+
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
+                  }}
+                >
+                  <Text style={styles.inputTitle}>Make a Call for this</Text>
+                  <Text style={styles.inputTitle1}>(076 8510781)</Text>
+                </View>
+
+              
+              </View>
+
+              <TextIconButton
+                label="CALL"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
+                  backgroundColor: COLORS.green,
+
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding1,
+                }}
+                customLabelStyle={{
+                  color: COLORS.white,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                onPress={() => {
+                  navigation.navigate("");
+                }}
+              />
+
+              <TextIconButton
+                label="CANCEL"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
+                  backgroundColor: COLORS.white,
+                  borderColor: COLORS.gray30,
+                  borderWidth: 1,
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding3,
+                }}
+                customLabelStyle={{
+                  color: COLORS.red1Font,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                onPress={() => setCallModalVisible(!modalCallVisible)}
+              />
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+  }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1,
+      }}>
       <StatusBar style="auto" />
 
       {renderMap()}
+        {NoteToDriver()}
+        {CallToDriver()}
       {SlidingUpPanel()}
     </View>
   );
@@ -289,44 +569,78 @@ const styles = StyleSheet.create({
 
     margin: 5,
   },
+  modelBackground: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    width: "90%",
+    height: "90%",
+    margin: 10,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalViewCall: {
+    width: "90%",
+    height: "50%",
+    margin: 10,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  namecontainer: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "center",
+  },
+  inputTitle: {
+    ...FONTS.h3,
 
-  //   header: {
-  //     flex: 1,
-  //     // justifyContent: 'center',
-  //     // alignItems: 'center',
+    color: COLORS.black,
+    marginTop: SIZES.padding3,
+    marginLeft: 20,
+  },
 
-  // },
+  Buttoncontainer: {
+    width: "100%",
+    justifyContent: "center",
+  },
 
-  // container: {
-  //   backgroundColor: COLORS.background,
-  //   height: "100%",
-  //   flex: 1
-  // },
-  // titlebar: {
-  //   flexDirection: 'row',
+  inputTitle1: {
+    marginTop: 12,
+    marginLeft: 10,
+  },
 
-  // },
-
-  // nameTitle : {
-  //    color: COLORS.black,
-  //    marginTop: 15,
-  //    fontSize: SIZES.h3,
-
-  // },
-  // proname : {
-  //   alignItems: 'center'
-  // },
-  // nametag : {
-  //   color: COLORS.dark_grey,
-  //   marginTop: 3,
-  //   fontSize: SIZES.h3,
-
-  // },
-  // prodes : {
-  //   color: COLORS.grey,
-  //   marginTop: -5,
-  //   padding: 35,
-  //   fontSize: SIZES.body5,
-
-  // },
+  
 });

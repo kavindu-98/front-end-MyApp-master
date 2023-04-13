@@ -39,6 +39,8 @@ const PendingDriver = ({ route }) => {
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalCallVisible, setCallModalVisible] = useState(false);
+
 
   const snapPoints = ["100%"];
 
@@ -311,6 +313,7 @@ const PendingDriver = ({ route }) => {
                 flexDirection: "row",
               }}
             >
+              <TouchableOpacity   onPress={() => setCallModalVisible(true)}>
               <Image
                 source={require("../assets/icons/call.png")}
                 resizeMode="contain"
@@ -322,6 +325,7 @@ const PendingDriver = ({ route }) => {
                   // tintColor: COLORS.red1Font,
                 }}
               />
+              </TouchableOpacity>
 
               <View style={{ alignSelf: "center", marginTop: 20 }}>
                 <View style={styles.Circle}>
@@ -438,305 +442,105 @@ const PendingDriver = ({ route }) => {
       </View>
     );
   }
-  // function AcceptDriver() {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
+  function CallToDriver() {
+    return (
+      <View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalCallVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setCallModalVisible(!modalCallVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalViewCall}>
+              <Text
+                style={{
+                  color: COLORS.black,
+                  // fontWeight: 1,
+                  ...FONTS.h1,
+                  fontSize: 23,
+                }}
+              >
+                Call to Driver
+              </Text>
+              <Text
+                style={{
+                  color: COLORS.gray40,
+                  // fontWeight: 1,
+                  ...FONTS.h3,
+                  fontSize: 15,
+                }}
+              >
+                Let make the call to driver
+              </Text>
 
-  //         backgroundColor: COLORS.gray10,
-  //         // alignItems: 'center',
-  //         // justifyContent: 'center',
-  //       }}
-  //     >
-  //       <BottomSheet
-  //         // ref={sheetRef}
-  //         snapPoints={snapPoints}
-  //         // enablePanDownToClose={true}
-  //         onClose={() => setIsOpen(false)}
-  //         backgroundStyle={{ borderRadius: 50 }}
-  //       >
-  //         <BottomSheetView
-  //           style={{
-  //             // borderRadius: 5,
-  //             // backgroundColor: COLORS.gray10
-  //             justifyContent: "center",
-  //             alignItems: "center",
-  //           }}
-  //         >
-  //           <Text
-  //             style={{
-  //               color: COLORS.black,
-  //               // fontWeight: 1,
-  //               ...FONTS.h1,
-  //               fontSize: 23,
-  //             }}
-  //           >
-  //             Lalith Perera
-  //           </Text>
-  //           <View
-  //             style={{
-  //               flexDirection: "row",
-  //             }}
-  //           >
-  //             <Image
-  //               source={require("../assets/icons/call.png")}
-  //               resizeMode="contain"
-  //               style={{
-  //                 width: 50,
-  //                 height: 50,
-  //                 margin: 35,
-  //                 marginTop: 50,
-  //                 // tintColor: COLORS.red1Font,
-  //               }}
-  //             />
+            
 
-  //             <View style={{ alignSelf: "center", marginTop: 20 }}>
-  //               <View style={styles.Circle}>
-  //                 <Image
-  //                   source={require("../assets/images/Profile2.jpg")}
-  //                   style={styles.profileimage}
-  //                   resizeMode="center"
-  //                 />
-  //               </View>
-  //             </View>
-  //             <TouchableOpacity
-  //               onPress={() => {
-  //                 navigation.navigate("NoteToDriver");
-  //               }}
-  //             >
-  //               <Image
-  //                 source={require("../assets/icons/mesg.png")}
-  //                 resizeMode="contain"
-  //                 style={{
-  //                   width: 50,
-  //                   height: 50,
-  //                   margin: 35,
-  //                   marginTop: 50,
-  //                   // tintColor: COLORS.red1Font,
-  //                 }}
-  //               />
-  //             </TouchableOpacity>
-  //           </View>
+              <View style={styles.Buttoncontainer}>
+                <View
+                  style={{
+                    flexDirection: "row",
 
-  //           <View
-  //             style={{
-  //               flexDirection: "row",
-  //               justifyContent: "center",
-  //               alignItems: "center",
-  //               marginTop: 10,
-  //             }}
-  //           >
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //           </View>
-  //           <Text
-  //             style={{
-  //               color: COLORS.black,
-  //               // fontWeight: 1,
-  //               ...FONTS.h2,
-  //               fontSize: 15,
-  //             }}
-  //           >
-  //             NB3742 - Dehiwala
-  //           </Text>
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
+                  }}
+                >
+                  <Text style={styles.inputTitle}>Make a Call for this</Text>
+                  <Text style={styles.inputTitle1}>(076 8510781)</Text>
+                </View>
 
-  //           <TextIconButton
-  //             label="ACCEPTED"
-  //             customContainerStyle={{
-  //               width: "60%",
-  //               height: 55,
-  //               backgroundColor: COLORS.white,
-  //               borderWidth: 1,
-  //               borderColor: COLORS.red1Font,
-  //               borderRadius: SIZES.radius_btn4,
-  //               marginTop: SIZES.padding1,
-  //             }}
-  //             customLabelStyle={{
-  //               color: COLORS.green,
-  //               alignItems: "center",
-  //               marginLeft: -15,
-  //               ...FONTS.h2,
-  //             }}
-  //             onPress={() => {
-  //               navigation.navigate("Finish");
-  //             }}
-  //           />
-  //         </BottomSheetView>
-  //       </BottomSheet>
-  //     </View>
-  //   );
-  // }
-  // function Finish() {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
+              
+              </View>
 
-  //         backgroundColor: COLORS.gray10,
-  //         // alignItems: 'center',
-  //         // justifyContent: 'center',
-  //       }}
-  //     >
-  //       <BottomSheet
-  //         // ref={sheetRef}
-  //         snapPoints={snapPoints}
-  //         // enablePanDownToClose={true}
-  //         onClose={() => setIsOpen(false)}
-  //         backgroundStyle={{ borderRadius: 50 }}
-  //       >
-  //         <BottomSheetView
-  //           style={{
-  //             // borderRadius: 5,
-  //             // backgroundColor: COLORS.gray10
-  //             justifyContent: "center",
-  //             alignItems: "center",
-  //           }}
-  //         >
-  //           <Text
-  //             style={{
-  //               color: COLORS.black,
-  //               // fontWeight: 1,
-  //               ...FONTS.h1,
-  //               fontSize: 23,
-  //             }}
-  //           >
-  //             Lalith Perera
-  //           </Text>
-  //           <View
-  //             style={{
-  //               flexDirection: "row",
-  //             }}
-  //           >
-  //             <Image
-  //               source={require("../assets/icons/call.png")}
-  //               resizeMode="contain"
-  //               style={{
-  //                 width: 50,
-  //                 height: 50,
-  //                 margin: 35,
-  //                 marginTop: 50,
-  //                 // tintColor: COLORS.red1Font,
-  //               }}
-  //             />
+              <TextIconButton
+                label="CALL"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
+                  backgroundColor: COLORS.green,
 
-  //             <View style={{ alignSelf: "center", marginTop: 20 }}>
-  //               <View style={styles.Circle}>
-  //                 <Image
-  //                   source={require("../assets/images/Profile2.jpg")}
-  //                   style={styles.profileimage}
-  //                   resizeMode="center"
-  //                 />
-  //               </View>
-  //             </View>
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding1,
+                }}
+                customLabelStyle={{
+                  color: COLORS.white,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                onPress={() => {
+                  navigation.navigate("");
+                }}
+              />
 
-  //             <Image
-  //               source={require("../assets/icons/mesg.png")}
-  //               resizeMode="contain"
-  //               style={{
-  //                 width: 50,
-  //                 height: 50,
-  //                 margin: 35,
-  //                 marginTop: 50,
-  //                 // tintColor: COLORS.red1Font,
-  //               }}
-  //             />
-  //           </View>
-
-  //           <View
-  //             style={{
-  //               flexDirection: "row",
-  //               justifyContent: "center",
-  //               alignItems: "center",
-  //               marginTop: 10,
-  //             }}
-  //           >
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //             <Image
-  //               source={require("../assets/images/Star.png")}
-  //               style={styles.Star}
-  //               resizeMode="center"
-  //             />
-  //           </View>
-  //           <Text
-  //             style={{
-  //               color: COLORS.black,
-  //               // fontWeight: 1,
-  //               ...FONTS.h2,
-  //               fontSize: 15,
-  //             }}
-  //           >
-  //             NB3742 - Dehiwala
-  //           </Text>
-
-  //           <TextIconButton
-  //             label="FINISHED"
-  //             customContainerStyle={{
-  //               width: "60%",
-  //               height: 55,
-  //               backgroundColor: COLORS.white,
-  //               borderWidth: 1,
-  //               borderColor: COLORS.red1Font,
-  //               borderRadius: SIZES.radius_btn4,
-  //               marginTop: SIZES.padding1,
-  //             }}
-  //             customLabelStyle={{
-  //               color: COLORS.green,
-  //               alignItems: "center",
-  //               marginLeft: -15,
-  //               ...FONTS.h2,
-  //             }}
-  //             onPress={() => {
-  //               navigation.navigate("RatingScreen");
-  //             }}
-  //           />
-  //         </BottomSheetView>
-  //       </BottomSheet>
-  //     </View>
-  //   );
-  // }
+              <TextIconButton
+                label="CANCEL"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
+                  backgroundColor: COLORS.white,
+                  borderColor: COLORS.gray30,
+                  borderWidth: 1,
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding3,
+                }}
+                customLabelStyle={{
+                  color: COLORS.red1Font,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                onPress={() => setCallModalVisible(!modalCallVisible)}
+              />
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+  }
 
 
   // opacity: modalVisible ? 0.2 : 1
@@ -749,6 +553,7 @@ const PendingDriver = ({ route }) => {
 
       {renderMap()}
       {NoteToDriver()}
+        {CallToDriver()}
       {PendingDriver()}
      
       {/* {AcceptDriver()} */}
@@ -806,6 +611,25 @@ const styles = StyleSheet.create({
   modalView: {
     width: "90%",
     height: "90%",
+    margin: 10,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalViewCall: {
+    width: "90%",
+    height: "50%",
     margin: 10,
     backgroundColor: "white",
     borderRadius: 20,

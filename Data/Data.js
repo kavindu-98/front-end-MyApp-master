@@ -126,3 +126,30 @@ export const EmployeeShortCuts = [
   },
  
 ];
+export const DailyRideCards = [
+  {
+    id: 1,
+    name: "Day",
+    Image: require('../assets/images/DayCardLong.png'),
+  },
+  {
+    id: 2,
+    name: "Night",
+    Image: require('../assets/images/NightCardLong.png'),
+  },
+  {
+    id: 3,
+    name: "Day Off",
+    Image: require('../assets/images/DayOffLong.png'),
+  },
+  {
+    id: 4,
+    name: "Night Off",
+    Image: require('../assets/images/NightOffLong.png'),
+  },
+  {
+    id: 5,
+    name: "Favorite Places",
+    Image: require('../assets/images/FPlace.png'),
+  },
+];

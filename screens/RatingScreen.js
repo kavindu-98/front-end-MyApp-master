@@ -17,34 +17,10 @@ import HomeScreen from './HomeScreen';
 
 
 
-const RatingScreen = () => {
+const RatingScreen = ({ route }) => {
 
 
- 
 
-//   const [selectedPlace, setSelectedPlace] = React.useState(null)
-//   const [selectedHotel, setSelectedHotel] = React.useState(null)
-//   const [allowDragging, setAllowDragging] = React.useState(true)
-
-
-//   const _draggedValue = React.useRef(new Animated.Value(0)).current;
-
-
-// //   let _panel = React.useRef(null);
-
-//   React.useEffect(() => {
-//       let { selectedPlace } = route.params;
-//       setSelectedPlace(selectedPlace) 
-//       // Listener that will diasble panel dragging whenever the mapview is shown
-//       _draggedValue.addListener((valueObj) => {
-//           if (valueObj.value > SIZES.height) {
-//               setAllowDragging(false)
-//           }
-//       })
-//       return () => {
-//           _draggedValue.removeAllListeners()
-//       }
-//   }, [])
   const navigation = useNavigation();
 
 
@@ -203,14 +179,12 @@ function renderMap() {
                               ...FONTS.h2,
                               
                               }}
-                              // onPress={HomeScreen}
+                              onPress={() => {
+                                navigation.navigate("Home1");
+                              }}
                           />
 
                             </View>
-
-                          
-                
-          
                            
             </View>
 
