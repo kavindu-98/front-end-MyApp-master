@@ -11,14 +11,21 @@ import {
   BackHandler,
   TextInput,
 } from "react-native";
-import React, { useEffect, useState, useRef, useCallback, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  useContext,
+} from "react";
 import { Header, Icon, ListItem, SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from "../constants";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-navigator.geolocation = require('react-native-geolocation-service');
+navigator.geolocation = require("react-native-geolocation-service");
+import { OriginContext, DestinationContext } from "../contexts/contexts";
 
 import { IconButton } from "../components";
 import {
@@ -30,21 +37,26 @@ import {
   SavedLocation,
 } from "../components";
 
-import * as Animatable from "react-native-animatable";
-
-import { ImageBackground } from "react-native";
-import HomeScreen from "./HomeScreen";
-
 const Destination = ({ route }) => {
-
-
-  // const {dispatchDestination} = useContext(DestinationContext)
   const textInput2 = useRef(5);
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
-  const[destination,setDestination] = useState(false)
+  const [destination1, setDestination] = useState(false);
+
+  const { destination, dispatchDestination } = useContext(DestinationContext);
+  const [userDestination, setUserDestination] = useState({
+    latitude: destination.latitude,
+    longitude: destination.longitude,
+  });
 
   const snapPoints = ["100%"];
+
+  useEffect(() => {
+    setUserDestination({
+      latitude: destination.latitude,
+      longitude: destination.longitude,
+    });
+  }, [destination]);
 
   let AnimatedHeaderValue = new Animated.Value(0);
   const Header_Max_Height = 180;
@@ -109,27 +121,31 @@ const Destination = ({ route }) => {
                 // tintColor: COLORS.transparentWhite
               }}
             ></IconButton>
-
-
           </View>
           <View style={styles.searchBox}>
-
             <GooglePlacesAutocomplete
-
               nearbyPlacesAPI="GooglePlacesSearch"
               placeholder="Enter Destination"
-              listViewDisplayed = "auto"
+              listViewDisplayed="auto"
               debounce={400}
-              currentLocation = {true}
+              currentLocation={true}
               currentLocationLabel="Current Location"
               // ref={textInput1}
               minLength={2}
-              enablePoweredByContainer = {false}
-              fetchDetails = {true}
-              
+              enablePoweredByContainer={false}
+              fetchDetails={true}
               onPress={(data, details = null) => {
-                // 'details' is provided when fetchDetails = true
-                console.log(data, details);
+                dispatchDestination({
+                  type: "ADD_DESTINATION",
+                  payload: {
+                    latitude: details.geometry.location.lat,
+                    longitude: details.geometry.location.lng,
+                    address: details.formatted_address,
+                    name: details.name,
+                  },
+                });
+
+                setDestination(true);
               }}
               query={{
                 key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",
@@ -150,11 +166,11 @@ const Destination = ({ route }) => {
                 },
               }}
             />
-             </View>
+          </View>
         </Animated.View>
 
         <View>
-          <MapComponent></MapComponent>
+          <MapComponent userDestination = {userDestination} ></MapComponent>
         </View>
       </View>
     );
@@ -251,7 +267,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.gray40,
     borderRadius: 6,
-}
+  },
 
   //   header: {
   //     flex: 1,

@@ -5,7 +5,8 @@ import { MapStyle } from "../styles";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 
-const MapComponent = () => {
+const MapComponent = ({ route }) => {
+  // const userDestination = route.params;
   // const [selectedPlace, setSelectedPlace] = React.useState(null)
   const initialRegion = {
     latitude: 6.927079,
@@ -19,7 +20,7 @@ const MapComponent = () => {
       <MapView
         style={{
           width: "100%",
-          height: "100%",
+          height: "91%",
         }}
         customMapStyle={MapStyle}
         provider={PROVIDER_GOOGLE}
@@ -28,7 +29,30 @@ const MapComponent = () => {
         followsUserLocation={true}
         zoomEnabled={true}
         zoomControlEnabled={true}
-      ></MapView>
+      >
+        {/* {userOrigin.latitude != null &&   
+                        <MapView.Marker coordinate = {userOrigin} anchor = {{x:0.5,y:0.5}} >
+                            <Image 
+                                source ={require('../assets/images/pickupIcon.png')}
+                                style ={styles.markerOrigin2}
+                                resizeMode ="cover"
+                            />
+                        </MapView.Marker>
+                     } */}
+
+        {userDestination.latitude != null && (
+          <MapView.Marker
+            coordinate={userDestination}
+            anchor={{ x: 0.5, y: 0.5 }}
+          >
+            <Image
+              source={require("../assets/images/pickupIcon.png")}
+              style={styles.markerDestination}
+              resizeMode="cover"
+            />
+          </MapView.Marker>
+        )}
+      </MapView>
     </View>
   );
 };

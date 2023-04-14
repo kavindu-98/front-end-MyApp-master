@@ -12,7 +12,13 @@ import {
   BackHandler,
   TextInput,
 } from "react-native";
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  useContext,
+} from "react";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from "../constants";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
@@ -25,20 +31,29 @@ import Geolocation from "react-native-geolocation-service";
 import { IconButton } from "../components";
 import { HeaderBar, MapComponent } from "../components";
 import { Marker } from "react-native-maps";
+import { OriginContext, DestinationContext } from "../contexts/contexts";
 
 const PickupLocation = ({ route }) => {
   // location.coords.latitude = null;
   // location.coords.longitude = null;
 
-  useEffect(() => {
-    getLocation();
-  }, []);
 
+
+  const textInput1 = useRef(4);
   const [isOpen, setIsOpen] = useState(true);
   const [lating, setLating] = useState({});
   const [location, setLocation] = useState(false);
-
+  const {origin,dispatchOrigin} = useContext(OriginContext)
+  const [userOrigin,setUserOrigin] = useState({latitude:origin.latitude,
+                                                longitude:origin.longitude})
   const snapPoints = ["100%"];
+
+  useEffect(() => {
+
+       setUserOrigin({latitude:origin.latitude,
+        longitude:origin.longitude});
+    getLocation();
+  }, [origin]);
 
   const requestLocationPermission = async () => {
     try {
@@ -210,10 +225,28 @@ const PickupLocation = ({ route }) => {
                           /> */}
 
               <GooglePlacesAutocomplete
-                placeholder="Enter Destination"
+                nearbyPlacesAPI="GooglePlacesSearch"
+                placeholder="Enter Pickup Location"
+                listViewDisplayed="auto"
+                debounce={400}
+                currentLocation={true}
+                currentLocationLabel="Current Location"
+                ref={textInput1}
+                minLength={2}
+                enablePoweredByContainer={false}
+                fetchDetails={true}
                 onPress={(data, details = null) => {
-                  // 'details' is provided when fetchDetails = true
-                  console.log(data, details);
+                  dispatchOrigin({
+                    type: "ADD_ORIGIN",
+                    payload: {
+                      latitude: details.geometry.location.lat,
+                      longitude: details.geometry.location.lng,
+                      address: details.formatted_address,
+                      name: details.name,
+                    },
+                  });
+
+                  navigation.navigate("Destination",{state:0})
                 }}
                 query={{
                   key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",
