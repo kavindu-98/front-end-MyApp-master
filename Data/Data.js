@@ -131,25 +131,51 @@ export const DailyRideCards = [
     id: 1,
     name: "Day",
     Image: require('../assets/images/DayCardLong.png'),
+    Icon: require('../assets/images/DayIcon.png'),
   },
   {
     id: 2,
     name: "Night",
     Image: require('../assets/images/NightCardLong.png'),
+    Icon: require('../assets/images/NightIcon.png'),
   },
   {
     id: 3,
     name: "Day Off",
     Image: require('../assets/images/DayOffLong.png'),
+    Icon: require('../assets/images/DayIcon.png'),
   },
   {
     id: 4,
     name: "Night Off",
     Image: require('../assets/images/NightOffLong.png'),
+    Icon: require('../assets/images/NightIcon.png'),
   },
   {
     id: 5,
     name: "Favorite Places",
     Image: require('../assets/images/FPlace.png'),
   },
+];
+
+export const BusAround = [
+  {
+    // id: 0,
+    // Location: "Katunayake",
+    latitude: 7.175549,
+    longitude: 79.883291,
+  },
+  {
+    // id: 1,
+    // Location: "Negombo",
+    latitude: 7.209440,
+    longitude: 79.834303,
+  },
+  {
+    // id: 2,
+    // Location: "Dehiwala",
+    latitude: 6.850299,
+    longitude: 79.867610,
+  },
+ 
 ];

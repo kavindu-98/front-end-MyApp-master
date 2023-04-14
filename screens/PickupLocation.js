@@ -1,208 +1,278 @@
-import { StyleSheet, Text, View,  StatusBar, TouchableOpacity, ScrollView, SafeAreaView, Image, Animated, BackHandler, TextInput} from 'react-native';
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { Header, Icon, ListItem, SearchBar } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
-import { COLORS, SIZES, FONTS, icons } from '../constants';
-import BottomSheet, {BottomSheetView} from "@gorhom/bottom-sheet";
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-// import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-import { PROVIDER_GOOGLE } from "react-native-maps";
-
 import {
-  IconButton,
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  PermissionsAndroid,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+  Image,
+  Animated,
+  BackHandler,
+  TextInput,
+} from "react-native";
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { COLORS, SIZES, FONTS, icons } from "../constants";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import { BusAround } from "../Data/Data";
+import { MapStyle } from "../styles";
+import Geolocation from "react-native-geolocation-service";
 
-} from "../components";
-import { HeaderBar , TextIconButton, Rating, TextButton, MapComponent} from "../components";
+import { IconButton } from "../components";
+import { HeaderBar, MapComponent } from "../components";
+import { Marker } from "react-native-maps";
 
-import * as Animatable from 'react-native-animatable';
+const PickupLocation = ({ route }) => {
+  // location.coords.latitude = null;
+  // location.coords.longitude = null;
 
-import { ImageBackground } from 'react-native';
-import HomeScreen from './HomeScreen';
+  useEffect(() => {
+    getLocation();
+  }, []);
 
-
-
-
-
-const PickupLocation = ({ route}) => {
-
-
-  const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
+  const [lating, setLating] = useState({});
+  const [location, setLocation] = useState(false);
 
-  const snapPoints = ["100%"];   
+  const snapPoints = ["100%"];
 
+  const requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: "Geolocation Permission",
+          message: "Can we access your location?",
+          buttonNeutral: "Ask Me Later",
+          buttonNegative: "Cancel",
+          buttonPositive: "OK",
+        }
+      );
+      console.log("granted", granted);
+      if (granted === "granted") {
+        console.log("You can use Geolocation");
+        return true;
+      } else {
+        console.log("You cannot use Geolocation");
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  };
+  const getLocation = () => {
+    const result = requestLocationPermission();
+    result.then((res) => {
+      console.log("res is:", res);
+      if (res) {
+        Geolocation.getCurrentPosition(
+          (position) => {
+            console.log(position);
+            setLocation(position);
+          },
+          (error) => {
+            // See error code charts below.
+            console.log(error.code, error.message);
+            setLocation(false);
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+      }
+    });
+    console.log(location);
+  };
+
+  const _map = useRef(1);
 
   const navigation = useNavigation();
 
-
-
-
-
-function renderMap() {
+  function renderMap() {
     return (
- 
-            <View
-                style={{
-                 flex: 2,
-                  // height : "100%",
-                  backgroundColor: COLORS.transparentWhite,
-                  // alignItems: 'center',
-                  // justifyContent: 'center',
-                }}
-            >
-       
-                 <MapComponent>
+      <View
+        style={{
+          flex: 2,
+          // height : "100%",
+          backgroundColor: COLORS.transparentWhite,
+          // alignItems: 'center',
+          // justifyContent: 'center',
+        }}
+      >
+        <MapView
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+          // ref ={_map}
+          customMapStyle={MapStyle}
+          provider={PROVIDER_GOOGLE}
+          initialRegion={{
+            ...BusAround[0],
+            latitudeDelta: 0.2,
+            longitudeDelta: 0.2,
+          }}
+          showsUserLocation={true}
+          followsUserLocation={true}
+          zoomEnabled={true}
+          zoomControlEnabled={true}
+        >
+          {BusAround.map((item, index) => (
+            <Marker coordinate={item} key={index.toString()}>
+              <Image
+                source={require("../assets/images/busIcon.png")}
+                style={styles.carsAround}
+                resizeMode="cover"
+              />
+            </Marker>
+          ))}
+        </MapView>
 
-                 </MapComponent>
-                 <HeaderBar
-                              // title={selectedPlace?.name}
-                              leftOnPressed={() => navigation.goBack()}
-                             
-                              right={false}
-                              icon={icons.left_arrow}
-                              containerStyle={{
-                                  position: 'absolute',
-                                  top: SIZES.padding * 2,
-                                  // height: "20%",
-                                  // width: SIZES.width,
-                                  // backgroundColor: COLORS.red1Font
-                                 
-                              }}
-                            />
-          
-                           
-            </View>
+        <HeaderBar
+          // title={selectedPlace?.name}
+          leftOnPressed={() => navigation.goBack()}
+          right={false}
+          icon={icons.left_arrow}
+          containerStyle={{
+            position: "absolute",
+            top: SIZES.padding * 2,
+            // height: "20%",
+            // width: SIZES.width,
+            // backgroundColor: COLORS.red1Font
+          }}
+        />
+      </View>
+    );
+  }
 
-   
-    )
-}
+  function SlidingUpPanel() {
+    return (
+      <View
+        style={{
+          flex: 2,
 
-function SlidingUpPanel() {
-  return (
-    
-          <View
-              style={{
-               flex: 2,
-           
-                backgroundColor: COLORS.gray10,
-              }}
+          backgroundColor: COLORS.gray10,
+        }}
+      >
+        <BottomSheet
+          // ref={sheetRef}
+          snapPoints={snapPoints}
+          // enablePanDownToClose={true}
+          onClose={() => setIsOpen(false)}
+          backgroundStyle={{ borderRadius: 50 }}
+        >
+          <BottomSheetView
+            style={
+              {
+                // borderRadius: 5,
+                // backgroundColor: COLORS.gray10
+              }
+            }
           >
-            <BottomSheet
-            // ref={sheetRef}
-            snapPoints={snapPoints}
-            // enablePanDownToClose={true}
-            onClose={() => setIsOpen(false)}
-            backgroundStyle={{ borderRadius: 50}}
-          
+            <Text
+              style={{
+                color: COLORS.black,
+                // fontWeight: 1,
+                ...FONTS.h2,
+                alignItems: "center",
+                fontWeight: "bold",
+                marginLeft: 20,
+                fontSize: 20,
+              }}
             >
-              <BottomSheetView
-                style={{
-                  // borderRadius: 5,
-                  // backgroundColor: COLORS.gray10
-                }}>
-                <Text
-                style={{
-                  color: COLORS.black,
-                  // fontWeight: 1,
-                  ...FONTS.h2,
-                  alignItems: 'center',
-                  fontWeight: 'bold',
-                  marginLeft: 20,
-                  fontSize: 20
-                }}
-                >Choose a Pick-up Location</Text>
-                  <Text
-                style={{
-                  color: COLORS.black,
-                  // fontWeight: 1,
-                  ...FONTS.h5,
-                  alignItems: 'center',
-                  marginLeft: 20,
-                  fontSize: 12
-                }}
-                >Book on demand or pre-scheduled rides</Text>
-                <View style={{
-                  flexDirection: 'row'
-                }}>
-                   {/* <TextInput
+              Choose a Pick-up Location
+            </Text>
+            <Text
+              style={{
+                color: COLORS.black,
+                // fontWeight: 1,
+                ...FONTS.h5,
+                alignItems: "center",
+                marginLeft: 20,
+                fontSize: 12,
+              }}
+            >
+              Book on demand or pre-scheduled rides
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+              }}
+            >
+              {/* <TextInput
                             style={styles.input}
                             placeholder="Enter Destionation"
                             // autoFocus
                             // value={email}
                             // onChangeText={text => setEmail(text)}
                           /> */}
-                     
-                          <GooglePlacesAutocomplete
-                              placeholder='Enter Destination'
-                              onPress={(data, details = null) => {
-                                // 'details' is provided when fetchDetails = true
-                                console.log(data, details);
-                              }}
-                              query={{
-                                key: 'AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk',
-                                language: 'en',
-                              }}
-                              styles={{
-                                textInputContainer: {
-                                 
-                                  backgroundColor: COLORS.transparentWhite,
-                                  borderColor: COLORS.outLine,
-                                  borderRadius: 8,
-                                  borderWidth: 1,
-                                  width: "88%",
-                                  height: 50,
-                                  marginLeft: 17,
-                                  marginTop: SIZES.padding3,
-                                  padding: SIZES.padding2
-                                },
-                                textInput: {
-                                  height: 38,
-                                  color:  COLORS.gray70,
-                                  fontSize: 16,
-                                  marginTop: -10
-                                  // maxWidth: "70%"
-                                },
-                                predefinedPlacesDescription: {
-                                  color: '#1faadb',
-                                },
-                              }}
-                            />
 
-                            <IconButton
-                                    icon={icons.Search}
-                                    onPress={() => {navigation.navigate('Destination')}}
-                                    iconStyle={{
-                                      width: 25,
-                                      height: 25,
-                                      marginTop: 22,
-                                      marginLeft: 5,
-                                        tintColor: COLORS.black
-                                    }}
-                                ></IconButton>
-                          </View>
-              </BottomSheetView>
-            </BottomSheet>
-           
-        
-          </View>
+              <GooglePlacesAutocomplete
+                placeholder="Enter Destination"
+                onPress={(data, details = null) => {
+                  // 'details' is provided when fetchDetails = true
+                  console.log(data, details);
+                }}
+                query={{
+                  key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",
+                  language: "en",
+                }}
+                styles={{
+                  textInputContainer: {
+                    backgroundColor: COLORS.transparentWhite,
+                    borderColor: COLORS.outLine,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    width: "88%",
+                    height: 50,
+                    marginLeft: 17,
+                    marginTop: SIZES.padding3,
+                    padding: SIZES.padding2,
+                  },
+                  textInput: {
+                    height: 38,
+                    color: COLORS.gray70,
+                    fontSize: 16,
+                    marginTop: -10,
+                    // maxWidth: "70%"
+                  },
+                  predefinedPlacesDescription: {
+                    color: "#343a40",
+                  },
+                }}
+              />
 
-
-  )
-}
-
-
+              <IconButton
+                icon={icons.Search}
+                onPress={() => {
+                  navigation.navigate("Destination");
+                }}
+                iconStyle={{
+                  width: 25,
+                  height: 25,
+                  marginTop: 22,
+                  marginLeft: 5,
+                  tintColor: COLORS.black,
+                }}
+              ></IconButton>
+            </View>
+          </BottomSheetView>
+        </BottomSheet>
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>
-       <StatusBar
-                        style="auto"
-                        />
-    
-    {renderMap()}
-    {SlidingUpPanel()}
-  </View>
-  )
-}
+      <StatusBar style="auto" />
+
+      {renderMap()}
+      {SlidingUpPanel()}
+    </View>
+  );
+};
 
 export default PickupLocation;
 
@@ -216,40 +286,10 @@ const styles = StyleSheet.create({
     height: 50,
     marginLeft: 17,
     marginTop: SIZES.padding3,
-    padding: SIZES.padding2
-
+    padding: SIZES.padding2,
   },
-
-//   header: {
-
-
-// nameTitle : {
-//    color: COLORS.black,
-//    marginTop: 15,
-//    fontSize: SIZES.h3,
-
-   
-// },
-// proname : {
-//   alignItems: 'center'
-// },
-// nametag : {
-//   color: COLORS.dark_grey,
-//   marginTop: 3,
-//   fontSize: SIZES.h3,
-
-  
-// },
-// prodes : {
-//   color: COLORS.grey,
-//   marginTop: -5,
-//   padding: 35,
-//   fontSize: SIZES.body5,
-
-  
-// },
-
-
-
-
-})
+  carsAround: {
+    width: 60,
+    height: 30,
+  },
+});

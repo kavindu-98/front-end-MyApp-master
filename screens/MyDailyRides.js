@@ -9,7 +9,7 @@ import {
   IconButton,
 
 } from "../components";
-import { HeaderBar , TextIconButton, Rating, Cards, TextButton, MapComponent} from "../components";
+import { HeaderBar , TextIconButton, Rating, RideCards, TextButton, MapComponent} from "../components";
 
 import * as Animatable from 'react-native-animatable';
 
@@ -95,17 +95,9 @@ function renderMap() {
                   backgroundColor: COLORS.gray10
                   
                 }}>
-         <Cards customContainerStyle={{
-          width: "90%",
-          height: 130,
-          marginLeft: -1,
-          marginTop: 15,
-          marginBottom: -40
-         
-         }} imageUri={require('../assets/images/DayCardLong.png')}>
-
-        </Cards>
-        <Cards customContainerStyle={{
+         <RideCards/>
+      
+        {/* <Cards customContainerStyle={{
           width: "90%",
           height: 130,
           marginLeft: -1,
@@ -114,37 +106,8 @@ function renderMap() {
          
          }} imageUri={require('../assets/images/NightCardLong.png')}>
 
-        </Cards>
-        <Cards customContainerStyle={{
-          width: "90%",
-          height: 130,
-          marginLeft: -1,
-          marginTop: 15,
-          marginBottom: -40
-         
-         }} imageUri={require('../assets/images/DayOffLong.png')}>
-
-        </Cards>
-        <Cards customContainerStyle={{
-          width: "90%",
-          height: 130,
-          marginLeft: -1,
-          marginTop: 15,
-          marginBottom: -40
-         
-         }} imageUri={require('../assets/images/NightOffLong.png')}>
-
-        </Cards>   
-        <Cards customContainerStyle={{
-          width: "90%",
-          height: 130,
-          marginLeft: -1,
-          marginTop: 15,
-          marginBottom: -40
-         
-         }} imageUri={require('../assets/images/FPlace.png')}>
-
-        </Cards>
+        </Cards> */}
+    
 
       </View>
       </ScrollView>

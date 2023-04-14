@@ -24,6 +24,10 @@ const MapComponent = () => {
         customMapStyle={MapStyle}
         provider={PROVIDER_GOOGLE}
         initialRegion={initialRegion}
+        showsUserLocation={true}
+        followsUserLocation={true}
+        zoomEnabled={true}
+        zoomControlEnabled={true}
       ></MapView>
     </View>
   );

@@ -32,12 +32,13 @@ import * as Animatable from "react-native-animatable";
 import { ImageBackground } from "react-native";
 import HomeScreen from "./HomeScreen";
 
-import { Employee, EmployeeShortCuts } from "../Data/Data";
+import { Employee, EmployeeShortCuts} from "../Data/Data";
 
-const DailyRides = () => {
+const DailyRides = ({ route }) => {
   const navigation = useNavigation();
+  const daily = route.params;
 
-  function renderMap() {
+  function renderContainer() {
     return (
       <View
         style={{
@@ -160,7 +161,7 @@ const DailyRides = () => {
                     ...FONTS.h2,
                   }}
                 >
-                  Day
+                  {daily.name}
                 </Text>
               </View>
               <View   style={{
@@ -269,7 +270,7 @@ const DailyRides = () => {
     <View style={{ flex: 1 }}>
       <StatusBar style="auto" />
 
-      {renderMap()}
+      { renderContainer()}
       {/* {SlidingUpPanel()} */}
     </View>
   );
@@ -313,7 +314,7 @@ const styles = StyleSheet.create({
   },
   Card2: {
     width: "85%",
-    height: 390,
+    height: 370,
     borderRadius: 30,
     backgroundColor: COLORS.white,
     marginTop: 20,

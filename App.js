@@ -36,11 +36,14 @@ import {
   } from './screens';
 import Tabs from "./navigation/tabs";
 import DTabs from "./navigation/Dtabs";
+import { OriginContextProvider,DestinationContextProvider } from './contexts/contexts'
 
 const Stack = createStackNavigator()
 
 const App = () => {
   return (
+    <DestinationContextProvider>
+    <OriginContextProvider>
     <NavigationContainer>
       <Stack.Navigator 
             screenOptions={{
@@ -88,6 +91,8 @@ const App = () => {
 
     </Stack.Navigator>
     </NavigationContainer>
+    </OriginContextProvider>
+   </DestinationContextProvider>
   )
 }
 

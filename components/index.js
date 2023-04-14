@@ -5,6 +5,7 @@ import PasswordIcon from "./PasswordIcon";
 import TextButton from "./TextButton";
 import IconButton from "./IconButton";
 import Cards from "./Cards";
+import RideCards from "./RideCards";
 import PhotoCard from "./PhotoCard";
 import DriverCard from "./DriverCard";
 import DPhotoCard from "./DPhotoCard";
@@ -21,6 +22,7 @@ export {
   TextButton,
   IconButton,
   Cards,
+  RideCards,
   PhotoCard,
   DPhotoCard,
   DriverCard,

@@ -28,10 +28,12 @@ import {
 } from "../components";
 
 
-const DriverDetails = ({ route  }) => {
+const DriverDetails = ({ route }) => {
 
 
   const navigation = useNavigation();
+
+  const driver = route.params;
 
   function renderMap() {
     return (
@@ -47,7 +49,7 @@ const DriverDetails = ({ route  }) => {
       >
         {/* header */}
         <HeaderBar
-          // title={selectedPlace?.name}
+       
 
           leftOnPressed={() => {
             navigation.navigate("SeleDriver");
@@ -99,7 +101,7 @@ const DriverDetails = ({ route  }) => {
             >
               <View style={styles.Circle}>
                 <Image
-                  // source={Driver.Image}
+                  source={driver.Image}
                   style={styles.profileimage}
                   resizeMode="center"
                 />
@@ -120,8 +122,8 @@ const DriverDetails = ({ route  }) => {
                     marginLeft: 20,
                   }}
                 >
-                  {/* {Driver.name} */}
-                  Lalith
+                  {driver.name}
+                  {/* Lalith */}
                 </Text>
                 <Text
                   style={{
@@ -132,7 +134,7 @@ const DriverDetails = ({ route  }) => {
                     marginLeft: 20,
                   }}
                 >
-                  {/* {Driver.vehicleNo} */}
+                  {driver.vehicleNo}
                 </Text>
                 <Text
                   style={{
@@ -141,7 +143,7 @@ const DriverDetails = ({ route  }) => {
                     marginTop: 5,
                   }}
                 >
-                  {/* {Driver.vehicleType} * {Driver.condition} */}
+                  {driver.vehicleType} * {driver.condition}
                 </Text>
                 <Image
                   source={require("../assets/icons/Seats.png")}
@@ -161,7 +163,7 @@ const DriverDetails = ({ route  }) => {
                     marginTop: -25,
                   }}
                 >
-                 {/* {Driver.sheetcount} Seats Available */}
+                 {driver.sheetcount} Seats Available
                 </Text>
 
                 <Image
@@ -176,7 +178,7 @@ const DriverDetails = ({ route  }) => {
                     ...FONTS.h2,
                   }}
                 >
-                  {/* {Driver.ratings} */}
+                  {driver.ratings}
                 </Text>
               </View>
             </View>
