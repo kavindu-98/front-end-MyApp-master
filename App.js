@@ -11,7 +11,7 @@ import {
    AcceptDriver,
    GetStartScreen,
    Destination,
-  //  DestinationEdit,
+   DestinationEdit,
    VehicleDt1Screen, 
    DLoginScreen, 
    RouteDetailsInput, 
@@ -73,7 +73,7 @@ const App = () => {
            <Stack.Screen name="RatingScreen" component={RatingScreen} />   
           <Stack.Screen name="MyActivity" component={MyActivity} /> 
           <Stack.Screen name="MyDailyRides" component={MyDailyRides} />
-          {/* <Stack.Screen name="DestinationEdit" component={DestinationEdit} /> */}
+          <Stack.Screen name="DestinationEdit" component={DestinationEdit} />
           <Stack.Screen name="DailyRides" component={DailyRides} />
         
           <Stack.Screen name="DriverDetails" component={DriverDetails} />

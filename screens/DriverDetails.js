@@ -123,7 +123,6 @@ const DriverDetails = ({ route }) => {
                   }}
                 >
                   {driver.name}
-                  {/* Lalith */}
                 </Text>
                 <Text
                   style={{

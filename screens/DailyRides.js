@@ -32,7 +32,7 @@ import * as Animatable from "react-native-animatable";
 import { ImageBackground } from "react-native";
 import HomeScreen from "./HomeScreen";
 
-import { Employee, EmployeeShortCuts} from "../Data/Data";
+import { Employee, EmployeeShortCuts } from "../Data/Data";
 
 const DailyRides = ({ route }) => {
   const navigation = useNavigation();
@@ -136,7 +136,7 @@ const DailyRides = ({ route }) => {
                 marginTop: 10,
                 flexDirection: "column",
                 alignItems: "center",
-                justifyContent: 'center',
+                justifyContent: "center",
               }}
             >
               <View
@@ -164,10 +164,12 @@ const DailyRides = ({ route }) => {
                   {daily.name}
                 </Text>
               </View>
-              <View   style={{
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}>
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 {EmployeeShortCuts.map((Lcard, index) => {
                   return (
                     <TouchableOpacity
@@ -224,16 +226,22 @@ const DailyRides = ({ route }) => {
                           </Text>
                         </View>
                         <View>
-                          <Image
-                            source={require("../assets/images/edit.png")}
-                            resizeMode="contain"
-                            style={{
-                              width: 30,
-                              height: 30,
-                              marginLeft: 5,
-                              tintColor: COLORS.red1Font,
+                          <TouchableOpacity
+                            onPress={() => {
+                              navigation.navigate('DestinationEdit',Lcard, {state:0});
                             }}
-                          />
+                          >
+                            <Image
+                              source={require("../assets/images/edit.png")}
+                              resizeMode="contain"
+                              style={{
+                                width: 30,
+                                height: 30,
+                                marginLeft: 5,
+                                tintColor: COLORS.red1Font,
+                              }}
+                            />
+                          </TouchableOpacity>
                         </View>
                       </View>
                     </TouchableOpacity>
@@ -270,7 +278,7 @@ const DailyRides = ({ route }) => {
     <View style={{ flex: 1 }}>
       <StatusBar style="auto" />
 
-      { renderContainer()}
+      {renderContainer()}
       {/* {SlidingUpPanel()} */}
     </View>
   );
