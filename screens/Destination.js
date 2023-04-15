@@ -170,7 +170,7 @@ const Destination = ({ route }) => {
         </Animated.View>
 
         <View>
-          <MapComponent userDestination = {userDestination} ></MapComponent>
+          {/* <MapComponent userDestination = {userDestination} ></MapComponent> */}
         </View>
       </View>
     );

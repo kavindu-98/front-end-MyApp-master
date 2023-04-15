@@ -41,7 +41,7 @@ export default class MapComponent extends Component {
                         </MapView.Marker>
                      } */}
 
-          {this.props.userDestination.latitude != null && (
+          {/* {this.props.userDestination.latitude != null && (
             <MapView.Marker
               coordinate={this.props.userDestination}
               anchor={{ x: 0.5, y: 0.5 }}
@@ -52,7 +52,7 @@ export default class MapComponent extends Component {
                 resizeMode="cover"
               />
             </MapView.Marker>
-          )}
+          )} */}
           {/* {this.props.userDestination.latitude !== null &&
                         <MapViewDirections 
                           origin={this.props.userOrigin}

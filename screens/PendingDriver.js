@@ -330,7 +330,7 @@ const PendingDriver = ({ route }) => {
               <View style={{ alignSelf: "center", marginTop: 20 }}>
                 <View style={styles.Circle}>
                   <Image
-                    source={require("../assets/images/Profile2.jpg")}
+                    source={Driver.Image}
                     style={styles.profileimage}
                     resizeMode="center"
                   />
@@ -393,7 +393,7 @@ const PendingDriver = ({ route }) => {
                 fontSize: 15,
               }}
             >
-              NB3742 - Dehiwala
+              {Driver.vehicleNo} - Dehiwala
             </Text>
 
             <TextIconButton
@@ -489,7 +489,7 @@ const PendingDriver = ({ route }) => {
                   }}
                 >
                   <Text style={styles.inputTitle}>Make a Call for this</Text>
-                  <Text style={styles.inputTitle1}>(076 8510781)</Text>
+                  <Text style={styles.inputTitle1}>({Driver.phone})</Text>
                 </View>
 
               

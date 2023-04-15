@@ -144,9 +144,13 @@ const PickupLocation = ({ route }) => {
             </Marker>
           ))}
           {/* {
-            <Marker>
-              
-            </Marker>
+          <Marker coordinate = {origin} anchor = {{x:0.5,y:0.5}} >
+                            <Image 
+                                source ={require('../assets/images/pickupmarker.png')}
+                                style ={styles.markerOrigin2}
+                                resizeMode ="cover"
+                            />
+                        </Marker>
           } */}
         </MapView>
 

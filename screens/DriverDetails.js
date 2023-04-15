@@ -192,11 +192,11 @@ const DriverDetails = ({ route }) => {
               }}
             >
               <Image
-                source={require("../assets/images/Bus.png")}
+                source={driver.vehiclePhoto1}
                 style={styles.Star1}
               />
               <Image
-                source={require("../assets/images/Bus.png")}
+                source={driver.vehiclePhoto2}
                 style={styles.Star1}
               />
             </View>
@@ -209,11 +209,11 @@ const DriverDetails = ({ route }) => {
               }}
             >
               <Image
-                source={require("../assets/images/Bus.png")}
+               source={driver.vehiclePhoto3}
                 style={styles.Star1}
               />
               <Image
-                source={require("../assets/images/Bus.png")}
+               source={driver.vehiclePhoto4}
                 style={styles.Star1}
               />
             </View>
@@ -239,10 +239,14 @@ const DriverDetails = ({ route }) => {
         >
           Time can be changed due to traffic
         </Text>
-        <Image
+        <View style={styles.Star2}>
+          <MapComponent style={styles.map}></MapComponent>
+
+        </View>
+        {/* <Image
           source={require("../assets/images/map1.png")}
           style={styles.Star2}
-        />
+        /> */}
 
         <TextIconButton
           label="SEND REQUEST"
@@ -339,14 +343,19 @@ const styles = StyleSheet.create({
     width: 100,
     height: 70,
     marginHorizontal: 20,
+    borderRadius: 10,
+    resizeMode: "cover"
   },
   Star2: {
     width: SIZES.width * 0.8,
-    height: 130,
-    borderRadius: 20,
+    height: 170,
+    borderRadius: 30,
     marginHorizontal: 20,
   },
 
+  map:{
+    marginTop: 20
+  }
   //   header: {
   //     flex: 1,
   //     // justifyContent: 'center',
