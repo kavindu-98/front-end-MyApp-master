@@ -16,6 +16,7 @@ import OTPScreen from "./OTPScreen";
 import GetStartScreen from "./GetStartScreen";
 import DriverDetails from "./DriverDetails";
 import Destination from "./Destination";
+import DestinationEdit from "./Destination copy";
 import AcceptDriver from "./AcceptDriver";
 import Finish from "./Finish";
 import DRSignUpScreen from "./DRSignUpScreen";
@@ -56,6 +57,7 @@ export {
     GetStartScreen,
     DriverDetails,
     Destination,
+    DestinationEdit,
     AcceptDriver,
     Finish,
     DRSignUpScreen,
