@@ -143,6 +143,11 @@ const PickupLocation = ({ route }) => {
               />
             </Marker>
           ))}
+          {/* {
+            <Marker>
+              
+            </Marker>
+          } */}
         </MapView>
 
         <HeaderBar

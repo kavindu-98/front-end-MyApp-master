@@ -93,6 +93,15 @@ export const Employee = [
     name: "Nishadi Adhikari",
     Image: require("../assets/images/EProfile.jpg"),
     EmployeeId: "EMP001",
+    DayPickup:"",
+    DayDrop:"",
+    NightPickup:"",
+    NightDrop:"",
+    DayOffPickup:"",
+    DayOffDrop:"",
+    NightOffPickup:"",
+    NightOffDrop:"",
+
   },
   // {
   //     id: 2,
