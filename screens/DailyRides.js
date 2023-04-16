@@ -55,7 +55,7 @@ const DailyRides = ({ route }) => {
           // title={selectedPlace?.name}
           icon={icons.close}
           leftOnPressed={() => {
-            navigation.navigate("Home1");
+            navigation.goBack();
           }}
           iconStyle3={{
             tintColor: COLORS.white,

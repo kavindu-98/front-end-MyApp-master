@@ -79,7 +79,7 @@ function renderMap() {
                         customIconStyle={{
                             height: 25
                         }}
-                        onPress={() => {navigation.navigate('')}}
+                        onPress={() => {navigation.goBack()}}
                     /> 
                     
             

@@ -58,7 +58,7 @@ const App = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="OTP" component={OTPScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="GetStartScreen" component={GetStartScreen} /> */}
+        <Stack.Screen name="GetStartScreen" component={GetStartScreen} />
           <Stack.Screen name="Home" component={Tabs} />
           <Stack.Screen name="Destination" component={Destination} />
            <Stack.Screen name="SetDesM" component={SetDestiOnMap} />
@@ -74,9 +74,9 @@ const App = () => {
           <Stack.Screen name="MyActivity" component={MyActivity} /> 
           <Stack.Screen name="MyDailyRides" component={MyDailyRides} />
           <Stack.Screen name="DestinationEdit" component={DestinationEdit} />
-          <Stack.Screen name="DailyRides" component={DailyRides} />
+          <Stack.Screen name="DailyRides" component={DailyRides} /> */}
         
-          <Stack.Screen name="DriverDetails" component={DriverDetails} />
+          {/* <Stack.Screen name="DriverDetails" component={DriverDetails} /> */}
           <Stack.Screen name="DRSignUpScreen" component={DRSignUpScreen} />
           <Stack.Screen name="VehicleDt1Screen" component={VehicleDt1Screen} />
           <Stack.Screen name="VehicleDt2Screen" component={VehicleDt2Screen} />

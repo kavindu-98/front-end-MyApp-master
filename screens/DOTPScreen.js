@@ -89,7 +89,7 @@ const DOTPScreen  = ({navigation}) => {
                         customIconStyle={{
                             height: 30
                         }}
-                        onPress={() => {navigation.navigate('')}}
+                        onPress={() => navigation.goBack()}
                     /> 
                     
             
@@ -181,7 +181,7 @@ const DOTPScreen  = ({navigation}) => {
                       ...FONTS.h2,
                       
                       }}
-                      onPress={() => {navigation.navigate('GetStartScreen')}}
+                      onPress={() => {navigation.navigate('DHome')}}
                    />
   
 

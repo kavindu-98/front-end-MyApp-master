@@ -17,6 +17,7 @@ import {
   Image
   
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Button, Icon } from "react-native-elements";
 import { COLORS, FONTS, SIZES, icons } from "../constants";
 import { TextIconButton, PasswordIcon } from "../components";
@@ -31,7 +32,7 @@ const API_URL = 'http://192.168.1.107:8080//api/users/login';
 const URL = 'https://media.istockphoto.com/id/691286862/vector/flat-man-driver-license-plastic-card-template-id-card-vector-illustration.jpg?s=612x612&w=0&k=20&c=c-tDqF5B4t2i_eoJXwWsUK05q8ORuLmRbeCa7weLtGc';
 
 
-const VehicleDt1Screen = ({ navigation }) => {
+const VehicleDt1Screen = ({}) => {
   const [email, setEmail] = useState();
   const [Name1, setName1] = useState();
   const [Name2, setName2] = useState();
@@ -42,6 +43,8 @@ const VehicleDt1Screen = ({ navigation }) => {
   const [password2, setPassword2] = useState();
    const [selectedItem, setSelectedItem] = useState({});
    const [selectedGender, setSelectedGender] = useState({});
+
+   const navigation = useNavigation();
 
    const Options ={
     title: 'Select Image',
@@ -174,7 +177,7 @@ const VehicleDt1Screen = ({ navigation }) => {
                         customIconStyle={{
                             height: 40
                         }}
-                        onPress={() => {navigation.navigate('SL')}}
+                        onPress={() => navigation.goBack()}
                     /> 
                     
             
@@ -200,7 +203,7 @@ const VehicleDt1Screen = ({ navigation }) => {
                             marginLeft: -110,
                             fontSize: 20
                         }}
-                        onPress={() => {navigation.navigate('Login')}}
+                        onPress={() => {navigation.navigate('DLogin')}}
                     /> 
                    
         </View>

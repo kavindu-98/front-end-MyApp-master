@@ -37,21 +37,19 @@ const PickupLocation = ({ route }) => {
   // location.coords.latitude = null;
   // location.coords.longitude = null;
 
-
-
   const textInput1 = useRef(4);
   const [isOpen, setIsOpen] = useState(true);
   const [lating, setLating] = useState({});
   const [location, setLocation] = useState(false);
-  const {origin,dispatchOrigin} = useContext(OriginContext)
-  const [userOrigin,setUserOrigin] = useState({latitude:origin.latitude,
-                                                longitude:origin.longitude})
-  const snapPoints = ["100%"];
+  const { origin, dispatchOrigin } = useContext(OriginContext);
+  const [userOrigin, setUserOrigin] = useState({
+    latitude: origin.latitude,
+    longitude: origin.longitude,
+  });
+  const snapPoints = ['20%',"40%", '70%'];
 
   useEffect(() => {
-
-       setUserOrigin({latitude:origin.latitude,
-        longitude:origin.longitude});
+    setUserOrigin({ latitude: origin.latitude, longitude: origin.longitude });
     getLocation();
   }, [origin]);
 
@@ -119,7 +117,7 @@ const PickupLocation = ({ route }) => {
         <MapView
           style={{
             width: "100%",
-            height: "100%",
+            height: "85%",
           }}
           // ref ={_map}
           customMapStyle={MapStyle}
@@ -167,19 +165,7 @@ const PickupLocation = ({ route }) => {
             // backgroundColor: COLORS.red1Font
           }}
         />
-      </View>
-    );
-  }
 
-  function SlidingUpPanel() {
-    return (
-      <View
-        style={{
-          flex: 2,
-
-          backgroundColor: COLORS.gray10,
-        }}
-      >
         <BottomSheet
           // ref={sheetRef}
           snapPoints={snapPoints}
@@ -255,7 +241,7 @@ const PickupLocation = ({ route }) => {
                     },
                   });
 
-                  navigation.navigate("Destination",{state:0})
+                  navigation.navigate("Destination", { state: 0 });
                 }}
                 query={{
                   key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",
@@ -306,12 +292,26 @@ const PickupLocation = ({ route }) => {
     );
   }
 
+  // function SlidingUpPanel() {
+  //   return (
+  //     <View
+  //       style={{
+  //         flex: 2,
+
+  //         backgroundColor: COLORS.gray10,
+  //       }}
+  //     >
+
+  //     </View>
+  //   );
+  // }
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style="auto" />
 
       {renderMap()}
-      {SlidingUpPanel()}
+      {/* {SlidingUpPanel()} */}
     </View>
   );
 };

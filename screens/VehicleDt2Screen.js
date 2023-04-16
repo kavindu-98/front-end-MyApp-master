@@ -152,7 +152,7 @@ const VehicleDt2Screen = ({ navigation }) => {
                         customIconStyle={{
                             height: 30
                         }}
-                        onPress={() => {navigation.navigate('SL')}}
+                        onPress={() => navigation.goBack()}
                     /> 
                     
             
@@ -178,7 +178,7 @@ const VehicleDt2Screen = ({ navigation }) => {
                             marginLeft: -110,
                             fontSize: 20
                         }}
-                        onPress={() => {navigation.navigate('Login')}}
+                        onPress={() => {navigation.navigate('DLogin')}}
                     /> 
                    
         </View>
@@ -384,7 +384,7 @@ const VehicleDt2Screen = ({ navigation }) => {
                       ...FONTS.h2,
                       
                       }}
-                      onPress={() => {navigation.navigate('Login')}}
+                      onPress={() => {navigation.navigate('RouteDetailsInput')}}
                    />
   
 

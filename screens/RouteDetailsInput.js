@@ -128,7 +128,7 @@ const RouteDetailsInput = ({ navigation }) => {
                         customIconStyle={{
                             height: 30
                         }}
-                        onPress={() => {navigation.navigate('SL')}}
+                        onPress={() => navigation.goBack()}
                     /> 
                     
             
@@ -154,7 +154,7 @@ const RouteDetailsInput = ({ navigation }) => {
                             marginLeft: -130,
                             fontSize: 20
                         }}
-                        onPress={() => {navigation.navigate('Login')}}
+                        onPress={() => {navigation.navigate('DLogin')}}
                     /> 
                    
         </View>
@@ -177,7 +177,7 @@ const RouteDetailsInput = ({ navigation }) => {
                 <View>
                  
                  
-                    <Text style={styles.inputTitle}>ROUTE PERMIT NUMBER</Text>
+                    <Text style={styles.inputTitle}>ROUTE</Text>
                     <Picker
                               selectedValue={selectedItem}
                               style={{

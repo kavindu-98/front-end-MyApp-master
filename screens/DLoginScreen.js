@@ -89,7 +89,7 @@ const DLoginScreen  = ({navigation}) => {
                     /> 
                     
             
-          <Text style={styles.Title}>Login</Text>
+          <Text style={styles.Title}>Driver Login</Text>
         <View style={styles.button}>
 
         <TextIconButton
@@ -111,7 +111,7 @@ const DLoginScreen  = ({navigation}) => {
                             marginLeft: 50,
                             fontSize: 20
                         }}
-                        onPress={() => {navigation.navigate('Login')}}
+                        onPress={() => {navigation.navigate('DRSignUpScreen')}}
                     /> 
                    
         </View>
@@ -135,7 +135,7 @@ const DLoginScreen  = ({navigation}) => {
                       <Text style={styles.inputTitle}>DRIVER ID</Text>
                   <TextInput
                     style={styles.input}
-                    placeholder="Enter your Employee ID"
+                    placeholder="Enter your Driver ID"
                     autoFocus
                     value={name}
                     onChangeText={text => setName(text)}
@@ -170,7 +170,7 @@ const DLoginScreen  = ({navigation}) => {
                       ...FONTS.h2,
                       
                       }}
-                      onPress={() => {navigation.navigate('OTP')}}
+                      onPress={() => {navigation.navigate('DOTP')}}
                    />
   
 

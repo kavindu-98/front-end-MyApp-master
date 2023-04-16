@@ -202,7 +202,7 @@ const DRSignUpScreen = ({ navigation }) => {
                             marginLeft: -110,
                             fontSize: 20
                         }}
-                        onPress={() => {navigation.navigate('Login')}}
+                        onPress={() => {navigation.navigate('DLogin')}}
                     /> 
                    
         </View>

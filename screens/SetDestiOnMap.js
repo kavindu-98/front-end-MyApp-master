@@ -26,7 +26,7 @@ const SetDestiOnMap = ({ Route }) => {
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
 
-  const snapPoints = ["100%"];   
+  const snapPoints = ["22%"];   
 
 
   let AnimatedHeaderValue = new Animated.Value(0);
@@ -116,28 +116,7 @@ function renderMap() {
           }}
         
            />
-              
-          
-                           
-            </View>
-
-   
-    )
-}
-
-function SlidingUpPanel() {
-  return (
-    
-          <View
-              style={{
-               flex: 1,
-           
-                backgroundColor: COLORS.gray10,
-                // alignItems: 'center',
-                // justifyContent: 'center',
-              }}
-          >
-            <BottomSheet
+           <BottomSheet
             // ref={sheetRef}
             snapPoints={snapPoints}
             // enablePanDownToClose={true}
@@ -191,13 +170,35 @@ function SlidingUpPanel() {
                    />
               </BottomSheetView>
             </BottomSheet>
+              
+          
+                           
+            </View>
+
+   
+    )
+}
+
+// function SlidingUpPanel() {
+//   return (
+    
+//           <View
+//               style={{
+//                flex: 1,
+           
+//                 backgroundColor: COLORS.gray10,
+//                 // alignItems: 'center',
+//                 // justifyContent: 'center',
+//               }}
+//           >
+            
            
         
-          </View>
+//           </View>
 
 
-  )
-}
+//   )
+// }
 
 
 
@@ -208,7 +209,7 @@ function SlidingUpPanel() {
                         />
     
     {renderMap()}
-    {SlidingUpPanel()}
+    {/* {SlidingUpPanel()} */}
   </View>
   )
 }

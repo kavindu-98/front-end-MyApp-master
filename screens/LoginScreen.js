@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useDispatch} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import { View, Text, TextInput, StyleSheet,KeyboardAvoidingView, StatusBar,TouchableWithoutFeedback,Keyboard ,ScrollView, Animated} from 'react-native';
@@ -16,7 +16,7 @@ const API_URL = 'http://192.168.1.107:8080/api/users/';
 const LoginScreen  = ({navigation}) => {
 
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [employeeId, setEmployeeId] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -138,7 +138,7 @@ const LoginScreen  = ({navigation}) => {
                     style={styles.input}
                     placeholder="Enter your Employee ID"
                     autoFocus
-                    value={name}
+                    value={employeeId}
                     onChangeText={text => setName(text)}
                   />
                   <Text style={styles.inputTitle}>PASSWORD</Text>
