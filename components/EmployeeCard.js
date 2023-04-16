@@ -122,7 +122,7 @@ const EmployeeCard = ({ ImageUri, Name, PhoneNo }) => {
           </View>
           <View
             style={{
-              marginLeft: -35,
+              marginLeft: -45,
             }}
           >
             <Image
@@ -185,7 +185,7 @@ const EmployeeCard = ({ ImageUri, Name, PhoneNo }) => {
               borderColor: COLORS.gray20,
               borderRadius: SIZES.radius_btn4,
               marginTop: SIZES.padding3,
-              marginLeft: 25,
+              marginLeft: 20,
             }}
             customLabelStyle={{
               color: COLORS.white,

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View,  StatusBar, TouchableOpacity, ScrollView, SafeAreaView, Image, Animated, BackHandler, TextInput} from 'react-native';
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Header, Icon, ListItem, SearchBar } from "react-native-elements";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from '../constants';
 import BottomSheet, {BottomSheetView} from "@gorhom/bottom-sheet";
@@ -26,32 +27,12 @@ const DStartLocation = ({ route}) => {
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
 
-  const snapPoints = ["100%"];   
-
-//   const [selectedPlace, setSelectedPlace] = React.useState(null)
-//   const [selectedHotel, setSelectedHotel] = React.useState(null)
-//   const [allowDragging, setAllowDragging] = React.useState(true)
+  const snapPoints = ['20%',"40%", '70%']; 
 
 
-//   const _draggedValue = React.useRef(new Animated.Value(0)).current;
 
-
-// //   let _panel = React.useRef(null);
-
-//   React.useEffect(() => {
-//       let { selectedPlace } = route.params;
-//       setSelectedPlace(selectedPlace) 
-//       // Listener that will diasble panel dragging whenever the mapview is shown
-//       _draggedValue.addListener((valueObj) => {
-//           if (valueObj.value > SIZES.height) {
-//               setAllowDragging(false)
-//           }
-//       })
-//       return () => {
-//           _draggedValue.removeAllListeners()
-//       }
-//   }, [])
   const navigation = useNavigation();
+  const textInput3 = useRef(4);
 
 
 
@@ -69,6 +50,8 @@ function renderMap() {
                   // justifyContent: 'center',
                 }}
             >
+                 <MapComponent></MapComponent>
+                 
                      {/* header */}
                      <HeaderBar
                               // title={selectedPlace?.name}
@@ -86,28 +69,7 @@ function renderMap() {
                               }}
                             />
 
-                 <MapComponent></MapComponent>
-          
-                           
-            </View>
-
-   
-    )
-}
-
-function SlidingUpPanel() {
-  return (
-    
-          <View
-              style={{
-               flex: 1,
-           
-                backgroundColor: COLORS.gray10,
-                // alignItems: 'center',
-                // justifyContent: 'center',
-              }}
-          >
-            <BottomSheet
+                 <BottomSheet
             // ref={sheetRef}
             snapPoints={snapPoints}
             // enablePanDownToClose={true}
@@ -144,11 +106,58 @@ function SlidingUpPanel() {
                 <View style={{
                   flexDirection: 'row'
                 }}>
-                   <TextInput
-                            style={styles.input}
-                            placeholder="Enter Start Location"
-                        
-                          />
+                  <GooglePlacesAutocomplete
+                nearbyPlacesAPI="GooglePlacesSearch"
+                placeholder="Enter Start Location"
+                listViewDisplayed="auto"
+                debounce={400}
+                currentLocation={true}
+                currentLocationLabel="Current Location"
+                ref={textInput3}
+                minLength={2}
+                enablePoweredByContainer={false}
+                fetchDetails={true}
+                onPress={(data, details = null) => {
+                  dispatchOrigin({
+                    type: "ADD_ORIGIN",
+                    payload: {
+                      latitude: details.geometry.location.lat,
+                      longitude: details.geometry.location.lng,
+                      address: details.formatted_address,
+                      name: details.name,
+                    },
+                  });
+
+                  navigation.navigate("Destination", { state: 0 });
+                }}
+                query={{
+                  key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",
+                  language: "en",
+                }}
+                styles={{
+                  textInputContainer: {
+                    backgroundColor: COLORS.transparentWhite,
+                    borderColor: COLORS.outLine,
+                    borderRadius: 8,
+                    borderWidth: 1,
+                    width: "88%",
+                    height: 50,
+                    marginLeft: 17,
+                    marginTop: SIZES.padding3,
+                    padding: SIZES.padding2,
+                  },
+                  textInput: {
+                    height: 38,
+                    color: COLORS.gray70,
+                    fontSize: 16,
+                    marginTop: -10,
+                    // maxWidth: "70%"
+                  },
+                  predefinedPlacesDescription: {
+                    color: "#343a40",
+                  },
+                }}
+              />
 
                             <IconButton
                                     icon={icons.Search}
@@ -164,13 +173,15 @@ function SlidingUpPanel() {
                           </View>
               </BottomSheetView>
             </BottomSheet>
-           
-        
-          </View>
+          
+                           
+            </View>
 
-
-  )
+   
+    )
 }
+
+
 
 
 
@@ -181,7 +192,7 @@ function SlidingUpPanel() {
                         />
     
     {renderMap()}
-    {SlidingUpPanel()}
+
   </View>
   )
 }

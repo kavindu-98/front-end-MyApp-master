@@ -35,6 +35,10 @@ import DFinishRide from "./DFinishRide";
 import DMyActivity from "./DMyActivity";
 import MyDailyRides from "./MyDailyRides";
 import DailyRides from "./DailyRides";
+import DRDailyRides from "./DRDailyRides";
+import DRProfileInfo from "./DRProfileInfo";
+import ProfileInfo from "./ProfileInfo";
+import DRMyDailyRides from "./DRMyDailyRides";
 
 
 
@@ -75,7 +79,11 @@ export {
     DFinishRide,
     DMyActivity,
     MyDailyRides,
-    DailyRides
+    DailyRides,
+    DRDailyRides,
+    DRProfileInfo,
+    ProfileInfo,
+    DRMyDailyRides
 
     
 
