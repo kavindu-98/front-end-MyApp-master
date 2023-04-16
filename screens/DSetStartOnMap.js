@@ -55,7 +55,43 @@ const DSetStartOnMap = ({ Route }) => {
           // justifyContent: 'center',
         }}
       >
-        <MapComponent></MapComponent>
+         <MapView
+          style={{
+            width: "100%",
+            height: "85%",
+          }}
+          // ref ={_map}
+          customMapStyle={MapStyle}
+          provider={PROVIDER_GOOGLE}
+          initialRegion={{
+            ...BusAround[0],
+            latitudeDelta: 0.2,
+            longitudeDelta: 0.2,
+          }}
+          showsUserLocation={true}
+          followsUserLocation={true}
+          zoomEnabled={true}
+          zoomControlEnabled={true}
+        >
+          {BusAround.map((item, index) => (
+            <Marker coordinate={item} key={index.toString()}>
+              <Image
+                source={require("../assets/images/busIcon.png")}
+                style={styles.carsAround}
+                resizeMode="cover"
+              />
+            </Marker>
+          ))}
+          {/* {
+          <Marker coordinate = {origin} anchor = {{x:0.5,y:0.5}} >
+                            <Image 
+                                source ={require('../assets/images/pickupmarker.png')}
+                                style ={styles.markerOrigin2}
+                                resizeMode ="cover"
+                            />
+                        </Marker>
+          } */}
+        </MapView>
         <HeaderBar
           title={"Canada Friendship Rd, Katunaya..."}
           leftOnPressed={() => navigation.goBack()}

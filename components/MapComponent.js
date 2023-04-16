@@ -1,9 +1,14 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { COLORS, SIZES, FONTS, icons } from "../constants";
 import { MapStyle } from "../styles";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
+
+// useEffect(() => {
+//  console.log(userOrigin)
+// }, []);
+
 
 export default class MapComponent extends Component {
   // const userDestination = route.params;
@@ -31,17 +36,21 @@ export default class MapComponent extends Component {
           zoomEnabled={true}
           zoomControlEnabled={true}
         >
-          {/* {userOrigin.latitude != null &&   
+          
+          {/* {userOrigin.latitude != null &&
+          
+          
                         <MapView.Marker coordinate = {userOrigin} anchor = {{x:0.5,y:0.5}} >
+                          
                             <Image 
                                 source ={require('../assets/images/pickupIcon.png')}
                                 style ={styles.markerOrigin2}
                                 resizeMode ="cover"
                             />
                         </MapView.Marker>
-                     } */}
+                     }
 
-          {/* {this.props.userDestination.latitude != null && (
+          {this.props.userDestination.latitude != null && (
             <MapView.Marker
               coordinate={this.props.userDestination}
               anchor={{ x: 0.5, y: 0.5 }}

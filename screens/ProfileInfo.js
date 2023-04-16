@@ -27,16 +27,21 @@ const Tab = createMaterialTopTabNavigator();
 const API_URL = "http://192.168.1.107:8080//api/users/login";
 
 const ProfileInfo = ({ navigation }) => {
-  const [email, setEmail] = useState();
-  const [Name1, setName1] = useState();
-  const [Name2, setName2] = useState();
-  const [Phone, setPhone] = useState();
-  const [Did, setDid] = useState();
+ const [email, setEmail] = useState();
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [phone, setPhone] = useState();
   const [NIC, setNIC] = useState();
-  const [password1, setPassword1] = useState();
+  const [employeeId, setEid] = useState();
+  const [gender, setGender] = useState();
+  const [password, setPassword1] = useState();
   const [password2, setPassword2] = useState();
-  const [selectedItem, setSelectedItem] = useState({});
-  const [selectedGender, setSelectedGender] = useState({});
+   const [selectedItem, setSelectedItem] = useState({});
+   const [selectedGender, setSelectedGender] = useState({});
+   const [success,setSuccess] = useState({successMsg:''})
+  const [error, setError] = useState({
+    errorMsg:''
+  });
 
   const Options = {
     title: "Select Image",
@@ -150,19 +155,20 @@ const ProfileInfo = ({ navigation }) => {
             iconStyle={{
               tintColor: COLORS.black,
             }}
+            onPress={()=> navigation.goBack()}
           ></IconButton>
           <Text
             style={{
               color: COLORS.black,
               alignItems: "center",
               justifyContent: "center",
-              marginLeft: 130,
+              marginLeft: 90,
               fontWeight: "bold",
 
               ...FONTS.h5,
             }}
           >
-            Driver Profile
+            Employee Profile Info
           </Text>
         </View>
 
@@ -186,216 +192,185 @@ const ProfileInfo = ({ navigation }) => {
           )}
         >
           <View style={styles.footer}>
-            <View style={{ alignSelf: "center", marginTop: 20 }}>
-              <View style={styles.profileimage}>
-                <Image
-                  source={require("../assets/images/Profile2.jpg")}
-                  style={styles.profileimage}
-                />
-              </View>
-            </View>
-
-            <View style={styles.proname}>
-              <Text style={styles.nameTitle}>Lalith Perera</Text>
-            </View>
-
-            <View style={{ marginTop: 10, margin: SIZES.padding4 }}>
-              <View>
-                <View style={styles.namecontainer}>
-                  <View>
-                    <Text style={styles.inputTitle}>FIRST NAME</Text>
-                    <TextInput
-                      style={styles.input}
-                      placeholder="Enter your First Name"
-                      // autoFocus
-                      value={Name1}
-                      onChangeText={(text) => setName1(text)}
-                    />
-                  </View>
-                  <View>
-                    <Text style={styles.inputTitle}>LAST NAME</Text>
-                    <TextInput
-                      style={styles.input}
-                      placeholder="Enter your Last Name"
-                      // autoFocus
-                      value={Name2}
-                      onChangeText={(text) => setName2(text)}
-                    />
-                  </View>
-                </View>
-
-                <Text style={styles.inputTitle}>EMAIL</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Create your Email"
-                  // secureTextEntry
-                  value={email}
-                  onChangeText={(text) => setEmail(text)}
-                />
-
-                <View style={styles.namecontainer}>
-                  <View>
-                    <Text style={styles.inputTitle}>COUNTRY CODE</Text>
-
-                    <Picker
-                      selectedValue={selectedItem}
-                      style={{
-                        borderWidth: 1,
-                        // backgroundColor:COLORS.transparentBlack,
-                        marginTop: 8,
-                      }}
-                      onValueChange={(itemValue, item) =>
-                        setSelectedItem(itemValue)
-                      }
-                    >
-                      <Picker.Item label="+94" value="+94" />
-                      <Picker.Item label="+88" value="+88" />
-                      <Picker.Item label="+97" value="+97" />
-                      <Picker.Item label="+11" value="+11" />
-                      <Picker.Item label="+12" value="+12" />
-                    </Picker>
-                  </View>
-                  <View>
-                    <Text style={styles.inputTitle}>CONTACT NO</Text>
-                    <TextInput
-                      style={styles.input}
-                      placeholder="Enter your Phone Number"
-                      // autoFocus
-                      value={Phone}
-                      onChangeText={(text) => setPhone(text)}
-                    />
-                  </View>
-                </View>
-                <Text style={styles.inputTitle}>DRIVER ID</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Enter your Driver ID"
-                  // secureTextEntry
-                  value={Did}
-                  onChangeText={(text) => setDid(text)}
-                />
-
-                <View style={styles.namecontainer}>
-                  <View>
-                    <Text style={styles.inputTitle}>NIC</Text>
-                    <TextInput
-                      style={styles.input}
-                      placeholder="Enter your NIC Number"
-                      // autoFocus
-                      value={NIC}
-                      onChangeText={(text) => setNIC(text)}
-                    />
-                  </View>
-                  <View
-                    style={{
-                      marginRight: 100,
-                    }}
-                  >
-                    <Text style={styles.inputTitle}>GENDER</Text>
-
-                    <Picker
-                      selectedValue={selectedGender}
-                      style={{
-                        // borderWidth: 1,
-                        // backgroundColor:COLORS.transparentBlack,
-                        marginTop: 8,
-                        marginRight: -100,
-                      }}
-                      onValueChange={(itemValue1, item) =>
-                        setSelectedGender(itemValue1)
-                      }
-                    >
-                      <Picker.Item label="Male" value="Male" />
-                      <Picker.Item label="Female" value="Female" />
-                      <Picker.Item label="nonbinary" value="nonbinary" />
-                    </Picker>
-                  </View>
-                </View>
-
-                <Text style={styles.inputTitle}>DRIVING LICENSE NUMBER</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Enter your Driver ID"
-                  // secureTextEntry
-                  value={Did}
-                  onChangeText={(text) => setDid(text)}
-                />
-
-                <Text style={styles.inputTitle1}>
-                  Please Upload Driving license
-                </Text>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    padding: 10,
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <View style={styles.profileimage}>
-                    <TouchableOpacity onPress={openGallery}>
-                      <Image
-                        source={require("../assets/images/PhotoInput.png")}
-                        style={styles.profileimage}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                  <View style={styles.profileimage}>
-                    <TouchableOpacity onPress={openGallery}>
-                      <Image
-                        source={require("../assets/images/PhotoInput.png")}
-                        style={styles.profileimage}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    padding: 10,
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Text style={styles.inputTitle2}>Front View</Text>
-                  <Text style={styles.inputTitle2}>Back View</Text>
-                </View>
-
-                <Text style={styles.inputTitle}>PASSWORD</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Create your password"
-                  secureTextEntry
-                  value={password1}
-                  onChangeText={(text) => setPassword1(text)}
-                />
-                <Text style={styles.inputTitle}>CONFIRM PASSWORD</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Re-enter password"
-                  secureTextEntry
-                  value={password2}
-                  onChangeText={(text) => setPassword2(text)}
-                />
-              </View>
-
-              <TextIconButton
-                label="SAVE INFORMATION"
-                customContainerStyle={{
-                  width: "100%",
-                  height: 55,
-                  borderRadius: SIZES.radius_btn4,
-                  marginTop: SIZES.padding1,
-                }}
-                customLabelStyle={{
-                  color: COLORS.white,
-                  alignItems: "center",
-                  marginLeft: -15,
-                  ...FONTS.h2,
-                }}
-                onPress={() => {
-                  navigation.navigate("VehicleDt1Screen");
-                }}
+           <View style={{ alignSelf: "center", marginTop: 20 }}>
+            <View style={styles.profileimage}>
+              <Image
+                source={require("../assets/images/EProfile.jpg")}
+                style={styles.profileimage}
+                resizeMode="center"
               />
             </View>
+          </View>
+
+          <View style={styles.proname}>
+            <Text style={styles.nameTitle}>Nishadi Adhikari</Text>
+          </View>
+
+                 <View  style={{ marginTop: 20, margin: SIZES.padding4}}>
+                
+                <View>
+                   <View style={styles.namecontainer}>
+                    <View>
+                        <Text style={styles.inputTitle}>FIRST NAME</Text>
+                          <TextInput
+                            style={styles.input}
+                            placeholder="Enter your First Name"
+                            // autoFocus
+                            value={FirstName}
+                            onChangeText={text => setFirstName(text)}
+                          />
+                    </View>
+                    <View>
+                        <Text style={styles.inputTitle}>LAST NAME</Text>
+                          <TextInput
+                            style={styles.input}
+                            placeholder="Enter your Last Name"
+                            // autoFocus
+                            value={LastName}
+                            onChangeText={text => setLastName(text)}
+                          />
+                    </View>
+                     
+                   </View>
+                 
+                    <Text style={styles.inputTitle}>EMAIL</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Create your Email"
+                    // secureTextEntry
+                    value={email}
+                    onChangeText={text => setEmail(text)}
+                  />
+
+                <View style={styles.namecontainer}>
+                      <View>
+                            <Text style={styles.inputTitle}>COUNTRY CODE</Text>
+
+                            <Picker
+                              selectedValue={selectedItem}
+                              style={{
+                                borderWidth: 1,
+                                // backgroundColor:COLORS.transparentBlack,
+                                marginTop:8
+                              }}
+                              onValueChange={(itemValue, item) =>
+                                setSelectedItem(itemValue)
+                              }>
+                              <Picker.Item label="+94" value="+94" />
+                              <Picker.Item label="+88" value="+88" />
+                              <Picker.Item label="+97" value="+97" />
+                              <Picker.Item label="+11" value="+11" />
+                              <Picker.Item label="+12" value="+12" />
+                            
+
+                            </Picker>
+                            
+                        </View>
+                        <View>
+                            <Text style={styles.inputTitle}>CONTACT NO</Text>
+                              <TextInput
+                                style={styles.input}
+                                placeholder="Enter your Phone Number"
+                                // autoFocus
+                                value={phone}
+                                onChangeText={text => setPhone(text)}
+                              />
+                        </View>
+                      
+                </View>
+                    <Text style={styles.inputTitle}>EMPLOYEE ID</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your Employee ID"
+                    // secureTextEntry
+                    value={employeeId}
+                    onChangeText={text => setEid(text)}
+                  />
+                  
+               
+                 <View style={styles.namecontainer}>
+                 
+                       <View>
+                          <Text style={styles.inputTitle}>NIC</Text>
+                            <TextInput
+                              style={styles.input}
+                              placeholder="Enter your NIC Number"
+                              // autoFocus
+                              value={NIC}
+                              onChangeText={text => setNIC(text)}
+                            />
+                      </View> 
+                       <View style={{
+                        marginRight:100
+                       }} >
+                          <Text style={styles.inputTitle}>GENDER</Text>
+
+                          <Picker
+                            selectedValue={selectedGender}
+                            style={{
+                              // borderWidth: 1,
+                              // backgroundColor:COLORS.transparentBlack,
+                              marginTop:8,
+                              marginRight:-100
+                            }}
+                            onValueChange={(itemValue1, item) =>
+                              setSelectedGender(itemValue1)
+                            }>
+                            <Picker.Item label="Male" value="Male" />
+                            <Picker.Item label="Female" value="Female" />
+                            <Picker.Item label="nonbinary" value="nonbinary" />
+                        
+                          
+
+                          </Picker> 
+                         
+                          
+                      </View> 
+                      
+                  </View> 
+
+                    <Text style={styles.inputTitle}>PASSWORD</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Create your password"
+                    secureTextEntry
+                    value={password}
+                    onChangeText={text => setPassword1(text)}
+                  />
+                        <Text style={styles.inputTitle}>CONFIRM PASSWORD</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Re-enter password"
+                    secureTextEntry
+                    value={password2}
+                    onChangeText={text => setPassword2(text)}
+                  />
+                  
+                  
+                </View>
+                {error.errorMsg !== '' && <Text style={styles.error}>{error.errorMsg}</Text>}
+      {success.successMsg !== '' && <Text style={styles.success}>{success.successMsg}</Text>}
+
+                    <TextIconButton
+                      label="SAVE INFORMATION"
+                      customContainerStyle={{
+                      width: "100%",
+                      height: 55,
+                      borderRadius: SIZES.radius_btn4,
+                      marginTop: SIZES.padding1
+                      }}
+                      customLabelStyle={{
+                      color: COLORS.white,
+                      alignItems: 'center',
+                      marginLeft: -15,
+                      ...FONTS.h2,
+                      
+                      }}
+                      onPress={() => {navigation.navigate('')}}
+                   />
+  
+
+          </View>
           </View>
         </ScrollView>
       </View>

@@ -27,7 +27,7 @@ const DRideCards = ({}) => {
         return (
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('DailyRides',item);
+              navigation.navigate('DRDailyRides',item);
             }}
           >
             <View

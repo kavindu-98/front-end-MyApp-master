@@ -16,6 +16,10 @@ import { Header, Icon, ListItem, SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from "../constants";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import { MapStyle } from "../styles";
+import { BusAround } from "../Data/Data";
+import { Marker } from "react-native-maps";
 
 import { IconButton } from "../components";
 import {
@@ -55,7 +59,52 @@ const SetDestiOnMap = ({ Route }) => {
           // justifyContent: 'center',
         }}
       >
-        <MapComponent></MapComponent>
+        <MapView
+          style={{
+            width: "100%",
+            height: "85%",
+          }}
+          // ref ={_map}
+          customMapStyle={MapStyle}
+          provider={PROVIDER_GOOGLE}
+          initialRegion={{
+            ...BusAround[0],
+            latitudeDelta: 0.2,
+            longitudeDelta: 0.2,
+          }}
+          showsUserLocation={true}
+          followsUserLocation={true}
+          zoomEnabled={true}
+          zoomControlEnabled={true}
+        >
+         
+            <Marker coordinate={{
+            latitude: 6.927079,
+              longitude: 79.861244,
+          }} 
+          draggable
+          // pinColor="gold"
+          onDragStart={(e)=> {
+            console.log("Drag start", e.nativeEvent.coordinate);
+          }}
+          >
+              <Image
+                source={require("../assets/images/DES.png")}
+                style={styles.carsAround}
+                resizeMode="cover"
+              />
+            </Marker>
+         
+          {/* {
+          <Marker coordinate = {origin} anchor = {{x:0.5,y:0.5}} >
+                            <Image 
+                                source ={require('../assets/images/pickupmarker.png')}
+                                style ={styles.markerOrigin2}
+                                resizeMode ="cover"
+                            />
+                        </Marker>
+          } */}
+        </MapView>
         <HeaderBar
           title={"Canada Friendship Rd, Katunaya..."}
           leftOnPressed={() => navigation.goBack()}
@@ -184,5 +233,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
 
     marginTop: 35,
+  },
+  carsAround: {
+    width: 50,
+    height: 65,
   },
 });
