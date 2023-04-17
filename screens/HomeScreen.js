@@ -13,7 +13,7 @@ import {
     StyleSheet
 } from 'react-native';
 import Carousel,{ Pagination } from 'react-native-snap-carousel';
-
+import {useDispatch,useSelector} from 'react-redux'
 import {
     IconButton,
     TextButton,
@@ -95,6 +95,7 @@ const Section =({ containerStyle, title, onPress, children }) => {
 }
 
 const HomeScreen = () => {
+    const {user}=useSelector((state)=>state.userLogIn)
 
 
     function renderHeader() {
@@ -114,7 +115,7 @@ const HomeScreen = () => {
                         flex: 1
                     }}
                 >
-                    <Text style={{ ...FONTS.h2, fontWeight: 'bold', color: COLORS.black }}>Hello, Nishadi!</Text>
+                    <Text style={{ ...FONTS.h2, fontWeight: 'bold', color: COLORS.black }}>Hello, {user.FirstName}!</Text>
                     <Text 
                     style={{
                         color: COLORS.gray50,

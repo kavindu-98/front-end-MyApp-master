@@ -1,30 +1,36 @@
-import React, {useEffect, useState, useDispatch} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import { View, Text, TextInput, StyleSheet,KeyboardAvoidingView, StatusBar,TouchableWithoutFeedback,Keyboard ,ScrollView, Animated} from 'react-native';
 import { Button} from 'react-native-elements';
 import { COLORS, FONTS, SIZES, icons } from '../constants';
 import { TextIconButton} from "../components"
+import {useDispatch,useSelector} from 'react-redux'
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather'
+import { logInUser } from '../Actions/userActions';
+import { ToastAndroid } from 'react-native';
 
 
 const Tab = createMaterialTopTabNavigator();
 
-const API_URL = 'http://192.168.1.107:8080/api/users/';
+// const API_URL = 'http://192.168.1.107:8080/api/users/';
 
 const LoginScreen  = ({navigation}) => {
 
-
-  // const dispatch = useDispatch();
+const {user,isSuccess,isError,isLoading,message}=useSelector((state)=>state.userLogIn)
+  const dispatch = useDispatch();
 
   const [employeeId, setEmployeeId] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const LoginBtnClick = () => {
-    // dispatch(getProductData());
-    navigation.navigate('OTP');
+    dispatch(logInUser({employeeId,password}));
+    // navigation.navigate('OTP');
   };
+  useEffect(()=>{if(isSuccess){
+navigation.navigate('OTP');
+  }},[user])
 
   async function login() {
     try {
@@ -139,7 +145,7 @@ const LoginScreen  = ({navigation}) => {
                     placeholder="Enter your Employee ID"
                     autoFocus
                     value={employeeId}
-                    onChangeText={text => setName(text)}
+                    onChangeText={text => setEmployeeId(text)}
                   />
                   <Text style={styles.inputTitle}>PASSWORD</Text>
                   <TextInput
@@ -175,6 +181,9 @@ const LoginScreen  = ({navigation}) => {
                    />
   
 
+          </View>
+          <View>
+           <Text>{isLoading?'Loading':isError?'Error'+message:isSuccess?'LoginSuccess':''}</Text> 
           </View>
 
 

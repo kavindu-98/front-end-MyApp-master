@@ -42,11 +42,14 @@ import {
 import Tabs from "./navigation/tabs";
 import DTabs from "./navigation/Dtabs";
 import { OriginContextProvider,DestinationContextProvider } from './contexts/contexts'
+import { Provider } from 'react-redux';
+import store from './app/store';
 
 const Stack = createStackNavigator()
 
 const App = () => {
   return (
+    <Provider store={store}>
     <DestinationContextProvider>
     <OriginContextProvider>
     <NavigationContainer>
@@ -57,12 +60,12 @@ const App = () => {
               initialRouteName={"Role"}
              >
         {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
-        {/* <Stack.Screen name="Role" component={RoleSelect} />
+        <Stack.Screen name="Role" component={RoleSelect} />
          <Stack.Screen name="SL" component={SlScreen} /> 
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="OTP" component={OTPScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="GetStartScreen" component={GetStartScreen} /> */}
+        <Stack.Screen name="GetStartScreen" component={GetStartScreen} />
           <Stack.Screen name="Home" component={Tabs} />
           <Stack.Screen name="Destination" component={Destination} />
            <Stack.Screen name="SetDesM" component={SetDestiOnMap} />
@@ -103,6 +106,7 @@ const App = () => {
     </NavigationContainer>
     </OriginContextProvider>
    </DestinationContextProvider>
+   </Provider>
   )
 }
 

@@ -89,7 +89,7 @@ const OTPScreen  = ({navigation}) => {
                         customIconStyle={{
                             height: 30
                         }}
-                        onPress={() => {navigation.navigate('')}}
+                        onPress={() => navigation.goBack()}
                     /> 
                     
             

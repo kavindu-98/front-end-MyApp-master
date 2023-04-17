@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from "../constants";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { IconButton, TextIconButton } from "../components";
+import { resetUserLogIn } from "../reducers/userSlice";
 
 const ProfileScreen = () => {
   const sheetRef = useRef(null);
@@ -153,7 +154,8 @@ const ProfileScreen = () => {
                     ...FONTS.h3,
                   }}
                   onPress={() => {
-                    navigation.navigate("");
+                    dispatch(resetUserLogIn())
+                    navigation.navigate("Role");
                   }}
                 />
               </View>

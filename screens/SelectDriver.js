@@ -19,7 +19,7 @@ import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 import { HeaderBar, MapComponent, DriverCard } from "../components";
 
-const SelectDriver = ({ route }) => {
+const SelectDriver = ({ dropLocation, pickupLocation}) => {
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
   const [Drivercards, setDrivercards] = useState([]);
@@ -44,7 +44,11 @@ const SelectDriver = ({ route }) => {
 
         {/* </TouchableOpacity> */}
 
-        <MapComponent></MapComponent>
+        <MapComponent
+            pickupLocation={pickupLocation}
+            dropLocation={dropLocation}
+       
+          />
         <HeaderBar
           // title={selectedPlace?.name}
           icon={icons.left_arrow}

@@ -43,7 +43,15 @@ const Destination = ({ route }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [destination1, setDestination] = useState(false);
 
+  const pickupLocation = route.params;
+  
+  const [dropLocation , setDropLocation] = useState();
+  const dispatchOrigin = useContext(OriginContext);
+  console.log(pickupLocation);
+  console.log(dispatchOrigin.latitude);
+
   const { destination, dispatchDestination } = useContext(DestinationContext);
+
   const [userDestination, setUserDestination] = useState({
     latitude: destination.latitude,
     longitude: destination.longitude,
@@ -106,7 +114,7 @@ const Destination = ({ route }) => {
             }}
           />
 
-          <Text style={styles.Title}>Canada Friendship Rd, Katunaya...</Text>
+          <Text style={styles.Title}>{pickupLocation.formatted_address}</Text>
 
           <View style={styles.button}>
             <IconButton
@@ -146,6 +154,14 @@ const Destination = ({ route }) => {
                 });
 
                 setDestination(true);
+                setDropLocation(details)
+                console.log(dropLocation)
+                // dropLocation = details;
+                navigation.navigate(
+                  "SelectDriver",
+                  details,
+                  pickupLocation
+                );
               }}
               query={{
                 key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",
@@ -170,7 +186,8 @@ const Destination = ({ route }) => {
         </Animated.View>
 
         <View>
-          {/* <MapComponent userDestination = {userDestination} ></MapComponent> */}
+          <MapComponent
+          />
         </View>
       </View>
     );

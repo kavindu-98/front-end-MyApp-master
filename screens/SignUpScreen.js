@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch,useSelector } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { LoginComponent, SignupComponent } from "../components";
@@ -22,6 +23,7 @@ import { TextIconButton, PasswordIcon } from "../components";
 import * as Animatable from "react-native-animatable";
 import SelectBox from 'react-native-multiple-select';
 import {Picker} from '@react-native-picker/picker';
+import { signUpUser } from "../Actions/userActions";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -45,6 +47,7 @@ const SignUpScreen = ({ navigation }) => {
   const [error, setError] = useState({
     errorMsg:''
   });
+  const {isError,isSuccess,isLoading,message}=useSelector((state)=>state.userLogIn)
 
   //  {FirstName, LastName, email, phone, employeeId, gender, password
 
@@ -105,24 +108,28 @@ const SignUpScreen = ({ navigation }) => {
    }
   
   };
-
+const dispatch=useDispatch()
   const handleSignup = () => {
+    
     if (validate()) {
-      console.log('Signup success');
-      setFirstName('');
-      setLastName('');
-      setEid('');
-      setEmail('');
-      setNIC('');
-      setPhone('');
-      setPassword1('');
-      setPassword2('');
-      setTimeout(()=> {
-        navigation.navigate('SignIn');
-       }, 1500);
+      dispatch(signUpUser({FirstName,LastName,employeeId,email,NIC,phone,password,gender:'Female'}))
+     
       // navigation.navigate('SignIn')
     }
   };
+  if(isSuccess){
+    console.log('Signup success');
+    setFirstName('');
+    setLastName('');
+    setEid('');
+    setEmail('');
+    setNIC('');
+    setPhone('');
+    setPassword1('');
+    setPassword2('');
+
+      navigation.navigate('Login');
+  }
 
 
 
@@ -375,7 +382,7 @@ const SignUpScreen = ({ navigation }) => {
                       ...FONTS.h2,
                       
                       }}
-                      onPress={() => {navigation.navigate('Login')}}
+                      onPress={handleSignup}
                    />
   
 

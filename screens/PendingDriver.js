@@ -28,11 +28,6 @@ import {
   DriverCard,
 } from "../components";
 
-import * as Animatable from "react-native-animatable";
-
-import { ImageBackground } from "react-native";
-import HomeScreen from "./HomeScreen";
-
 const PendingDriver = ({ route }) => {
   const Driver = route.params;
 
@@ -40,11 +35,18 @@ const PendingDriver = ({ route }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalCallVisible, setCallModalVisible] = useState(false);
+  const [modalFinishRideVisible, setmodalFinishRideVisible] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
-
-  const snapPoints = ["20%","62%"];
+  const snapPoints = ["5%" , "62%"];
 
   const navigation = useNavigation();
+  const onPressHandler = () => {
+    setIsClicked(true);
+    setTimeout('',40000)
+    setmodalFinishRideVisible(true)
+  
+  };
 
   function renderMap() {
     return (
@@ -74,7 +76,7 @@ const PendingDriver = ({ route }) => {
             backgroundColor: COLORS.transparentWhite,
           }}
         />
-          <BottomSheet
+        <BottomSheet
           // ref={sheetRef}
           snapPoints={snapPoints}
           // enablePanDownToClose={true}
@@ -104,18 +106,18 @@ const PendingDriver = ({ route }) => {
                 flexDirection: "row",
               }}
             >
-              <TouchableOpacity   onPress={() => setCallModalVisible(true)}>
-              <Image
-                source={require("../assets/icons/call.png")}
-                resizeMode="contain"
-                style={{
-                  width: 50,
-                  height: 50,
-                  margin: 35,
-                  marginTop: 50,
-                  // tintColor: COLORS.red1Font,
-                }}
-              />
+              <TouchableOpacity onPress={() => setCallModalVisible(true)}>
+                <Image
+                  source={require("../assets/icons/call.png")}
+                  resizeMode="contain"
+                  style={{
+                    width: 50,
+                    height: 50,
+                    margin: 35,
+                    marginTop: 50,
+                    // tintColor: COLORS.red1Font,
+                  }}
+                />
               </TouchableOpacity>
 
               <View style={{ alignSelf: "center", marginTop: 20 }}>
@@ -127,7 +129,7 @@ const PendingDriver = ({ route }) => {
                   />
                 </View>
               </View>
-              <TouchableOpacity   onPress={() => setModalVisible(true)}>
+              <TouchableOpacity onPress={() => setModalVisible(true)}>
                 <Image
                   source={require("../assets/icons/mesg.png")}
                   resizeMode="contain"
@@ -189,46 +191,51 @@ const PendingDriver = ({ route }) => {
             </Text>
 
             <TextIconButton
-              label="PENDING..."
+              label={isClicked ? "ACCEPTED" : "PENDING..."}
               customContainerStyle={{
-                width: "90%",
+                width: isClicked ? "60%" : "90%",
                 height: 55,
-                backgroundColor: COLORS.redOpacity,
+                backgroundColor:isClicked ? COLORS.white : COLORS.redOpacity,
+                borderWidth: isClicked ? 1 : null,
+                borderColor: isClicked ? COLORS.red1Font : null,
                 borderRadius: SIZES.radius_btn4,
                 marginTop: SIZES.padding1,
               }}
               customLabelStyle={{
-                color: COLORS.white,
+                color: isClicked ? COLORS.green : COLORS.white,
                 alignItems: "center",
                 marginLeft: -15,
                 ...FONTS.h2,
               }}
-              onPress={() => {
-                navigation.navigate("AcceptDriver");
-              }}
+              onPress={onPressHandler}
+              // onPress={() => {
+              //   navigation.navigate("AcceptDriver");
+              // }}
             />
-
-            <TextIconButton
-              label="CANCEL"
-              customContainerStyle={{
-                width: "90%",
-                height: 55,
-                backgroundColor: COLORS.white,
-                borderColor: COLORS.gray30,
-                borderWidth: 1,
-                borderRadius: SIZES.radius_btn4,
-                marginTop: SIZES.padding3,
-              }}
-              customLabelStyle={{
-                color: COLORS.red1Font,
-                alignItems: "center",
-                marginLeft: -15,
-                ...FONTS.h2,
-              }}
-              onPress={() => {
-                navigation.navigate("DriverDetails");
-              }}
-            />
+            {isClicked ? null  :(
+              <TextIconButton
+                label="CANCEL"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
+                  backgroundColor: COLORS.white,
+                  borderColor: COLORS.gray30,
+                  borderWidth: 1,
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding3,
+                }}
+                customLabelStyle={{
+                  color: COLORS.red1Font,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                // onPress={onPressHandler}
+                onPress={() => 
+                  navigation.goBack()
+                }
+              />
+            )}
           </BottomSheetView>
         </BottomSheet>
       </View>
@@ -440,7 +447,7 @@ const PendingDriver = ({ route }) => {
   //         // justifyContent: 'center',
   //       }}
   //     >
-      
+
   //     </View>
   //   );
   // }
@@ -479,8 +486,6 @@ const PendingDriver = ({ route }) => {
                 Let make the call to driver
               </Text>
 
-            
-
               <View style={styles.Buttoncontainer}>
                 <View
                   style={{
@@ -493,8 +498,6 @@ const PendingDriver = ({ route }) => {
                   <Text style={styles.inputTitle}>Make a Call for this</Text>
                   <Text style={styles.inputTitle1}>(0768510781)</Text>
                 </View>
-
-              
               </View>
 
               <TextIconButton
@@ -544,20 +547,80 @@ const PendingDriver = ({ route }) => {
     );
   }
 
+  function FinishRide() {
+    return (
+      <View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalFinishRideVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setmodalFinishRideVisible(!modalFinishRideVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalViewCall}>
+        
+        
+
+              <View style={styles.Buttoncontainer}>
+                <View
+                  style={{
+                    flexDirection: "row",
+
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
+                  }}
+                >
+                  <Text style={styles.inputTitle}>You have arrived your destination</Text>
+                  <Text style={styles.inputTitle1}>Thank you !</Text>
+                </View>
+              </View>
+
+            
+
+              <TextIconButton
+                label="CANCEL"
+                customContainerStyle={{
+                  width: "90%",
+                  height: 55,
+                  backgroundColor: COLORS.white,
+                  borderColor: COLORS.gray30,
+                  borderWidth: 1,
+                  borderRadius: SIZES.radius_btn4,
+                  marginTop: SIZES.padding3,
+                }}
+                customLabelStyle={{
+                  color: COLORS.red1Font,
+                  alignItems: "center",
+                  marginLeft: -15,
+                  ...FONTS.h2,
+                }}
+                onPress={() => {navigation.navigate('RatingScreen')}}
+              />
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+  }
 
   // opacity: modalVisible ? 0.2 : 1
 
   return (
-    <View style={{ 
-      flex: 1,
-       }}>
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
       <StatusBar style="auto" />
 
       {renderMap()}
       {NoteToDriver()}
-        {CallToDriver()}
-      {/* {PendingDriver()} */}
-     
+      {CallToDriver()}
+      {FinishRide()}
+
       {/* {AcceptDriver()} */}
       {/* {Finish()} */}
     </View>

@@ -20,6 +20,7 @@ import { Button, Icon } from "react-native-elements";
 import { COLORS, FONTS, SIZES, icons } from "../constants";
 import { TextIconButton, PasswordIcon, IconButton } from "../components";
 import { Picker } from "@react-native-picker/picker";
+import { Employee } from "../Data/Data";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
 const Tab = createMaterialTopTabNavigator();
@@ -216,7 +217,7 @@ const ProfileInfo = ({ navigation }) => {
                             style={styles.input}
                             placeholder="Enter your First Name"
                             // autoFocus
-                            value={FirstName}
+                            value={Employee.Fname}
                             onChangeText={text => setFirstName(text)}
                           />
                     </View>
@@ -226,7 +227,7 @@ const ProfileInfo = ({ navigation }) => {
                             style={styles.input}
                             placeholder="Enter your Last Name"
                             // autoFocus
-                            value={LastName}
+                            value={Employee.Lname}
                             onChangeText={text => setLastName(text)}
                           />
                     </View>
@@ -238,7 +239,7 @@ const ProfileInfo = ({ navigation }) => {
                     style={styles.input}
                     placeholder="Create your Email"
                     // secureTextEntry
-                    value={email}
+                    value={Employee.email}
                     onChangeText={text => setEmail(text)}
                   />
 
@@ -272,7 +273,7 @@ const ProfileInfo = ({ navigation }) => {
                                 style={styles.input}
                                 placeholder="Enter your Phone Number"
                                 // autoFocus
-                                value={phone}
+                                value={Employee.phone}
                                 onChangeText={text => setPhone(text)}
                               />
                         </View>
@@ -283,7 +284,7 @@ const ProfileInfo = ({ navigation }) => {
                     style={styles.input}
                     placeholder="Enter your Employee ID"
                     // secureTextEntry
-                    value={employeeId}
+                    value={Employee.EmployeeId}
                     onChangeText={text => setEid(text)}
                   />
                   
@@ -296,7 +297,7 @@ const ProfileInfo = ({ navigation }) => {
                               style={styles.input}
                               placeholder="Enter your NIC Number"
                               // autoFocus
-                              value={NIC}
+                              value={Employee.NIC}
                               onChangeText={text => setNIC(text)}
                             />
                       </View> 
@@ -334,7 +335,7 @@ const ProfileInfo = ({ navigation }) => {
                     style={styles.input}
                     placeholder="Create your password"
                     secureTextEntry
-                    value={password}
+                    value={Employee.Password}
                     onChangeText={text => setPassword1(text)}
                   />
                         <Text style={styles.inputTitle}>CONFIRM PASSWORD</Text>
@@ -466,6 +467,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: COLORS.transparentWhite,
     borderColor: COLORS.outLine,
+    color: COLORS.black,
     borderRadius: 8,
     borderWidth: 1,
     width: "100%",

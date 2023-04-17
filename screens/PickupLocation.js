@@ -31,25 +31,35 @@ import Geolocation from "react-native-geolocation-service";
 import { IconButton } from "../components";
 import { HeaderBar, MapComponent } from "../components";
 import { Marker } from "react-native-maps";
-import { OriginContext, DestinationContext } from "../contexts/contexts";
+import { OriginContext } from "../contexts/contexts";
+import { useDispatch, useSelector } from "react-redux";
+import { addOrigin } from "../reducers/mapSlice";
 
 const PickupLocation = ({ route }) => {
   // location.coords.latitude = null;
   // location.coords.longitude = null;
+
+  const data = useSelector((state) => state.mapData);
+  console.log(data);
+  const dispatch = useDispatch();
 
   const textInput1 = useRef(4);
   const [isOpen, setIsOpen] = useState(true);
   const [lating, setLating] = useState({});
   const [location, setLocation] = useState(false);
   const { origin, dispatchOrigin } = useContext(OriginContext);
-  const [userOrigin, setUserOrigin] = useState({
-    latitude: origin.latitude,
-    longitude: origin.longitude,
-  });
-  const snapPoints = ['20%',"40%", '70%'];
+  // const [userOrigin, setUserOrigin] = useState({
+  //   latitude: origin.latitude,
+  //   longitude: origin.longitude,
+  //   // address: origin
+  // });
+  const snapPoints = ["20%", "40%", "70%"];
 
   useEffect(() => {
-    setUserOrigin({ latitude: origin.latitude, longitude: origin.longitude });
+    // dispatch (
+    //   addOrigin({latitude: "6.25555"})
+    // )
+    // setUserOrigin({ latitude: origin.latitude, longitude: origin.longitude });
     getLocation();
   }, [origin]);
 
@@ -230,18 +240,21 @@ const PickupLocation = ({ route }) => {
                 minLength={2}
                 enablePoweredByContainer={false}
                 fetchDetails={true}
-                onPress={(data, details = null) => {
-                  dispatchOrigin({
-                    type: "ADD_ORIGIN",
-                    payload: {
+                onPress={( data, details = null) => {
+                  dispatch(
+                    addOrigin({
                       latitude: details.geometry.location.lat,
                       longitude: details.geometry.location.lng,
                       address: details.formatted_address,
                       name: details.name,
-                    },
-                  });
+                    })
+                  );
+                  // console.log(data.description);
+                  // console.log(details.formatted_address);
 
-                  navigation.navigate("Destination", { state: 0 });
+                  navigation.navigate("Destination", details);
+
+                  // console.log(details.geometry.location.lng);
                 }}
                 query={{
                   key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",
