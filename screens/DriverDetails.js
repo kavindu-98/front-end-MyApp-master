@@ -23,7 +23,7 @@ import {
   TextIconButton,
   Rating,
   TextButton,
-  MapComponent,
+  MapComponentRoute,
   DriverCard,
 } from "../components";
 
@@ -239,7 +239,7 @@ const DriverDetails = ({ route }) => {
           Time can be changed due to traffic
         </Text>
         <View style={styles.Star2}>
-          <MapComponent style={styles.map}></MapComponent>
+          <MapComponentRoute style={styles.map}></MapComponentRoute>
 
         </View>
         {/* <Image

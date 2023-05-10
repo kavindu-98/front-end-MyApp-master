@@ -581,18 +581,18 @@ const PendingDriver = ({ route }) => {
             
 
               <TextIconButton
-                label="CANCEL"
+                label="FINISHED"
                 customContainerStyle={{
                   width: "90%",
                   height: 55,
                   backgroundColor: COLORS.white,
-                  borderColor: COLORS.gray30,
+                  borderColor: COLORS.green,
                   borderWidth: 1,
                   borderRadius: SIZES.radius_btn4,
                   marginTop: SIZES.padding3,
                 }}
                 customLabelStyle={{
-                  color: COLORS.red1Font,
+                  color: COLORS.green,
                   alignItems: "center",
                   marginLeft: -15,
                   ...FONTS.h2,

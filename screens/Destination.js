@@ -26,6 +26,7 @@ import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 navigator.geolocation = require("react-native-geolocation-service");
 import { OriginContext, DestinationContext } from "../contexts/contexts";
+import { useDispatch, useSelector } from "react-redux";
 
 import { IconButton } from "../components";
 import {
@@ -36,12 +37,14 @@ import {
   MapComponent,
   SavedLocation,
 } from "../components";
+import { destination } from "../reducers/mapSlice";
 
 const Destination = ({ route }) => {
   const textInput2 = useRef(5);
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
   const [destination1, setDestination] = useState(false);
+  const dispatch = useDispatch();
 
   const pickupLocation = route.params;
   
@@ -50,7 +53,7 @@ const Destination = ({ route }) => {
   console.log(pickupLocation);
   console.log(dispatchOrigin.latitude);
 
-  const { destination, dispatchDestination } = useContext(DestinationContext);
+  // const { destination, dispatchDestination } = useContext(DestinationContext);
 
   const [userDestination, setUserDestination] = useState({
     latitude: destination.latitude,
@@ -142,26 +145,32 @@ const Destination = ({ route }) => {
               minLength={2}
               enablePoweredByContainer={false}
               fetchDetails={true}
-              onPress={(data, details = null) => {
-                dispatchDestination({
-                  type: "ADD_DESTINATION",
-                  payload: {
+              onPress={( data, details = null) => {
+                dispatch(
+                  destination({
                     latitude: details.geometry.location.lat,
                     longitude: details.geometry.location.lng,
                     address: details.formatted_address,
                     name: details.name,
-                  },
-                });
+                  })
+                );
+                // console.log(data.description);
+                // console.log(details.formatted_address);
+
+                navigation.navigate("SeleDriver", details);
+
+                // console.log(details.geometry.location.lng);
+            
 
                 setDestination(true);
                 setDropLocation(details)
-                console.log(dropLocation)
-                // dropLocation = details;
-                navigation.navigate(
-                  "SelectDriver",
-                  details,
-                  pickupLocation
-                );
+                // console.log(dropLocation)
+                // // dropLocation = details;
+                // navigation.navigate(
+                //   "SelectDriver",
+                //   details,
+                //   pickupLocation
+                // );
               }}
               query={{
                 key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",

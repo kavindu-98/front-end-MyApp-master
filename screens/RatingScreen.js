@@ -30,7 +30,7 @@ import {
 
 
 const onPressHandler = () => {
-  isClicked(require("../assets/images/Star.png"));
+  setIsClicked(require("../assets/images/Star.png"));
 };
 
 const RatingScreen = ({ route }) => {

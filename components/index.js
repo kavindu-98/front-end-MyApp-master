@@ -14,6 +14,7 @@ import HeaderBar from "./HeaderBar";
 import MapComponent from "./MapComponent";
 import EmployeeCard from "./EmployeeCard";
 import SavedLocation from "./SavedLocation";
+import MapComponentRoute from "./MapComponentRoute";
 
 export {
   LoginComponent,
@@ -32,4 +33,5 @@ export {
   HeaderBar,
   MapComponent,
   SavedLocation,
+  MapComponentRoute
 };

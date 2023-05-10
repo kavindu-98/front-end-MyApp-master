@@ -11,21 +11,36 @@ import React from 'react';
 
 import * as Animatable from 'react-native-animatable';
 import { COLORS, FONTS, SIZES, icons } from '../constants';
-import { TextIconButton} from "../components"
+import { HeaderBar, TextIconButton} from "../components"
  
 import Feather from 'react-native-vector-icons/Feather'
 
 
-// this screen select the role of Driver or Employee
 
 
-const RoleSelect = ({navigation}) => {
+
+const DSlScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
+{/* 
+                        <HeaderBar
+                              // title={selectedPlace?.name}
+                              leftOnPressed={navigation.goBack()}
+                              right={false}
+                              containerStyle={{
+                                  position: 'absolute',
+                                  top: SIZES.padding * 2,
+                                  // height: "20%",
+                                  // width: SIZES.width,
+                                  // backgroundColor: COLORS.red1Font
+                                 
+                              }}
+                            /> */}
       <View style={styles.header} >
 
        <ImageBackground source={require('../assets/images/background.png')} style={styles.ImageBackground}>
-        <View style={styles.header1} >
+
+       <View style={styles.header1} >
         <Animatable.Image
             animation="bounceIn"
             // duration="1500"
@@ -34,8 +49,6 @@ const RoleSelect = ({navigation}) => {
             resizeMode="contain"
            />
         </View>
-
-        
            </ImageBackground>
         </View>
        <View style={styles.footer}
@@ -45,7 +58,7 @@ const RoleSelect = ({navigation}) => {
             style={styles.button}
             >  
             <TextIconButton
-                           label="Driver"
+                           label="Sign up"
                            customContainerStyle={{
                             marginTop: SIZES.padding2,
                             width: 164,
@@ -60,7 +73,7 @@ const RoleSelect = ({navigation}) => {
                             
                         }}
                        
-                        onPress={() => {navigation.navigate('DSL')}}
+                        onPress={() => {navigation.navigate('DRSignUpScreen')}}
                     /> 
                     
             </View>
@@ -68,7 +81,7 @@ const RoleSelect = ({navigation}) => {
             style={styles.button}
             >           
             <TextIconButton
-                           label="Employee"
+                           label="Log in"
                            customContainerStyle={{
                             marginTop: SIZES.padding2,
                             width: 164,
@@ -82,7 +95,7 @@ const RoleSelect = ({navigation}) => {
                             marginLeft: -15
                             
                         }}
-                        onPress={() => {navigation.navigate('SL')}}
+                        onPress={() => {navigation.navigate('DLogin')}}
                     /> 
                     
             </View>
@@ -94,7 +107,7 @@ const RoleSelect = ({navigation}) => {
   )
 }
 
-export default RoleSelect;
+export default DSlScreen;
 
 const {height} = Dimensions.get("screen");
 const height_logo = height * 0.2;
@@ -115,8 +128,8 @@ const styles = StyleSheet.create({
       width: '100%',
       height:'87%',
      
-      // justifyContent: 'center',
-      // alignItems: 'center'
+    //   justifyContent: 'center',
+    //   alignItems: 'center'
      
   },
   header1: {
@@ -136,7 +149,6 @@ const styles = StyleSheet.create({
       width: height_logo,
       height: height_logo,
       marginBottom: 480,
-      
       // marginLeft: 133
     
   },

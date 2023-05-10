@@ -17,7 +17,7 @@ import Feather from 'react-native-vector-icons/Feather'
 
 
 
-
+// this screen select the Signup or Login when selecting the paticular role
 
 const SlScreen = ({navigation}) => {
   return (

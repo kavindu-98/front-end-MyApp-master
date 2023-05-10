@@ -53,51 +53,52 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
 const {width, height} = Dimensions.get("window");
 const data = dummyData;
 
-const Section =({ containerStyle, title, onPress, children }) => {
-    return (
-        <View
-            style={{
-                ...containerStyle
-            }}
-        >
+// const Section =({ containerStyle, title, onPress, children }) => {
+//     return (
+//         <View
+//             style={{
+//                 ...containerStyle
+//             }}
+//         >
 
-            <View
-                style={{
-                    flexDirection: 'row',
-                    paddingHorizontal: SIZES.padding
-                }}
-            >
-                <Text 
-                    style={{
-                        flex: 1,
-                        ...FONTS.h2
-                    }}
-                    >
-                        {title}
-                </Text>
-                <TextButton
-                    contentContainerStyle={{
-                        width: 80,
-                        borderRadius: 30,
-                        backgroundColor: COLORS.primary
-                    }}
-                    label="See All"
-                    onPress={onPress}
-                >
+//             <View
+//                 style={{
+//                     flexDirection: 'row',
+//                     paddingHorizontal: SIZES.padding
+//                 }}
+//             >
+//                 <Text 
+//                     style={{
+//                         flex: 1,
+//                         ...FONTS.h2
+//                     }}
+//                     >
+//                         {title}
+//                 </Text>
+//                 <TextButton
+//                     contentContainerStyle={{
+//                         width: 80,
+//                         borderRadius: 30,
+//                         backgroundColor: COLORS.primary
+//                     }}
+//                     label="See All"
+//                     onPress={onPress}
+//                 >
 
 
-                </TextButton>
+//                 </TextButton>
 
-            </View>
-                    {/* {children} */}
-        </View>
-    )
-}
+//             </View>
+//                     {/* {children} */}
+//         </View>
+//     )
+// }
 
+// this screen is the home screen for the employee
 const HomeScreen = () => {
     const {user}=useSelector((state)=>state.userLogIn)
 
-
+// header bar
     function renderHeader() {
         return (
             <View
@@ -122,7 +123,7 @@ const HomeScreen = () => {
                         ...FONTS.body3,
                         fontWeight: 'bold'
                     }}>
-                        Sunday, 16th Oct 2022
+                        Thursday, 11th May 2023
                     </Text>
 
                 </View>
@@ -139,6 +140,7 @@ const HomeScreen = () => {
         )
     }
 
+    // flat scroll view cards
     function renderHorizontalScrollView() {
         return (
 
@@ -184,6 +186,7 @@ const HomeScreen = () => {
             
             )
     }
+    // crousel cards
 
         function renderPhotoCard() {
 
@@ -233,84 +236,7 @@ const HomeScreen = () => {
     
  
 
-    // function renderCategories() {
-    //     return (
-    //         <Section
-    //             title="Categories"
-    //         >
 
-    //         <FlatList
-    //             horizontal
-    //             data={dummyData.categories}
-    //             listKey="Categories"
-    //             keyExtractor={item => 'Categories-${item.id}'}
-    //             showsHorizontalScrollIndicator={false}
-    //             contentContainerStyle={{
-    //                 marginTop: SIZES.padding
-    //             }}
-    //             renderItem={({ item, index }) => (
-    //                     <CategoryCard
-    //                         category={item}
-    //                         containerStyle={{
-    //                             marginLeft: index == 0 ? SIZES.padding: SIZES.base,
-    //                             marginRight: index == dummyData.categories.length - 1 ? SIZES.padding: 0
-    //                         }}
-    //                     />
-    //             )}
-
-    //             />
-
-    //         </Section>
-    //     )
-    // }
-
-    // function renderPopularCourses() {
-    //     return(
-    //         <Section
-    //         title="Popular Courses"
-    //         containerStyle={{
-    //             marginTop: 30
-    //         }}
-    //     >
-    
-    //     <FlatList
-           
-    //         data={dummyData.courses_list_2}
-    //         listKey="PopularCourses"
-    //         scrollEnabled={false}
-    //         keyExtractor={item => 'PopularCourses-${item.id}'}
-    //         showsHorizontalScrollIndicator={false}
-    //         contentContainerStyle={{
-    //             marginTop: SIZES.radius,
-    //             paddingHorizontal: SIZES.padding
-    //         }}
-    //         renderItem={({ item, index }) => (
-    //                <HorizontalCourseCard
-    //                     course={item}
-    //                     containerStyle={{
-    //                         marginVertical: SIZES.padding,
-    //                         marginTop: index == 0 ? SIZES.radius : SIZES.padding
-    //                     }}
-                   
-    //                >
-    
-    //                </HorizontalCourseCard>
-    //         )}
-    //         ItemSeparatorComponent={() => (
-    //             <LineDivider
-    //                     lineStyle={{
-    //                         backgroundColor: COLORS.gray20
-    //                     }}
-                
-    //             />
-    //         )}
-    
-    //         />
-    
-    //     </Section>
-    //     )
-    
-    // }
 
     return (
         <View
@@ -320,11 +246,7 @@ const HomeScreen = () => {
             }}
         >
  
-        {/* header */}
       
-
-        {/* cardlist */}
-        
        
         {/* Content  */}
         <ScrollView
@@ -336,23 +258,11 @@ const HomeScreen = () => {
               {renderHeader()}
             {/* Render Phto */}
            {renderPhotoCard()}
-             {/* {renderStartLearning()} */}
-             {renderHorizontalScrollView()}
+           
 
-             {/* Courses */}
-             {/* {renderCourses()} */}
+           
 
-             {/* <LineDivider
-                lineStyle={{
-                    marginVertical: SIZES.padding
-                }}
-             /> */}
-
-             {/* Categories */}
-             {/* {renderCategories()} */}
-
-             {/* popular Courses */}
-             {/* {renderPopularCourses()} */}
+            
         </ScrollView>  
         </View>
     )

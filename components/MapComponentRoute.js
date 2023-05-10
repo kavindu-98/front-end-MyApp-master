@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
-const MapComponent = ({}) => {
+const MapComponentRoute = ({}) => {
 
 
   const data = useSelector((state) => state.mapData);
@@ -40,7 +40,7 @@ const GOOGLE_MAPS_APIKEY = 'AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk';
         {data.latitude!= null && (
           <Marker coordinate={data} anchor={{ x: 0.5, y: 0.5 }}>
             <Image
-              source={require("../assets/images/pickupmarker.png")}
+              source={require("../assets/images/pickupIcon.png")}
               style={styles.markerOrigin2}
               resizeMode="cover"
             />
@@ -49,12 +49,12 @@ const GOOGLE_MAPS_APIKEY = 'AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk';
 
         {/* {data.latitude != null && ( */}
             {/* <Marker
-              coordinate={{showsUserLocation
+              coordinate={{latitude: 7.175549 ,longitude: 79.883291
                 }}
               anchor={{ x: 0.5, y: 0.5 }}
             >
               <Image
-                source={require("../assets/images/pickupmarker.png")}
+                source={require("../assets/images/pickupIcon.png")}
                 style={styles.markerDestination}
                 resizeMode="cover"
               />
@@ -63,11 +63,11 @@ const GOOGLE_MAPS_APIKEY = 'AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk';
         {/* {.latitude !== null && */}
                         <MapViewDirections 
                           addOrigin={data}
-                          destination={{latitude: 7.175549 ,longitude: 79.883291}}
+                          destination={data}
                           // apikey={AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk}
                           apikey={GOOGLE_MAPS_APIKEY}
                           strokeWidth={4}
-                          strokeColor={COLORS.black}
+                          strokeColor={COLORS.blue}
                           // query={{
                           //   key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",
                           //   language: "en",
@@ -79,7 +79,7 @@ const GOOGLE_MAPS_APIKEY = 'AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk';
   );
 };
 
-export default MapComponent;
+export default MapComponentRoute;
 
 const styles = StyleSheet.create({
   markerDestination: {
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   markerOrigin2: { 
-    width: 42,
-    height: 32,
+    width: 30,
+    height: 40,
   }
 });

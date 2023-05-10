@@ -24,12 +24,13 @@ import * as Animatable from "react-native-animatable";
 import SelectBox from 'react-native-multiple-select';
 import {Picker} from '@react-native-picker/picker';
 import { signUpUser } from "../Actions/userActions";
+import { resetUserLoginStatus } from "../reducers/userSlice";
 
 const Tab = createMaterialTopTabNavigator();
 
-const API_URL = 'http://192.168.1.107:8080//api/users/login';
+// const API_URL = 'http://192.168.1.107:8080//api/users/login';
 
-
+// this screen for signup the Employee
 
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState();
@@ -47,10 +48,8 @@ const SignUpScreen = ({ navigation }) => {
   const [error, setError] = useState({
     errorMsg:''
   });
-  const {isError,isSuccess,isLoading,message}=useSelector((state)=>state.userLogIn)
 
-  //  {FirstName, LastName, email, phone, employeeId, gender, password
-
+  const {isError,isSuccess,isLoading,message,action}=useSelector((state)=>state.userLogIn)
 
   const K_Option = [
     {
@@ -79,7 +78,7 @@ const SignUpScreen = ({ navigation }) => {
     },
   ]
 
-  
+  // Validate the employee data in the front end
   const validate = () => {
     if (( FirstName === '')||(LastName === '')||(password === '')||(password2 === '')||(employeeId === '')||(NIC === '')) {
       setError({...error, errorMsg:'All Fields are required!'});
@@ -91,8 +90,8 @@ const SignUpScreen = ({ navigation }) => {
       setSuccess({...success,successMsg:''})
       return false;
     }
-    if (phone.length < 10) {
-      setError({...error, errorMsg:'Password must be at least 8 characters long!'});
+    if (phone.length < 9) {
+      setError({...error, errorMsg:'Phone number is wrong!'});
       setSuccess({...success,successMsg:''})
       return false;
     }
@@ -113,25 +112,16 @@ const dispatch=useDispatch()
     
     if (validate()) {
       dispatch(signUpUser({FirstName,LastName,employeeId,email,NIC,phone,password,gender:'Female'}))
-     
+      
       // navigation.navigate('SignIn')
     }
   };
-  if(isSuccess){
-    console.log('Signup success');
-    setFirstName('');
-    setLastName('');
-    setEid('');
-    setEmail('');
-    setNIC('');
-    setPhone('');
-    setPassword1('');
-    setPassword2('');
+  if(action==='signUpUser' && isSuccess){
+    console.log(message)
+    navigation.navigate('Login');
+    dispatch(resetUserLoginStatus())
 
-      navigation.navigate('Login');
   }
-
-
 
 
   let AnimatedHeaderValue = new Animated.Value(0);
@@ -362,11 +352,12 @@ const dispatch=useDispatch()
                     onChangeText={text => setPassword2(text)}
                   />
                   
-                  
+                
                 </View>
+              
                 {error.errorMsg !== '' && <Text style={styles.error}>{error.errorMsg}</Text>}
       {success.successMsg !== '' && <Text style={styles.success}>{success.successMsg}</Text>}
-
+{/* view the error messages */}
                     <TextIconButton
                       label="SIGN UP"
                       customContainerStyle={{
@@ -384,7 +375,7 @@ const dispatch=useDispatch()
                       }}
                       onPress={handleSignup}
                    />
-  
+  {/* run the handlesignup method */}
 
           </View>
 

@@ -16,19 +16,25 @@ const Tab = createMaterialTopTabNavigator();
 
 // const API_URL = 'http://192.168.1.107:8080/api/users/';
 
+//  this Screen for the login screen for the Employee
+
 const LoginScreen  = ({navigation}) => {
 
-const {user,isSuccess,isError,isLoading,message}=useSelector((state)=>state.userLogIn)
+const {user,isSuccess,isError,isLoading,message,action}=useSelector((state)=>state.userLogIn)
   const dispatch = useDispatch();
 
   const [employeeId, setEmployeeId] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  // check the Employee Id and password is correct
+
   const LoginBtnClick = () => {
     dispatch(logInUser({employeeId,password}));
+    console.log(employeeId)
+    console.log(password)
     // navigation.navigate('OTP');
   };
-  useEffect(()=>{if(isSuccess){
+  useEffect(()=>{if(action==='logInUser'&&isSuccess){
 navigation.navigate('OTP');
   }},[user])
 

@@ -41,7 +41,8 @@ const AcceptDriver = ({ route }) => {
 
   const snapPoints = ["6%", "40%", "100%"];
 
-
+const obj={name:'thari',age:5}
+const obj2={...obj,gender:'m',number:'ddvd'}
   const navigation = useNavigation();
 
   function renderMap() {

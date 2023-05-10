@@ -22,6 +22,7 @@ import {
    OTPScreen, 
    DOTPScreen,
    SlScreen,
+   DSlScreen,
    RatingScreen,
    MyActivity, 
    SetDestiOnMap, 
@@ -62,6 +63,7 @@ const App = () => {
         {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
         <Stack.Screen name="Role" component={RoleSelect} />
          <Stack.Screen name="SL" component={SlScreen} /> 
+         <Stack.Screen name="DSL" component={DSlScreen} /> 
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="OTP" component={OTPScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />

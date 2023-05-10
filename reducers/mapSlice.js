@@ -17,7 +17,7 @@ export const mapSlice = createSlice({
     
       
     },
-    destination: (state) => {
+    destination: (state, action) => {
         state.latitude = action.payload.latitude;
         state.longitude = action.payload.longitude;
         state.address = action.payload.address;

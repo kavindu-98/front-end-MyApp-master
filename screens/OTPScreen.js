@@ -13,43 +13,22 @@ import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 const Tab = createMaterialTopTabNavigator();
 
-const API_URL = 'http://192.168.1.107:8080/api/users/';
+// const API_URL = 'http://192.168.1.107:8080/api/users/';
+
+// this screen for OTP verification screen
+
 
 const OTPScreen  = ({navigation}) => {
 
-    const [name, setName] = useState('');
+   
     const [NUM, setNUM] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+ 
     const [pic, setPic] = useState('');
     const [field, setField] = useState([]);
   
 
-    const signup = () => {
-        const payload = {
-          name,
-          email,
-          password,
-        };
     
-        try {
-          fetch(`${API_URL}/`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-          });
-          navigation.navigate('Home');
-          setName('');
-          setPassword('');
-          setConfirmPassword('');
-          setEmail('');
-          setPic('');
-        } catch (error) {
-          console.log(error);
-        }
-      };
+   
 
       let AnimatedHeaderValue = new Animated.Value(0);
       const Header_Max_Height = 160;
@@ -268,7 +247,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: COLORS.gray20,
     marginTop: 32,
-    marginLeft: -200
+    marginLeft: -150
   },
   inputSubTitle: {
     

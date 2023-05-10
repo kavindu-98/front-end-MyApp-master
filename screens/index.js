@@ -5,6 +5,7 @@ import SignUpScreen from "./SignUpScreen";
 import ProfileScreen from "./ProfileScreen";
 import RoleSelect from "./RoleSelect";
 import SlScreen from "./SlScreen";
+import DSlScreen from "./DSlScreen";
 import RatingScreen from "./RatingScreen";
 import PickupLocation from "./PickupLocation";
 import SetDestiOnMap from "./SetDestiOnMap";
@@ -50,6 +51,7 @@ export {
     ProfileScreen,
     RoleSelect,
     SlScreen,
+    DSlScreen,
     MyActivity,
     RatingScreen,
     PickupLocation,
