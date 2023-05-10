@@ -15,6 +15,7 @@ import { COLORS, SIZES, FONTS, icons } from "../constants";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { IconButton, TextIconButton } from "../components";
 import { resetUserLogIn } from "../reducers/userSlice";
+import {useDispatch,useSelector} from 'react-redux'
 
 const ProfileScreen = () => {
   const sheetRef = useRef(null);
@@ -22,6 +23,7 @@ const ProfileScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const snapPoints = ["50%"];
+  const dispatch = useDispatch();
 
   const navigation = useNavigation();
   function renderHeader() {
