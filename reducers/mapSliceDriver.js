@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-export const mapSlice = createSlice({
+export const mapSliceDriver = createSlice({
 
-  // to save the pickup and destination for employee
+  // to save the pickup and destination for driver
   name: "map",
   initialState: {
     latitude:'',
@@ -11,7 +11,7 @@ export const mapSlice = createSlice({
   },
 
   reducers: {
-    addOrigin: (state, action) => {
+    addOriginDriver: (state, action) => {
       state.latitude = action.payload.latitude;
       state.longitude = action.payload.longitude;
       state.address = action.payload.address;
@@ -19,7 +19,7 @@ export const mapSlice = createSlice({
     
       
     },
-    destination: (state, action) => {
+    destinationDriver: (state, action) => {
         state.latitude = action.payload.latitude;
         state.longitude = action.payload.longitude;
         state.address = action.payload.address;
@@ -27,6 +27,6 @@ export const mapSlice = createSlice({
       },
     },
   });
-  export const { addOrigin, destination } = mapSlice.actions;
+  export const { addOriginDriver, destinationDriver } = mapSliceDriver.actions;
   
-  export default mapSlice.reducer;
+  export default mapSliceDriver.reducer;

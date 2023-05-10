@@ -27,6 +27,7 @@ import {
   DriverCard,
 } from "../components";
 
+// this screen for driver details for selected driver
 
 const DriverDetails = ({ route }) => {
 

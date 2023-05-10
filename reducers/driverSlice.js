@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit"
 import { logInUser, signUpUser } from "../Actions/userActions"
 import CookieManager from '@react-native-cookies/cookies';
 
+
+//for the redux slices to lgin signup driver
+
 const initialState={
     driver:null,
     data:{},

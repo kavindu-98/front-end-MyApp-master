@@ -28,6 +28,8 @@ import {
   DriverCard,
 } from "../components";
 
+// ride status and ride mappath
+
 const PendingDriver = ({ route }) => {
   const Driver = route.params;
 
@@ -241,7 +243,7 @@ const PendingDriver = ({ route }) => {
       </View>
     );
   }
-
+// function for send note no driver
   function NoteToDriver() {
     return (
       <View>
@@ -435,22 +437,7 @@ const PendingDriver = ({ route }) => {
       </View>
     );
   }
-
-  // function PendingDriver() {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1.2,
-
-  //         backgroundColor: COLORS.gray10,
-  //         // alignItems: 'center',
-  //         // justifyContent: 'center',
-  //       }}
-  //     >
-
-  //     </View>
-  //   );
-  // }
+// function for call to driver
   function CallToDriver() {
     return (
       <View>
@@ -547,6 +534,7 @@ const PendingDriver = ({ route }) => {
     );
   }
 
+  // model for changing the status of ride
   function FinishRide() {
     return (
       <View>

@@ -35,6 +35,8 @@ import { OriginContext } from "../contexts/contexts";
 import { useDispatch, useSelector } from "react-redux";
 import { addOrigin } from "../reducers/mapSlice";
 
+// this screen for get the pick location of employee
+
 const PickupLocation = ({ route }) => {
   // location.coords.latitude = null;
   // location.coords.longitude = null;
@@ -48,21 +50,11 @@ const PickupLocation = ({ route }) => {
   const [lating, setLating] = useState({});
   const [location, setLocation] = useState(false);
   const { origin, dispatchOrigin } = useContext(OriginContext);
-  // const [userOrigin, setUserOrigin] = useState({
-  //   latitude: origin.latitude,
-  //   longitude: origin.longitude,
-  //   // address: origin
-  // });
+
   const snapPoints = ["20%", "40%", "70%"];
 
-  useEffect(() => {
-    // dispatch (
-    //   addOrigin({latitude: "6.25555"})
-    // )
-    // setUserOrigin({ latitude: origin.latitude, longitude: origin.longitude });
-    getLocation();
-  }, [origin]);
 
+// ask the permission of location from user 
   const requestLocationPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -113,6 +105,8 @@ const PickupLocation = ({ route }) => {
 
   const navigation = useNavigation();
 
+
+  // map view with nearest busses shown
   function renderMap() {
     return (
       <View
@@ -229,6 +223,7 @@ const PickupLocation = ({ route }) => {
                             // onChangeText={text => setEmail(text)}
                           /> */}
 
+ {/* google autoplace suggesor */}
               <GooglePlacesAutocomplete
                 nearbyPlacesAPI="GooglePlacesSearch"
                 placeholder="Enter Pickup Location"
@@ -305,19 +300,6 @@ const PickupLocation = ({ route }) => {
     );
   }
 
-  // function SlidingUpPanel() {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 2,
-
-  //         backgroundColor: COLORS.gray10,
-  //       }}
-  //     >
-
-  //     </View>
-  //   );
-  // }
 
   return (
     <View style={{ flex: 1 }}>

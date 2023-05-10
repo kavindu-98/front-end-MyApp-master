@@ -39,6 +39,8 @@ import {
 } from "../components";
 import { destination } from "../reducers/mapSlice";
 
+// this screen for get the destination location of employee 
+
 const Destination = ({ route }) => {
   const textInput2 = useRef(5);
   const sheetRef = useRef(null);

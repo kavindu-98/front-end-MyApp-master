@@ -19,6 +19,8 @@ import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 
 import { HeaderBar, MapComponent, DriverCard } from "../components";
 
+// this screen for select the driver according to the route
+
 const SelectDriver = ({ dropLocation, pickupLocation}) => {
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
@@ -94,7 +96,7 @@ const SelectDriver = ({ dropLocation, pickupLocation}) => {
                 SELECT A DRIVER
               </Text>
               {/* <TouchableOpacity onPress={() => {navigation.navigate('DriverDetails')}}> */}
-
+ {/* maping to the driverCard */}
               <DriverCard />
             </BottomSheetView>
           </ScrollView>
