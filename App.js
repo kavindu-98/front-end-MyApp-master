@@ -39,6 +39,7 @@ import {
    DRProfileInfo,
    ProfileInfo,
    DRMyDailyRides,
+   DestinationDriver
   } from './screens';
 import Tabs from "./navigation/tabs";
 import DTabs from "./navigation/Dtabs";
@@ -93,6 +94,7 @@ const App = () => {
           <Stack.Screen name="DLogin" component={DLoginScreen} />
           <Stack.Screen name="DOTP" component={DOTPScreen} />
           <Stack.Screen name="DHome" component={DTabs} />
+          <Stack.Screen name="DestinationDriver" component={DestinationDriver} />
           <Stack.Screen name="DSetStartOnMap" component={DSetStartOnMap} />
           <Stack.Screen name="DStartRide" component={DStartRide} />
           <Stack.Screen name="AcceptEmpReq" component={AcceptEmpReq} /> 

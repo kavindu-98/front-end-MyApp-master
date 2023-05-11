@@ -1,21 +1,24 @@
 import { StyleSheet, Text, View,  StatusBar, TouchableOpacity, ScrollView, SafeAreaView, Image, Animated, BackHandler, TextInput} from 'react-native';
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useContext} from 'react';
 import { Header, Icon, ListItem, SearchBar } from "react-native-elements";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from '../constants';
 import BottomSheet, {BottomSheetView} from "@gorhom/bottom-sheet";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import Geolocation from "react-native-geolocation-service";
+import { useDispatch, useSelector } from "react-redux";
+import { addOriginDriver } from "../reducers/mapSliceDriver";
+// import { OriginContext } from "../contexts/contexts";
+// const { origin, dispatchOrigin } = useContext(OriginContext);
 
 import {
   IconButton,
 
 } from "../components";
-import { HeaderBar , TextIconButton, Rating, TextButton, MapComponent} from "../components";
+import { HeaderBar , TextIconButton, Rating, TextButton, MapComponentDriver} from "../components";
 
-import * as Animatable from 'react-native-animatable';
 
-import { ImageBackground } from 'react-native';
-import HomeScreen from './HomeScreen';
 
 
 
@@ -26,13 +29,67 @@ const DStartLocation = ({ route}) => {
 
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);
+  const [location, setLocation] = useState(false);
 
   const snapPoints = ['20%',"40%", '70%']; 
+  useEffect(() => {
+    // dispatch (
+    //   addOrigin({latitude: "6.25555"})
+    // )
+    // setUserOrigin({ latitude: origin.latitude, longitude: origin.longitude });
+    getLocation();
+  }, []);
 
 
 
   const navigation = useNavigation();
   const textInput3 = useRef(4);
+
+  const requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: "Geolocation Permission",
+          message: "Can we access your location?",
+          buttonNeutral: "Ask Me Later",
+          buttonNegative: "Cancel",
+          buttonPositive: "OK",
+        }
+      );
+      console.log("granted", granted);
+      if (granted === "granted") {
+        console.log("You can use Geolocation");
+        return true;
+      } else {
+        console.log("You cannot use Geolocation");
+        return false;
+      }
+    } catch (err) {
+      return false;
+    }
+  };
+  const getLocation = () => {
+    const result = requestLocationPermission();
+    result.then((res) => {
+      console.log("res is:", res);
+      if (res) {
+        Geolocation.getCurrentPosition(
+          (position) => {
+            console.log(position);
+            setLocation(position);
+          },
+          (error) => {
+            // See error code charts below.
+            console.log(error.code, error.message);
+            setLocation(false);
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+      }
+    });
+    console.log(location);
+  };
 
 
 
@@ -50,7 +107,7 @@ function renderMap() {
                   // justifyContent: 'center',
                 }}
             >
-                 <MapComponent></MapComponent>
+                 <MapComponentDriver></MapComponentDriver>
                  
                      {/* header */}
                      <HeaderBar
@@ -118,17 +175,16 @@ function renderMap() {
                 enablePoweredByContainer={false}
                 fetchDetails={true}
                 onPress={(data, details = null) => {
-                  dispatchOrigin({
-                    type: "ADD_ORIGIN",
-                    payload: {
+                  dispatch(
+                    addOriginDriver({
                       latitude: details.geometry.location.lat,
                       longitude: details.geometry.location.lng,
                       address: details.formatted_address,
                       name: details.name,
-                    },
-                  });
+                    })
+                  );
 
-                  navigation.navigate("Destination", { state: 0 });
+                  navigation.navigate("DestinationDriver", details);
                 }}
                 query={{
                   key: "AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk",
@@ -212,51 +268,6 @@ const styles = StyleSheet.create({
     padding: SIZES.padding2
 
   },
-
-//   header: {
-//     flex: 1,
-//     // justifyContent: 'center',
-//     // alignItems: 'center',
-
-// },
-
-
-// container: {
-//   backgroundColor: COLORS.background,
-//   height: "100%",
-//   flex: 1
-// },
-// titlebar: {
-//   flexDirection: 'row',
-
-// },
-
-
-// nameTitle : {
-//    color: COLORS.black,
-//    marginTop: 15,
-//    fontSize: SIZES.h3,
-
-   
-// },
-// proname : {
-//   alignItems: 'center'
-// },
-// nametag : {
-//   color: COLORS.dark_grey,
-//   marginTop: 3,
-//   fontSize: SIZES.h3,
-
-  
-// },
-// prodes : {
-//   color: COLORS.grey,
-//   marginTop: -5,
-//   padding: 35,
-//   fontSize: SIZES.body5,
-
-  
-// },
 
 
 

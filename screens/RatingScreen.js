@@ -33,6 +33,8 @@ const onPressHandler = () => {
   setIsClicked(require("../assets/images/Star.png"));
 };
 
+//this screen for adding ratings for driver
+
 const RatingScreen = ({ route }) => {
   const navigation = useNavigation();
 

@@ -11,41 +11,36 @@ import Feather from 'react-native-vector-icons/Feather'
 
 const Tab = createMaterialTopTabNavigator();
 
-const API_URL = 'http://192.168.1.107:8080/api/users/';
+// const API_URL = 'http://192.168.1.107:8080/api/users/';
+
+// driver login screen
 
 const DLoginScreen  = ({navigation}) => {
 
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+ 
     const [password, setPassword] = useState('');
+
+//     const {user,isSuccess,isError,isLoading,message,action}=useSelector((state)=>state.userLogIn)
+//   const dispatch = useDispatch();
+
+//   const [employeeId, setEmployeeId] = React.useState('');
+//   const [password, setPassword] = React.useState('');
+
+//   // check the Employee Id and password is correct
+
+//   const LoginBtnClick = () => {
+//     dispatch(logInUser({employeeId,password}));
+//     console.log(employeeId)
+//     console.log(password)
+//     // navigation.navigate('OTP');
+//   };
+//   useEffect(()=>{if(action==='logInUser'&&isSuccess){
+// navigation.navigate('OTP');
+//   }},[user])
 
   
 
-    const signup = () => {
-        const payload = {
-          name,
-          email,
-          password,
-        };
-    
-        try {
-          fetch(`${API_URL}/`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-          });
-          navigation.navigate('Home');
-          setName('');
-          setPassword('');
-          setConfirmPassword('');
-          setEmail('');
-          setPic('');
-        } catch (error) {
-          console.log(error);
-        }
-      };
 
       let AnimatedHeaderValue = new Animated.Value(0);
       const Header_Max_Height = 150;

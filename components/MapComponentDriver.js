@@ -12,14 +12,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
-const MapComponent = ({}) => {
+const MapComponentDriver = ({}) => {
 
 
-  const {origin,destination} = useSelector((state) => state.mapData);
-console.log("origin");
-console.log(origin);
-console.log("destination");
-console.log(destination);
+  const data = useSelector((state) => state.mapData);
+console.log(data);
 const GOOGLE_MAPS_APIKEY = 'AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk';
 
 
@@ -33,15 +30,15 @@ const GOOGLE_MAPS_APIKEY = 'AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk';
         }}
         customMapStyle={MapStyle}
         provider={PROVIDER_GOOGLE}
-        initialRegion={{  latitude: origin.latitude,
-        longitude: origin.longitude,latitudeDelta: 0.2, longitudeDelta: 0.2 }}
+        initialRegion={{  latitude: data.latitude,
+          longitude: data.longitude,latitudeDelta: 0.2, longitudeDelta: 0.2 }}
         showsUserLocation={true}
         followsUserLocation={true}
         zoomEnabled={true}
         zoomControlEnabled={true}
       >
-        {origin.latitude!== '' && (
-          <Marker coordinate={{latitude:origin.latitude,longitude:origin.longitude}} anchor={{ x: 0.5, y: 0.5 }}>
+        {data.latitude!= null && (
+          <Marker coordinate={data} anchor={{ x: 0.5, y: 0.5 }}>
             <Image
               source={require("../assets/images/pickupmarker.png")}
               style={styles.markerOrigin2}
@@ -50,22 +47,23 @@ const GOOGLE_MAPS_APIKEY = 'AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk';
           </Marker>
        )} 
 
-        {destination.latitude !== '' && (
-            <Marker
-              coordinate={{latitude:destination.latitude,longitude:destination.longitude}}
+        {/* {data.latitude != null && ( */}
+            {/* <Marker
+              coordinate={{showsUserLocation
+                }}
               anchor={{ x: 0.5, y: 0.5 }}
             >
               <Image
-                source={require("../assets/images/dropIcon.png")}
+                source={require("../assets/images/pickupmarker.png")}
                 style={styles.markerDestination}
                 resizeMode="cover"
               />
-            </Marker>
-           )}
-        {/* {origin.latitude !== '' && destination.latitude !== '' &&
+            </Marker> */}
+           {/* )} */}
+        {/* {.latitude !== null && */}
                         <MapViewDirections 
-                          addOrigin={{latitude:origin.latitude,longitude:origin.longitude}}
-                          destination={{latitude:destination.latitude,longitude:destination.longitude}}
+                          addOrigin={data}
+                          destination={{latitude: 7.175549 ,longitude: 79.883291}}
                           // apikey={AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk}
                           apikey={GOOGLE_MAPS_APIKEY}
                           strokeWidth={4}
@@ -75,13 +73,13 @@ const GOOGLE_MAPS_APIKEY = 'AIzaSyA90qiuk4qHsW30DrC_8krLEhGBn3wWnFk';
                           //   language: "en",
                           // }}
                         />
-                    }  */}
+                    {/* }  */}
       </MapView>
     </View>
   );
 };
 
-export default MapComponent;
+export default MapComponentDriver;
 
 const styles = StyleSheet.create({
   markerDestination: {

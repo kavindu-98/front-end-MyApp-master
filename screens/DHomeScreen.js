@@ -53,46 +53,7 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
 const {width, height} = Dimensions.get("window");
 const data = DdummyData;
 
-const Section =({ containerStyle, title, onPress, children }) => {
-    return (
-        <View
-            style={{
-                ...containerStyle
-            }}
-        >
 
-            <View
-                style={{
-                    flexDirection: 'row',
-                    paddingHorizontal: SIZES.padding
-                }}
-            >
-                <Text 
-                    style={{
-                        flex: 1,
-                        ...FONTS.h2
-                    }}
-                    >
-                        {title}
-                </Text>
-                <TextButton
-                    contentContainerStyle={{
-                        width: 80,
-                        borderRadius: 30,
-                        backgroundColor: COLORS.primary
-                    }}
-                    label="See All"
-                    onPress={onPress}
-                >
-
-
-                </TextButton>
-
-            </View>
-                    {/* {children} */}
-        </View>
-    )
-}
 
 const DHomeScreen = () => {
 
@@ -121,7 +82,7 @@ const DHomeScreen = () => {
                         ...FONTS.body3,
                         fontWeight: 'bold'
                     }}>
-                        Sunday, 16th Oct 2022
+                        Thursday, 11th May 2023
                     </Text>
 
                 </View>
@@ -232,84 +193,7 @@ const DHomeScreen = () => {
     
  
 
-    // function renderCategories() {
-    //     return (
-    //         <Section
-    //             title="Categories"
-    //         >
-
-    //         <FlatList
-    //             horizontal
-    //             data={dummyData.categories}
-    //             listKey="Categories"
-    //             keyExtractor={item => 'Categories-${item.id}'}
-    //             showsHorizontalScrollIndicator={false}
-    //             contentContainerStyle={{
-    //                 marginTop: SIZES.padding
-    //             }}
-    //             renderItem={({ item, index }) => (
-    //                     <CategoryCard
-    //                         category={item}
-    //                         containerStyle={{
-    //                             marginLeft: index == 0 ? SIZES.padding: SIZES.base,
-    //                             marginRight: index == dummyData.categories.length - 1 ? SIZES.padding: 0
-    //                         }}
-    //                     />
-    //             )}
-
-    //             />
-
-    //         </Section>
-    //     )
-    // }
-
-    // function renderPopularCourses() {
-    //     return(
-    //         <Section
-    //         title="Popular Courses"
-    //         containerStyle={{
-    //             marginTop: 30
-    //         }}
-    //     >
     
-    //     <FlatList
-           
-    //         data={dummyData.courses_list_2}
-    //         listKey="PopularCourses"
-    //         scrollEnabled={false}
-    //         keyExtractor={item => 'PopularCourses-${item.id}'}
-    //         showsHorizontalScrollIndicator={false}
-    //         contentContainerStyle={{
-    //             marginTop: SIZES.radius,
-    //             paddingHorizontal: SIZES.padding
-    //         }}
-    //         renderItem={({ item, index }) => (
-    //                <HorizontalCourseCard
-    //                     course={item}
-    //                     containerStyle={{
-    //                         marginVertical: SIZES.padding,
-    //                         marginTop: index == 0 ? SIZES.radius : SIZES.padding
-    //                     }}
-                   
-    //                >
-    
-    //                </HorizontalCourseCard>
-    //         )}
-    //         ItemSeparatorComponent={() => (
-    //             <LineDivider
-    //                     lineStyle={{
-    //                         backgroundColor: COLORS.gray20
-    //                     }}
-                
-    //             />
-    //         )}
-    
-    //         />
-    
-    //     </Section>
-    //     )
-    
-    // }
 
     return (
         <View

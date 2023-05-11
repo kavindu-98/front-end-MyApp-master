@@ -5,20 +5,11 @@ import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES, FONTS, icons } from '../constants';
 import BottomSheet, {BottomSheetView} from "@gorhom/bottom-sheet";
 
-import {
-  IconButton,
-
-} from "../components";
-import { HeaderBar , TextIconButton, Rating, RideCards, TextButton, MapComponent} from "../components";
-
-import * as Animatable from 'react-native-animatable';
-
-import { ImageBackground } from 'react-native';
-import HomeScreen from './HomeScreen';
 
 
 
 
+// daily rides shortcuts edit screen
 
 const MyDailyRides = ({ route}) => {
 

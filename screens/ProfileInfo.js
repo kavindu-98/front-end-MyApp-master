@@ -25,7 +25,9 @@ import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
 const Tab = createMaterialTopTabNavigator();
 
-const API_URL = "http://192.168.1.107:8080//api/users/login";
+// const API_URL = "http://192.168.1.107:8080//api/users/login";
+
+// this screen for profile data updates and shows
 
 const ProfileInfo = ({ navigation }) => {
  const [email, setEmail] = useState();

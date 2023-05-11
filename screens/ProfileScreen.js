@@ -17,6 +17,9 @@ import { IconButton, TextIconButton } from "../components";
 import { resetUserLogIn } from "../reducers/userSlice";
 import {useDispatch,useSelector} from 'react-redux'
 
+
+// this screen for profile screen
+
 const ProfileScreen = () => {
   const sheetRef = useRef(null);
   const [isOpen, setIsOpen] = useState(true);

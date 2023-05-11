@@ -38,25 +38,7 @@ const {user,isSuccess,isError,isLoading,message,action}=useSelector((state)=>sta
 navigation.navigate('OTP');
   }},[user])
 
-  async function login() {
-    try {
-      const response = await fetch('', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          employeeId: employeeId,
-          password: password,
-        }),
-      });
-      const data = await response.json();
-      console.log('success');
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
 
 
 

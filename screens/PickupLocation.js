@@ -52,6 +52,13 @@ const PickupLocation = ({ route }) => {
   const { origin, dispatchOrigin } = useContext(OriginContext);
 
   const snapPoints = ["20%", "40%", "70%"];
+  useEffect(() => {
+    // dispatch (
+    //   addOrigin({latitude: "6.25555"})
+    // )
+    // setUserOrigin({ latitude: origin.latitude, longitude: origin.longitude });
+    getLocation();
+  }, [origin]);
 
 
 // ask the permission of location from user 

@@ -40,6 +40,7 @@ import DRDailyRides from "./DRDailyRides";
 import DRProfileInfo from "./DRProfileInfo";
 import ProfileInfo from "./ProfileInfo";
 import DRMyDailyRides from "./DRMyDailyRides";
+import DestinationDriver from "./DestinationDriver";
 
 
 
@@ -85,7 +86,8 @@ export {
     DRDailyRides,
     DRProfileInfo,
     ProfileInfo,
-    DRMyDailyRides
+    DRMyDailyRides,
+    DestinationDriver
 
     
 

@@ -25,11 +25,13 @@ import SelectBox from 'react-native-multiple-select';
 import {Picker} from '@react-native-picker/picker';
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
-const URL = 'https://media.istockphoto.com/id/691286862/vector/flat-man-driver-license-plastic-card-template-id-card-vector-illustration.jpg?s=612x612&w=0&k=20&c=c-tDqF5B4t2i_eoJXwWsUK05q8ORuLmRbeCa7weLtGc';
+
 const Tab = createMaterialTopTabNavigator();
 
-const API_URL = 'http://192.168.1.107:8080//api/users/login';
+// const API_URL = 'http://192.168.1.107:8080//api/users/login';
 
+
+// screen for driver signup
 
 
 const DRSignUpScreen = ({ navigation }) => {
@@ -112,27 +114,7 @@ const DRSignUpScreen = ({ navigation }) => {
 
  
 
-  const register = async () => {
-    const payload = {
-      email,
-      password,
-    };
-
-    try {
-      fetch(`${API_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      navigation.navigate("Home");
-      setEmail("");
-      setPassword("");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ 
 
   let AnimatedHeaderValue = new Animated.Value(0);
   const Header_Max_Height = 150;

@@ -53,46 +53,6 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
 const {width, height} = Dimensions.get("window");
 const data = dummyData;
 
-// const Section =({ containerStyle, title, onPress, children }) => {
-//     return (
-//         <View
-//             style={{
-//                 ...containerStyle
-//             }}
-//         >
-
-//             <View
-//                 style={{
-//                     flexDirection: 'row',
-//                     paddingHorizontal: SIZES.padding
-//                 }}
-//             >
-//                 <Text 
-//                     style={{
-//                         flex: 1,
-//                         ...FONTS.h2
-//                     }}
-//                     >
-//                         {title}
-//                 </Text>
-//                 <TextButton
-//                     contentContainerStyle={{
-//                         width: 80,
-//                         borderRadius: 30,
-//                         backgroundColor: COLORS.primary
-//                     }}
-//                     label="See All"
-//                     onPress={onPress}
-//                 >
-
-
-//                 </TextButton>
-
-//             </View>
-//                     {/* {children} */}
-//         </View>
-//     )
-// }
 
 // this screen is the home screen for the employee
 const HomeScreen = () => {
@@ -258,7 +218,7 @@ const HomeScreen = () => {
               {renderHeader()}
             {/* Render Phto */}
            {renderPhotoCard()}
-           
+           {renderHorizontalScrollView()}
 
            
 

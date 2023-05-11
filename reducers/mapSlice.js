@@ -4,26 +4,27 @@ export const mapSlice = createSlice({
   // to save the pickup and destination for employee
   name: "map",
   initialState: {
-    latitude:'',
+    origin:{latitude:'',
     longitude:'',
     address:'',
-    name:''
+    name:''},
+    destination:{latitude:'',
+    longitude:'',
+    address:'',
+    name:''},
+    
   },
 
   reducers: {
     addOrigin: (state, action) => {
-      state.latitude = action.payload.latitude;
-      state.longitude = action.payload.longitude;
-      state.address = action.payload.address;
-      state.name = action.payload.name;
+      state.origin = action.payload
+      
     
       
     },
     destination: (state, action) => {
-        state.latitude = action.payload.latitude;
-        state.longitude = action.payload.longitude;
-        state.address = action.payload.address;
-        state.name = action.payload.name;
+        state.destination = action.payload;
+       
       },
     },
   });

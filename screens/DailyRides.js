@@ -27,12 +27,10 @@ import {
   DriverCard,
 } from "../components";
 
-import * as Animatable from "react-native-animatable";
-
-import { ImageBackground } from "react-native";
-import HomeScreen from "./HomeScreen";
 
 import { Employee, EmployeeShortCuts } from "../Data/Data";
+
+// can edit daily rides locations
 
 const DailyRides = ({ route }) => {
   const navigation = useNavigation();
